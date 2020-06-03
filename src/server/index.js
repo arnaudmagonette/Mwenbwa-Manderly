@@ -1,25 +1,32 @@
-/* becodeorg/mwenbwa
- *
- * /src/server/index.js - Server entry point
- *
- * coded by leny@BeCode
- * started at 18/05/2020
- */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
+const express = require("express");
+const bodyParser = require("body-parser");
+const user = require("./routes/user");
+const InitiateMongoServer = require("./config/db");
 
-import express from "express";
-import path from "path";
-
-const {APP_PORT} = process.env;
+// Initiate Mongo Server
+InitiateMongoServer();
 
 const app = express();
 
-app.use(express.static(path.resolve(__dirname, "../../bin/client")));
+// PORT
+const PORT = process.env.PORT || 12345;
 
-app.get("/hello", (req, res) => {
-    console.log(`ℹ️  (${req.method.toUpperCase()}) ${req.url}`);
-    res.send("Hello, World!");
+// Middleware
+app.use(bodyParser.json());
+
+app.get("/", (req, res) => {
+    res.json("API Working");
 });
 
-app.listen(APP_PORT, () =>
-    console.log(`🚀 Server is listening on port ${APP_PORT}.`),
-);
+/**
+ * Router Middleware
+ * Router - /user/*
+ * Method - *
+ */
+app.use("/user", user);
+
+app.listen(PORT, (req, res) => {
+    console.log(`Server Started at PORT ${PORT}`);
+});
