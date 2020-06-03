@@ -54,19 +54,28 @@ app.get("/allTrees", (req, res) => {
 
 //------------------------------
 
-const leavesTree1 = 10;
-const leavesTree2 = 30;
-const totalLeavesTree = leavesTree1 + leavesTree2;
 const totalLeaves = 100;
 const totalPlayers = 4;
 
 let leavesUser = Math.floor(totalLeaves / totalPlayers);
 
 function addLeaves() {
-    leavesUser = Math.floor(leavesUser + totalLeavesTree);
+    Trees.find({owner: "Arnaud"}).exec((err, allTrees) => {
+        if (err) {
+            console.error(err);
+        }
 
-    console.log("Add Leaves");
-    console.log(leavesUser);
+        let totalLeavesTrees = 0;
+
+        allTrees.forEach(tree => {
+            totalLeavesTrees += tree.leaves;
+        });
+
+        leavesUser = Math.floor(leavesUser + totalLeavesTrees);
+
+        console.log("Add Leaves");
+        console.log(leavesUser);
+    });
 
     setTimeout(addLeaves, 900000);
 }
@@ -80,5 +89,18 @@ function removeLeaves() {
     setTimeout(removeLeaves, 3600000);
 }
 
+function buyTree() {
+    Trees.findByIdAndUpdate("5ed10f1a45ab8e02c4ee0532", {
+        $push: {owner: ["Arnaud"]},
+    }).exec((err, tree) => {
+        if (err) {
+            console.error(err);
+        }
+
+        console.log(tree);
+    });
+}
+
 addLeaves();
 removeLeaves();
+buyTree();

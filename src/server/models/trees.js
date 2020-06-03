@@ -10,11 +10,11 @@ const treesSchema = new Schema(
             lat: Number,
             lon: Number,
         },
-        owner: [{type: String, default: null}],
+        owner: [{type: String, default: "For sale"}],
         comments: [{type: String, default: null}],
         lock: {type: Boolean, default: false},
     },
-    {collection: "trees"},
+    {collection: "test"},
 );
 
 module.exports = mongoose.model("Trees", treesSchema);
