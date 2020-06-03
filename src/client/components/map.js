@@ -28,7 +28,39 @@ const MapWrapper = () => (
             />
             <Marker position={position} icon={myIcon}>
                 <Popup>
-                    <p>{"Liège"}</p>
+                    <div>
+                        <p>{"Name : Arboretrium"}</p>
+                    </div>
+                    <div>
+                        <p>{"Owner : Pierre"}</p>
+                    </div>
+                    <div>
+                        <p>{"Value : 131 L"}</p>
+                        {/* <button type="button">Buy</button> */}
+                    </div>
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>{"Purchase History"}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{"User"}</td>
+                                    <td>{"Date"}</td>
+                                </tr>
+                                <tr>
+                                    <td>{"Pierre"}</td>
+                                    <td>{"03/06/2020"}</td>
+                                </tr>
+                                <tr>
+                                    <td>{"Marc"}</td>
+                                    <td>{"02/06/2020"}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </Popup>
             </Marker>
         </Map>
