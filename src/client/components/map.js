@@ -61,6 +61,36 @@ const MapWrapper = () => (
                             </tbody>
                         </table>
                     </div>
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>{"Comments"}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{"User"}</td>
+                                    <td>{"Comment"}</td>
+                                </tr>
+                                <tr>
+                                    <td>{"Pierre"}</td>
+                                    <td>{"Lorem ipsum"}</td>
+                                </tr>
+                                <tr>
+                                    <td>{"Marc"}</td>
+                                    <td>{"Lorem ipsum"}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <form>
+                        <textarea placeholder={"Write your comment..."} />
+                        {/* <button type={"submit"} /> */}
+                    </form>
+                    <div>
+                        <a href={"#"}>{"Wiki link"}</a>
+                    </div>
                 </Popup>
             </Marker>
         </Map>
