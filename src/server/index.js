@@ -15,7 +15,7 @@ app.listen(APP_PORT, () =>
     console.log(`🚀 Server is listening on port ${APP_PORT}.`),
 );
 
-//Connection
+// Connection
 
 const url = "mongodb://mongo:27017/mwenbwaDb";
 
@@ -29,7 +29,7 @@ mongoose.connect(url, {
 const db = mongoose.connection;
 
 db.once("open", () => {
-    console.log("Connection Server Ok");
+    console.log("Connection a la Db Ok");
 });
 
 db.on("error", err => {
@@ -37,6 +37,8 @@ db.on("error", err => {
 });
 
 //------------------------------
+
+// Routage
 
 app.get("/allTrees", (req, res) => {
     Trees.find({})
@@ -49,3 +51,34 @@ app.get("/allTrees", (req, res) => {
             res.json(allTrees);
         });
 });
+
+//------------------------------
+
+const leavesTree1 = 10;
+const leavesTree2 = 30;
+const totalLeavesTree = leavesTree1 + leavesTree2;
+const totalLeaves = 100;
+const totalPlayers = 4;
+
+let leavesUser = Math.floor(totalLeaves / totalPlayers);
+
+function addLeaves() {
+    leavesUser = Math.floor(leavesUser + totalLeavesTree);
+
+    console.log("Add Leaves");
+    console.log(leavesUser);
+
+    setTimeout(addLeaves, 900000);
+}
+
+function removeLeaves() {
+    leavesUser = Math.floor(leavesUser / 2);
+
+    console.log("Remove Leaves");
+    console.log(leavesUser);
+
+    setTimeout(removeLeaves, 3600000);
+}
+
+addLeaves();
+removeLeaves();

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const treesSchema = new Schema(
+const usersSchema = new Schema(
     {
         name: {type: String, default: "For sale"},
         leaves: Number,
@@ -14,7 +14,7 @@ const treesSchema = new Schema(
         comments: [{type: String, default: null}],
         lock: {type: Boolean, default: false},
     },
-    {collection: "trees"},
+    {collection: "users"},
 );
 
-module.exports = mongoose.model("Trees", treesSchema);
+module.exports = mongoose.model("Users", usersSchema);
