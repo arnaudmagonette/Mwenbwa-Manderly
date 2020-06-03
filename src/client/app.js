@@ -9,8 +9,6 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
 
-import HelloWorld from "./components/hello";
-import MapWrapper from "./components/map";
+import Index from "./components/index";
 
-ReactDOM.render(<HelloWorld />, document.querySelector("#app"));
-ReactDOM.render(<MapWrapper />, document.querySelector("#map"));
+ReactDOM.render(<Index />, document.querySelector("#app"));
