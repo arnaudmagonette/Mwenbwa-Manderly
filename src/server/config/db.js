@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 const mongoose = require("mongoose");
 
-const mongoURI = "mongodb://dev:dev@mongo/mwenbwaDb?authSource=admin";
+const mongoURI = "mongodb://dev:dev@mongo/mwenbwaDb";
 
 const ConnectionMongoDb = async () => {
     try {

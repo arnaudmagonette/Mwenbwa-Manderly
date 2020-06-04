@@ -1,46 +1,34 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 
 import express from "express";
 import path from "path";
 
 const app = express();
-const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const {APP_PORT} = process.env;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.resolve(__dirname, "../../bin/client")));
 
-const Trees = require("./models/trees");
+const Trees = require("./models/tree");
+const Users = require("./models/user");
+
+const user = require("./routes/user");
+const ConnectionMongoDb = require("./config/db");
 
 app.listen(APP_PORT, () =>
     console.log(`🚀 Server is listening on port ${APP_PORT}.`),
 );
 
-// Connection
-
-const url = "mongodb://mongo:27017/mwenbwaDb";
-
-mongoose.connect(url, {
-    auth: {authSource: "admin"},
-    user: "dev",
-    pass: "dev",
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
-const db = mongoose.connection;
-
-db.once("open", () => {
-    console.log("Connection a la Db Ok");
-});
-
-db.on("error", err => {
-    console.error("connection Error:", err);
-});
-
-//------------------------------
+// Connection Mongo Db
+ConnectionMongoDb();
 
 // Routage
+
+app.get("/", (req, res) => {
+    res.json("API Working");
+});
 
 app.get("/allTrees", (req, res) => {
     Trees.find({})
@@ -54,9 +42,21 @@ app.get("/allTrees", (req, res) => {
         });
 });
 
+app.get("/allUsers", (req, res) => {
+    Users.find({})
+        .limit(10)
+        .exec((err, allUsers) => {
+            if (err) {
+                console.error(err);
+            }
+
+            res.json(allUsers);
+        });
+});
+
 //------------------------------
 
-const totalLeaves = 100;
+/*const totalLeaves = 100;
 const totalPlayers = 4;
 
 let leavesUser = Math.floor(totalLeaves / totalPlayers);
@@ -69,7 +69,7 @@ function addLeaves() {
 
         let totalLeavesTrees = 0;
 
-        allTrees.forEach(tree => {
+        allTrees.forEach((tree) => {
             totalLeavesTrees += tree.leaves;
         });
 
@@ -101,8 +101,11 @@ function buyTree() {
 
         console.log(tree);
     });
-}
+}*/
 
-addLeaves();
-removeLeaves();
-buyTree();
+/**
+ * Router Middleware
+ * Router - /user/*
+ * Method - *
+ */
+app.use("/user", user);
