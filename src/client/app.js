@@ -10,4 +10,4 @@ import * as React from "react";
 import ReactDOM from "react-dom";
 import LogIn from "./components/login";
 
-ReactDOM.render( < LogIn / > , document.querySelector("#app"));
+ReactDOM.render(<LogIn />, document.querySelector("#app"));

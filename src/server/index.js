@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* becodeorg/mwenbwa
  *
  * /src/server/index.js - Server entry point
