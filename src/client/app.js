@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* becodeorg/mwenbwa
  *
  * /src/client/app.js - Client entry point
@@ -9,6 +10,9 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
 
+import FormComponent from "./components/login";
+
 import HelloWorld from "./components/hello";
 
-ReactDOM.render(<HelloWorld />, document.querySelector("#app"));
+ReactDOM.render(<FormComponent />, document.querySelector("#app"));
+// ReactDOM.render(<HelloWorld />, document.getElementById("#app"));

@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
+import path from "path";
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const user = require("./routes/user");
@@ -16,7 +18,9 @@ const PORT = process.env.PORT || 12345;
 // Middleware
 app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
+app.use(express.static(path.resolve(__dirname, "../../bin/client")));
+
+app.get("/api", (req, res) => {
     res.json("API Working");
 });
 
