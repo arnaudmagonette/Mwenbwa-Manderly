@@ -1,0 +1,19 @@
+/* eslint-disable no-console */
+const mongoose = require("mongoose");
+
+const mongoURI = "mongodb://dev:dev@mongo/mwenbwaDb?authSource=admin";
+
+const ConnectionMongoDb = async () => {
+    try {
+        await mongoose.connect(mongoURI, {
+            auth: {authSource: "admin"},
+            useNewUrlParser: true,
+        });
+        console.log("Connected to DB !!");
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+};
+
+module.exports = ConnectionMongoDb;
