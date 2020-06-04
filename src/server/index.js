@@ -4,10 +4,13 @@
 import express from "express";
 import path from "path";
 
+const auth = require("./middleware/auth");
+const cookieParser = require("cookie-parser");
 const app = express();
 const bodyParser = require("body-parser");
 const {APP_PORT} = process.env;
 
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.resolve(__dirname, "../../bin/client")));
 
@@ -28,6 +31,10 @@ ConnectionMongoDb();
 
 app.get("/", (req, res) => {
     res.json("API Working");
+});
+
+app.get("/api/secret", auth, function (req, res) {
+    res.send("The password is potato");
 });
 
 app.get("/allTrees", (req, res) => {
