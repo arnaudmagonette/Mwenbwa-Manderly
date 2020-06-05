@@ -6,7 +6,7 @@ import path from "path";
 
 const app = express();
 const bodyParser = require("body-parser");
-const {APP_PORT} = process.env;
+const {APP_PORT} = process.env.PORT || process.env;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.resolve(__dirname, "../../bin/client")));
