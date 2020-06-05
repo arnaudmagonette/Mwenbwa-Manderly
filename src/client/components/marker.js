@@ -1,11 +1,3 @@
-/* becodeorg/mwenbwa
- *
- * /src/client/components/map.js - Map Component
- *
- * coded by Guillaume Boeur
- * started at 28/05/2020
- */
-
 import React from "react";
 import {Marker as LeafletMarker, Popup} from "react-leaflet";
 import * as Leaflet from "leaflet";

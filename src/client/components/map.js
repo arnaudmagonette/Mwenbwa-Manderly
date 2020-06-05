@@ -1,11 +1,3 @@
-/* becodeorg/mwenbwa
- *
- * /src/client/components/map.js - Map Component
- *
- * coded by Guillaume Boeur
- * started at 28/05/2020
- */
-
 import React from "react";
 import {Map, TileLayer} from "react-leaflet";
 import Marker from "./marker";
