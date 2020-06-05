@@ -14,7 +14,7 @@ const treesSchema = new Schema(
         comments: [{type: String, default: null}],
         lock: {type: Boolean, default: false},
     },
-    {collection: "test"},
+    {collection: "trees"},
 );
 
 module.exports = mongoose.model("Trees", treesSchema);
