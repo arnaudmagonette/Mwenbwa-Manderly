@@ -5,15 +5,13 @@
   "author": "leny <leny@becode.org>",
   "license": "MIT",
   "private": true,
-  "main": "./client/app.js",
   "scripts": {
     "lint": "npx eslint --fix --cache --ignore-pattern 'docs/*' src",
     "build:server": "npx babel src/server -s --out-dir bin/server",
     "work:server": "npx babel src/server -s --watch --verbose --out-dir bin/server",
     "build:client": "npx webpack --progress --profile --colors",
     "work:client": "npx webpack --env=dev --progress",
-    "build": "npm run build:server && npm run build:client",
-    "start": "node app.js"
+    "build": "npm run build:server && npm run build:client"
   },
   "lint-staged": {
     "*.js": [
