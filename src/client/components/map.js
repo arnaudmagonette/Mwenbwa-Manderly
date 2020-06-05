@@ -7,32 +7,41 @@
  */
 
 import React from "react";
-import {Map, Marker, Popup, TileLayer} from "react-leaflet";
-import * as Leaflet from "leaflet";
+import {Map, TileLayer} from "react-leaflet";
+import Marker from "./marker";
 
 import "./map.less";
 
-const myIcon = Leaflet.icon({
-    iconUrl: "http://www.svgrepo.com/show/127575/location-sign.svg",
-    iconSize: [30, 30],
-    iconAnchor: [25, 15],
-    popupAnchor: [0, -20],
-});
-
 const position = [50.632119, 5.579524];
-const MapWrapper = () => (
-    <div>
-        <Map center={position} zoom={14}>
-            <TileLayer
-                url={"http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
-            />
-            <Marker position={position} icon={myIcon}>
-                <Popup>
-                    <p>{"Liège"}</p>
-                </Popup>
-            </Marker>
-        </Map>
-    </div>
-);
+
+const getAllTrees = setTrees => {
+    fetch("/allTrees").then(response => {
+        response.json().then(body => setTrees(body));
+    });
+};
+
+const MapWrapper = () => {
+    const [trees, setTrees] = React.useState([]);
+
+    React.useEffect(() => {
+        getAllTrees(setTrees);
+    }, []);
+
+    return (
+        <div>
+            <Map center={position} zoom={14}>
+                <TileLayer
+                    url={"http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
+                />
+                {trees.map(tree => (
+                    <Marker
+                        key={tree._id}
+                        position={[tree.geoloc.lat, tree.geoloc.lon]}
+                    />
+                ))}
+            </Map>
+        </div>
+    );
+};
 
 export default MapWrapper;

@@ -1,12 +1,15 @@
 import * as React from "react";
-//import AllTrees from "./list-trees";
-import LogIn from "./login";
+import MapWrapper from "./map.js";
+import HelloWorld from "./hello.js";
 
 function Index() {
     return (
         <main>
             <div>
-                <LogIn />
+                <MapWrapper />
+            </div>
+            <div>
+                <HelloWorld />
             </div>
         </main>
     );
