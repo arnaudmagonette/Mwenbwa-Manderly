@@ -28,8 +28,10 @@ export default class Login extends Component {
             .post(
                 "/user/login",
                 {
-                    email,
-                    password,
+                    data: {
+                        email,
+                        password,
+                    },
                 },
                 {
                     headers: {
