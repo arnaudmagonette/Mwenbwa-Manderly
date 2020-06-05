@@ -12,8 +12,7 @@
     "work:server": "npx babel src/server -s --watch --verbose --out-dir bin/server",
     "build:client": "npx webpack --progress --profile --colors",
     "work:client": "npx webpack --env=dev --progress",
-    "build": "npm run build:server && npm run build:client",
-    "start": "node app"
+    "build": "npm run build:server && npm run build:client"
   },
   "lint-staged": {
     "*.js": [
@@ -30,7 +29,6 @@
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
     "@becode/eslint-config": "^0.9.1",
-    "babel-cli": "^6.26.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "body-parser": "^1.19.0",
