@@ -10,9 +10,9 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
 
-import FormComponent from "./components/login";
+import Login from "./components/login";
 
-import HelloWorld from "./components/hello";
+// import HelloWorld from "./components/hello";
 
-ReactDOM.render(<FormComponent />, document.querySelector("#app"));
+ReactDOM.render(<Login />, document.querySelector("#app"));
 // ReactDOM.render(<HelloWorld />, document.getElementById("#app"));

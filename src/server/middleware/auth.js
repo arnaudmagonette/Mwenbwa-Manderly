@@ -6,7 +6,6 @@ module.exports = function (req, res, next) {
     if (!token) {
         res.status(401).json({message: "Auth Error"});
     }
-
     try {
         const decoded = jwt.verify(token, "randomString");
         req.user = decoded.user;
