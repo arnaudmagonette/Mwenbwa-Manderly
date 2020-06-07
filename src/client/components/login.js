@@ -22,33 +22,25 @@ export default class Login extends Component {
     }
 
     handleSubmit(event) {
-        const {email, password} = this.state;
-
         axios
-            .post(
-                "/user/login",
-                {
-                    data: {
-                        email,
-                        password,
-                    },
-                },
-                {
-                    headers: {
-                        "Content-Type": "application-json",
-                    },
-                },
-            )
+            .post("/user/login", {
+                email: this.state.email,
+                password: this.state.password,
+            })
             .then(response => {
-                if (response.data.logged_in) {
-                    this.props.handleSuccessfulAuth(response.data);
-                }
+                console.log(response.data);
+                axios.get(
+                    "/user/me",
+                    {
+                        headers: response.data,
+                    },
+                    window.location.replace("/"),
+                );
             })
             .catch(error => {
-                console.log("login error", error);
+                console.log(error);
             });
         event.preventDefault();
-        console.log(this.state);
     }
 
     render() {

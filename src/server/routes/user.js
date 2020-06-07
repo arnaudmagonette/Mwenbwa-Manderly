@@ -59,7 +59,7 @@ router.post(
                 },
             };
 
-            jwt.sign(
+            await jwt.sign(
                 payload,
                 "randomString",
                 {
@@ -122,21 +122,10 @@ router.post(
                 },
             };
 
-            jwt.sign(
-                payload,
-                "randomString",
-                {
-                    expiresIn: 3600,
-                },
-                (err, token) => {
-                    if (err) {
-                        throw err;
-                    }
-                    res.status(200).json({
-                        token,
-                    });
-                },
-            );
+            const token = await jwt.sign(payload, "randomString", {
+                expiresIn: 36000,
+            });
+            res.status(200).json({token});
         } catch (e) {
             console.error(e);
             res.status(500).json({
@@ -158,7 +147,7 @@ router.get("/me", auth, async (req, res) => {
         const user = await User.findById(req.user.id);
         res.json(user);
     } catch (e) {
-        res.send({message: "Error in Fetching user"});
+        res.json({message: "Error in Fetching user"});
     }
 });
 
