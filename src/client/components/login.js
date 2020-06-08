@@ -34,7 +34,7 @@ export default class Login extends Component {
                     {
                         headers: response.data,
                     },
-                    window.location.replace("/"),
+                    //window.location.replace("/user/me"),
                 );
             })
             .catch(error => {
