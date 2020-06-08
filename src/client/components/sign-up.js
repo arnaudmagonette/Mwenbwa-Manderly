@@ -86,24 +86,23 @@ export default class SignUp extends Component {
     render() {
         return (
             <div className={"column is-half has-padding-right-100"}>
-                <div> {"Sign Up "} </div>{" "}
+                <div> {"Sign Up "} </div>
                 <div className={"field"}>
                     <form onSubmit={this.handleSubmit}>
                         <label className={"label has-padding-top-40"}>
-                            {" "}
-                            {" Username "}{" "}
-                        </label>{" "}
+                            {" Username "}
+                        </label>
                         <input
                             className={"input"}
                             type={"text"}
                             name={"username"}
                             placeholder={"Choose your username"}
                             onChange={this.handleChange}
-                        />{" "}
+                            required
+                        />
                         <label className={"label has-padding-top-40"}>
-                            {" "}
-                            {"Email"}{" "}
-                        </label>{" "}
+                            {"Email"}
+                        </label>
                         <input
                             className={"input"}
                             type={"email"}
@@ -111,39 +110,39 @@ export default class SignUp extends Component {
                             placeholder={"Type your email"}
                             value={this.state.email}
                             onChange={this.handleChange}
-                        />{" "}
+                            required
+                        />
                         <label className={"label label has-padding-top-20"}>
-                            {" "}
-                            {"Password"}{" "}
-                        </label>{" "}
+                            {"Password"}
+                        </label>
                         <input
                             className={"input is-success"}
                             type={"password"}
                             name={"password"}
                             placeholder={"Password"}
                             onChange={this.handleChange}
-                        />{" "}
+                            required
+                        />
                         <label className={"label has-padding-top-20"}>
-                            {" "}
-                            {" Confirm your password "}{" "}
-                        </label>{" "}
+                            {" Confirm your password "}
+                        </label>
                         <input
                             className={"input is-success"}
                             type={"text"}
                             name={"password_confirmation"}
                             onChange={this.handleChange}
                             placeholder={"Confirm password"}
+                            required
                         />
                         <div className={"control has-padding-top-40"}>
                             <button
                                 className={"button is-primary is-medium center"}
                                 type={"submit"}>
-                                {" "}
-                                {"Sign up"}{" "}
-                            </button>{" "}
-                        </div>{" "}
-                    </form>{" "}
-                </div>{" "}
+                                {"Sign up"}
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         );
     }

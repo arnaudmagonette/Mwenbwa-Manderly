@@ -54,15 +54,13 @@ export default class SignIn extends Component {
     render() {
         return (
             <div className={"column is-half has-padding-right-100 "}>
-                <div> {"Sign In "} </div>{" "}
+                <div> {"Sign In "} </div>
                 <div className={"field "}>
                     <form onSubmit={this.handleSubmit}>
-                        {" "}
-                        {/*  Partie Email   */}{" "}
+                        {/*  Partie Email   */}
                         <label className={"label has-padding-top-40"}>
-                            {" "}
-                            {"Email"}{" "}
-                        </label>{" "}
+                            {"Email"}
+                        </label>
                         <input
                             className={"input"}
                             type={"email"}
@@ -71,12 +69,11 @@ export default class SignIn extends Component {
                             value={this.state.email}
                             onChange={this.handleChange}
                             required
-                        />{" "}
-                        {/*  Partie Mdp   */}{" "}
+                        />
+                        {/*  Partie Mdp   */}
                         <label className={"label label has-padding-top-20"}>
-                            {" "}
-                            {"Password"}{" "}
-                        </label>{" "}
+                            {"Password"}
+                        </label>
                         <input
                             className={"input is-success"}
                             type={"password"}
@@ -91,10 +88,10 @@ export default class SignIn extends Component {
                                 className={"button is-link is-medium center"}
                                 type={"submit"}>
                                 {"Login"}
-                            </button>{" "}
-                        </div>{" "}
-                    </form>{" "}
-                </div>{" "}
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         );
     }
