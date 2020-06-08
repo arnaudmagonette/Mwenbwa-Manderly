@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 import React, {Component} from "react";
 import axios from "axios";
 
@@ -25,10 +26,11 @@ export default class SignIn extends Component {
 
     handleSubmit(event) {
         const {email, password} = this.state;
+        console.log("Ok");
 
         axios
             .post(
-                "/user/login",
+                "/login",
                 {
                     user: {
                         email,
@@ -39,30 +41,30 @@ export default class SignIn extends Component {
                     withCredentials: true,
                 },
             )
-            .then((response) => {
+            .then(response => {
                 if (response.data.logged_in) {
                     this.props.handleSuccessfulAuth(response.data);
                 }
             })
-            .catch((error) => {
+            .catch(error => {
                 console.log("login error", error);
             });
         event.preventDefault();
     }
     render() {
         return (
-            <div className="column is-half has-padding-right-100 ">
+            <div className={"column is-half has-padding-right-100 "}>
                 <div> {"Sign In "} </div>{" "}
-                <div className="field ">
+                <div className={"field "}>
                     <form onSubmit={this.handleSubmit}>
                         {" "}
                         {/*  Partie Email   */}{" "}
-                        <label className="label has-padding-top-40">
+                        <label className={"label has-padding-top-40"}>
                             {" "}
                             {"Email"}{" "}
                         </label>{" "}
                         <input
-                            className="input"
+                            className={"input"}
                             type={"email"}
                             name={"email"}
                             placeholder={"Email"}
@@ -71,12 +73,12 @@ export default class SignIn extends Component {
                             required
                         />{" "}
                         {/*  Partie Mdp   */}{" "}
-                        <label className="label label has-padding-top-20">
+                        <label className={"label label has-padding-top-20"}>
                             {" "}
                             {"Password"}{" "}
                         </label>{" "}
                         <input
-                            className="input is-success"
+                            className={"input is-success"}
                             type={"password"}
                             name={"password"}
                             placeholder={"Password"}
@@ -84,10 +86,10 @@ export default class SignIn extends Component {
                             onChange={this.handleChange}
                             required
                         />
-                        <div className="control has-padding-top-40">
+                        <div className={"control has-padding-top-40"}>
                             <button
-                                className="button is-link is-medium center"
-                                type={"button"}>
+                                className={"button is-link is-medium center"}
+                                type={"submit"}>
                                 {"Login"}
                             </button>{" "}
                         </div>{" "}

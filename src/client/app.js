@@ -11,5 +11,4 @@ import ReactDOM from "react-dom";
 
 import Login from "./components/log";
 
-
-ReactDOM.render( < Login / > , document.querySelector("#app"));
+ReactDOM.render(<Login />, document.querySelector("#app"));
