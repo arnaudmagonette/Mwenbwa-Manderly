@@ -8,6 +8,8 @@
 
 import * as React from "react";
 import ReactDOM from "react-dom";
-import LogIn from "./components/login";
 
-ReactDOM.render( < LogIn / > , document.querySelector("#app"));
+import Login from "./components/log";
+
+
+ReactDOM.render( < Login / > , document.querySelector("#app"));

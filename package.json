@@ -53,6 +53,7 @@
     "bulma": "^0.8.2",
     "bulma-helpers": "^0.3.12",
     "bulma-spacing": "^2.0.4",
+    "create-react-app": "^3.4.1",
     "express": "^4.17.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
