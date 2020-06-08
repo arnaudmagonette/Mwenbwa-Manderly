@@ -60,7 +60,7 @@ export default class SignUp extends Component {
 
         axios
             .post(
-                "/register",
+                "user/signup",
                 {
                     user: {
                         username: this.state.username,

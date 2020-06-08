@@ -30,7 +30,7 @@ export default class SignIn extends Component {
 
         axios
             .post(
-                "/login",
+                "user/login",
                 {
                     user: {
                         email,
