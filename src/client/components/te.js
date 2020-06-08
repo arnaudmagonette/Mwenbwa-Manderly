@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-max-depth */
 import * as React from "react";
 
-// npm install bulma et npm i bulma-spacing
+// "npm install bulma bulma-spacing"
 
 const LogIn = () => (
     <div>
