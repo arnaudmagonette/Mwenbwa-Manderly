@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
 
 app.get("/allTrees", (req, res) => {
     Trees.find({})
-        .limit(10)
+        .limit(1000)
         .exec((err, allTrees) => {
             if (err) {
                 console.error(err);
