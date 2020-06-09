@@ -1,5 +1,5 @@
 import * as React from "react";
-import MapWrapper from "./map.js";
+import MapWrapper from "./map";
 
 function Index() {
     return (
