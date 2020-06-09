@@ -8,7 +8,7 @@
   "scripts": {
     "lint": "npx eslint --fix --cache --ignore-pattern 'docs/*' src",
     "popo": "npm install --save-dev @babel/core @babel/cli",
-    "build:server": "npm popo && npx babel src/server -s --out-dir bin/server",
+    "build:server": "npm install --save-dev @babel/core @babel/cli && npx babel src/server -s --out-dir bin/server",
     "work:server": "npx babel src/server -s --watch --verbose --out-dir bin/server",
     "build:client": "npx webpack --progress --profile --colors",
     "work:client": "npx webpack --env=dev --progress",
