@@ -1,7 +1,9 @@
 /* eslint-disable react/button-has-type */
+
 import React, {Component} from "react";
 import axios from "axios";
 import {validateAll} from "indicative/validator";
+import {CirclePicker} from "react-color";
 
 export default class SignUp extends Component {
     constructor(props) {
@@ -13,11 +15,16 @@ export default class SignUp extends Component {
             password: "",
             password_confirmation: "",
             hasAgreed: false,
+            color: "",
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
+
+    handleChangeComplete = color => {
+        this.setState({color: color.hex});{/* eslint-disable-line */}
+    };
 
     handleChange(event) {
         this.setState({
@@ -133,6 +140,10 @@ export default class SignUp extends Component {
                             onChange={this.handleChange}
                             placeholder={"Confirm password"}
                             required
+                        />
+                        <CirclePicker
+                            color={this.state.color}
+                            onChangeComplete={this.handleChangeComplete}
                         />
                         <div className={"control has-padding-top-40"}>
                             <button
