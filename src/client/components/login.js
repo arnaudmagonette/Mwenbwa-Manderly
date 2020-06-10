@@ -3,7 +3,7 @@
 /* eslint-disable react/button-has-type */
 import React, {Component} from "react";
 import axios from "axios";
-import Cookies from "universal-cookie";
+import {BrowserRouter as Router, Link} from "react-router-dom";
 
 export default class Login extends Component {
     constructor(props) {
@@ -32,11 +32,11 @@ export default class Login extends Component {
             })
             .then(response => {
                 const token = response.data.token;
-                //   response.headers.token = `${token}`;
-                const cookies = new Cookies();
-                cookies.set("token", token, {path: "/"});
-                console.log(cookies.get("token"));
-                // window.location.replace("/hello");
+                localStorage.setItem("access_token", token);
+                console.log(localStorage.getItem("access_token"));
+                axios.defaults.headers.authorization = localStorage.getItem(
+                    "access_token",
+                );
             })
             .catch(error => {
                 console.log(error);
@@ -46,91 +46,49 @@ export default class Login extends Component {
 
     render() {
         return (
-            <div>
+            <Router>
                 <div>
-                    <h1
+                    <div>
+                        <h1
+                            className={
+                                "has-text-centered is-size-1 has-margin-top-30"
+                            }>
+                            {" Welcome to Mwembwa"}
+                        </h1>
+                    </div>
+                    <div
                         className={
-                            "has-text-centered is-size-1 has-margin-top-30"
+                            "container notification is-four-fifths has-margin-top-50"
                         }>
-                        {" Welcome to Mwembwa"}
-                    </h1>
-                </div>
-                <div
-                    className={
-                        "container notification is-four-fifths has-margin-top-50"
-                    }>
-                    <div className={"columns is-size-3"}>
-                        <div className={"column is-half has-padding-right-100"}>
-                            <div> {"Sign Up"} </div>
-                            <div className={"field"}>
-                                <form>
+                        <div className={"columns is-size-3"}>
+                            <div
+                                className={
+                                    "column is-half has-padding-right-100"
+                                }>
+                                <div> {"Sign Up"} </div>
+                                <div className={"field"}>
+                                    <form>
+                                        <label
+                                            className={
+                                                "label has-padding-top-40"
+                                            }>
+                                            {"Username"}
+                                        </label>
+                                        <input
+                                            className={"input is-success"}
+                                            type={"email"}
+                                            placeholder={"Type your username"}
+                                        />
+                                    </form>
                                     <label
-                                        className={"label has-padding-top-40"}>
-                                        {"Username"}
-                                    </label>
-                                    <input
-                                        className={"input is-success"}
-                                        type={"email"}
-                                        placeholder={"Type your username"}
-                                    />
-                                </form>
-                                <label className={"label has-padding-top-20"}>
-                                    {"Email"}
-                                </label>
-                                <input
-                                    className={"input"}
-                                    type={"email"}
-                                    placeholder={"Type your email"}
-                                />
-                                <label
-                                    className={
-                                        "label label has-padding-top-20"
-                                    }>
-                                    {"Password"}
-                                </label>
-                                <input
-                                    className={"input is-success"}
-                                    type={"password"}
-                                    placeholder={"Type your password"}
-                                />
-                                <label className={"label has-padding-top-20"}>
-                                    {"Confirm your password"}
-                                </label>
-                                <input
-                                    className={"input is-success"}
-                                    type={"Confirm your password"}
-                                    placeholder={"Confirm your password"}
-                                />
-                                <div className={"control has-padding-top-40"}>
-                                    <button
-                                        className={
-                                            "button is-primary is-medium"
-                                        }>
-                                        {"Submit"}
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            className={"column is-half has-padding-right-100 "}>
-                            <div> {"Sign In"} </div>
-                            <div className={"field"}>
-                                <form onSubmit={this.handleSubmit}>
-                                    {/*  Partie Email   */}
-                                    <label
-                                        className={"label has-padding-top-40"}>
+                                        className={"label has-padding-top-20"}>
                                         {"Email"}
                                     </label>
                                     <input
                                         className={"input"}
                                         type={"email"}
-                                        name={"email"}
-                                        placeholder={"Email"}
-                                        value={this.state.email}
-                                        onChange={this.handleChange}
-                                        required
+                                        placeholder={"Type your email"}
                                     />
-                                    {/*  Partie Mdp   */}
                                     <label
                                         className={
                                             "label label has-padding-top-20"
@@ -140,11 +98,16 @@ export default class Login extends Component {
                                     <input
                                         className={"input is-success"}
                                         type={"password"}
-                                        name={"password"}
-                                        placeholder={"Password"}
-                                        value={this.state.password}
-                                        onChange={this.handleChange}
-                                        required
+                                        placeholder={"Type your password"}
+                                    />
+                                    <label
+                                        className={"label has-padding-top-20"}>
+                                        {"Confirm your password"}
+                                    </label>
+                                    <input
+                                        className={"input is-success"}
+                                        type={"Confirm your password"}
+                                        placeholder={"Confirm your password"}
                                     />
                                     <div
                                         className={
@@ -152,45 +115,73 @@ export default class Login extends Component {
                                         }>
                                         <button
                                             className={
-                                                "button is-link is-medium center"
-                                            }
-                                            type={"submit"}>
-                                            {"Login"}
+                                                "button is-primary is-medium"
+                                            }>
+                                            {"Submit"}
                                         </button>
                                     </div>
-                                </form>
+                                </div>
+                            </div>
+                            <div
+                                className={
+                                    "column is-half has-padding-right-100 "
+                                }>
+                                <div> {"Sign In"} </div>
+                                <div className={"field"}>
+                                    <form onSubmit={this.handleSubmit}>
+                                        {/*  Partie Email   */}
+                                        <label
+                                            className={
+                                                "label has-padding-top-40"
+                                            }>
+                                            {"Email"}
+                                        </label>
+                                        <input
+                                            className={"input"}
+                                            type={"email"}
+                                            name={"email"}
+                                            placeholder={"Email"}
+                                            value={this.state.email}
+                                            onChange={this.handleChange}
+                                            required
+                                        />
+                                        {/*  Partie Mdp   */}
+                                        <label
+                                            className={
+                                                "label label has-padding-top-20"
+                                            }>
+                                            {"Password"}
+                                        </label>
+                                        <input
+                                            className={"input is-success"}
+                                            type={"password"}
+                                            name={"password"}
+                                            placeholder={"Password"}
+                                            value={this.state.password}
+                                            onChange={this.handleChange}
+                                            required
+                                        />
+                                        <div
+                                            className={
+                                                "control has-padding-top-40"
+                                            }>
+                                            <Link to={"/hello"}>
+                                                <button
+                                                    className={
+                                                        "button is-link is-medium center"
+                                                    }
+                                                    type={"submit"}>
+                                                    {"Login"}
+                                                </button>
+                                            </Link>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <form onSubmit={this.handleSubmit}>
-                    <input
-                        type={"text"}
-                        name={"username"}
-                        placeholder={"Username"}
-                        value={this.state.username}
-                        onChange={this.handleChange}
-                        required
-                    />
-                    <input
-                        type={"email"}
-                        name={"email"}
-                        placeholder={"Email"}
-                        value={this.state.email}
-                        onChange={this.handleChange}
-                        required
-                    />
-                    <input
-                        type={"password"}
-                        name={"password"}
-                        placeholder={"Password"}
-                        value={this.state.password}
-                        onChange={this.handleChange}
-                        required
-                    />
-                    <button type={"submit"}> {"Login"} </button>
-                </form>
-            </div>
+            </Router>
         );
     }
 }

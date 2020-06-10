@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 import path from "path";
 import Cookies from "universal-cookie";
+import axios from "axios";
 
 const cookieParser = require("cookie-parser");
 const express = require("express");
@@ -39,7 +40,6 @@ app.get("/api/secret", auth, (req, res) => {
     res.send("The password is potato");
 });
 app.get("/hello", auth, (req, res) => {
-    cookies.get("token");
     res.send("The password is potato");
 });
 
