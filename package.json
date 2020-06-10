@@ -28,6 +28,7 @@
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
     "@becode/eslint-config": "^0.9.1",
+    "axios": "^0.19.2",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "body-parser": "^1.19.0",
@@ -61,17 +62,22 @@
     "bulma-helpers": "^0.3.12",
     "bulma-spacing": "^2.0.4",
     "chokidar": "^3.4.0",
-    "express": "^4.17.1",
     "express-validator": "^6.5.0",
     "jsonwebtoken": "^8.5.1",
     "leaflet": "^1.6.0",
     "mongoose": "^5.9.17",
+    "create-react-app": "^3.4.1",
+    "express": "^4.17.1",
+    "indicative": "^7.4.4",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-bulma-components": "^3.3.0",
     "react-color": "^2.18.1",
     "react-dom": "^16.13.1",
-    "react-leaflet": "^2.7.0"
+    "react-leaflet": "^2.7.0",
+    "react-hook-form": "^5.7.2",
+    "react-native-indicative": "^0.2.1",
+    "save": "^2.4.0"
   },
   "husky": {
     "hooks": {
