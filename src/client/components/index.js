@@ -1,11 +1,11 @@
 import * as React from "react";
-import Login from "./log";
+import MapWrapper from "./map";
 
 function Index() {
     return (
         <main>
             <div>
-                <Login />
+                <MapWrapper />
             </div>
         </main>
     );
