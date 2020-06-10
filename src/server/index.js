@@ -1,48 +1,134 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
+
+import express from "express";
 import path from "path";
-import Cookies from "universal-cookie";
-import axios from "axios";
 
-const cookieParser = require("cookie-parser");
-const express = require("express");
-const bodyParser = require("body-parser");
-const user = require("./routes/user");
-const auth = require("./middleware/auth");
-const InitiateMongoServer = require("./config/db");
-const cookies = new Cookies();
-
-// Initiate Mongo Server
-InitiateMongoServer();
-
+const cors = require("cors");
 const app = express();
+const bodyParser = require("body-parser");
+const {APP_PORT} = process.env;
 
-// PORT
-const PORT = process.env.PORT || 12345;
+const corsOptions = {
+    origin: "http://localhost:8080",
+};
 
-// Middleware
-app.use(bodyParser.json());
-app.use(cookieParser());
+app.use(cors(corsOptions));
 app.use(express.static(path.resolve(__dirname, "../../bin/client")));
+// parse requests of content-type - application/json
+app.use(bodyParser.json());
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({extended: true}));
+
+const db = require("./models");
+const Role = db.role;
+
+const ConnectionMongoDb = require("./config/db.config");
+
+// routes
+require("./routes/auth.routes")(app);
+require("./routes/user.routes")(app);
+
+app.listen(APP_PORT, () =>
+    console.log(`🚀 Server is listening on port ${APP_PORT}.`),
+);
+
+// Connection Mongo Db
+ConnectionMongoDb();
+
+// Routage
 
 app.get("/api", (req, res) => {
     res.json("API Working");
 });
 
-/**
- * Router Middleware
- * Router - /user/*
- * Method - *
- */
-app.use("/user", user);
+/*app.get("/allTrees", (req, res) => {
+    Trees.find({})
+        .limit(10)
+        .exec((err, allTrees) => {
+            if (err) {
+                console.error(err);
+            }
 
-app.get("/api/secret", auth, (req, res) => {
-    res.send("The password is potato");
-});
-app.get("/hello", auth, (req, res) => {
-    res.send("The password is potato");
+            res.json(allTrees);
+        });
 });
 
-app.listen(PORT, (req, res) => {
-    console.log(`Server Started at PORT ${PORT}`);
-});
+app.get("/allUsers", (req, res) => {
+    Users.find({})
+        .limit(10)
+        .exec((err, allUsers) => {
+            if (err) {
+                console.error(err);
+            }
+
+            res.json(allUsers);
+        });
+});*/
+
+//-------------------------------
+
+function initial() {
+    Role.estimatedDocumentCount((err, count) => {
+        if (!err && count === 0) {
+            new Role({
+                name: "user",
+            }).save(error => {
+                if (error) {
+                    console.log("error", error);
+                }
+
+                console.log("added 'user' to roles collection");
+            });
+        }
+    });
+}
+
+//------------------------------
+
+/*const totalLeaves = 100;
+const totalPlayers = 4;
+
+let leavesUser = Math.floor(totalLeaves / totalPlayers);
+
+function addLeaves() {
+    Trees.find({owner: "Arnaud"}).exec((err, allTrees) => {
+        if (err) {
+            console.error(err);
+        }
+
+        let totalLeavesTrees = 0;
+
+        allTrees.forEach((tree) => {
+            totalLeavesTrees += tree.leaves;
+        });
+
+        leavesUser = Math.floor(leavesUser + totalLeavesTrees);
+
+        console.log("Add Leaves");
+        console.log(leavesUser);
+    });
+
+    setTimeout(addLeaves, 900000);
+}
+
+function removeLeaves() {
+    leavesUser = Math.floor(leavesUser / 2);
+
+    console.log("Remove Leaves");
+    console.log(leavesUser);
+
+    setTimeout(removeLeaves, 3600000);
+}
+
+function buyTree() {
+    Trees.findByIdAndUpdate("5ed10f1a45ab8e02c4ee0532", {
+        $push: {owner: ["Arnaud"]},
+    }).exec((err, tree) => {
+        if (err) {
+            console.error(err);
+        }
+
+        console.log(tree);
+    });
+}*/

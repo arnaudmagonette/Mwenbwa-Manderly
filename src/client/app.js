@@ -9,15 +9,8 @@
 
 import * as React from "react";
 import ReactDOM from "react-dom";
-import {CookiesProvider} from "react-cookie";
-import Login from "./components/login";
 // import HelloWorld from "./components/hello";
 
-ReactDOM.render(
-    <CookiesProvider>
-        <Login />
-    </CookiesProvider>,
+import Index from "./components/index";
 
-    document.querySelector("#app"),
-);
-// ReactDOM.render(<HelloWorld />, document.getElementById("#app"));
+ReactDOM.render(<Index />, document.querySelector("#app"));
