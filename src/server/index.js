@@ -4,18 +4,30 @@
 import express from "express";
 import path from "path";
 
+const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
 const {APP_PORT} = process.env;
 
-app.use(bodyParser.urlencoded({extended: true}));
+const corsOptions = {
+    origin: "http://localhost:8080",
+};
+
+app.use(cors(corsOptions));
 app.use(express.static(path.resolve(__dirname, "../../bin/client")));
+// parse requests of content-type - application/json
+app.use(bodyParser.json());
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({extended: true}));
 
-const Trees = require("./models/tree");
-const Users = require("./models/user");
+const db = require("./models");
+const Role = db.role;
 
-const user = require("./routes/user");
-const ConnectionMongoDb = require("./config/db");
+const ConnectionMongoDb = require("./config/db.config");
+
+// routes
+require("./routes/auth.routes")(app);
+require("./routes/user.routes")(app);
 
 app.listen(APP_PORT, () =>
     console.log(`🚀 Server is listening on port ${APP_PORT}.`),
@@ -30,7 +42,7 @@ app.get("/", (req, res) => {
     res.json("API Working");
 });
 
-app.get("/allTrees", (req, res) => {
+/*app.get("/allTrees", (req, res) => {
     Trees.find({})
         .limit(1000)
         .exec((err, allTrees) => {
@@ -52,7 +64,25 @@ app.get("/allUsers", (req, res) => {
 
             res.json(allUsers);
         });
-});
+});*/
+
+//-------------------------------
+
+function initial() {
+    Role.estimatedDocumentCount((err, count) => {
+        if (!err && count === 0) {
+            new Role({
+                name: "user",
+            }).save(error => {
+                if (error) {
+                    console.log("error", error);
+                }
+
+                console.log("added 'user' to roles collection");
+            });
+        }
+    });
+}
 
 //------------------------------
 
@@ -102,10 +132,3 @@ function buyTree() {
         console.log(tree);
     });
 }*/
-
-/**
- * Router Middleware
- * Router - /user/*
- * Method - *
- */
-app.use("/user", user);

@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOMServer from "react-dom/server";
 
 const Icon = props => (
-    <svg width={"580"} height={"400"} xmlns={"http://www.w3.org/2000/svg"}>
+    <svg width={"400"} height={"400"} xmlns={"http://www.w3.org/2000/svg"}>
         <ellipse
             ry={"117"}
             rx={"117"}
