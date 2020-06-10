@@ -5,12 +5,8 @@ import LeaderBoard from "./leaderboard";
 function Index() {
     return (
         <main>
-            <div>
-                <MapWrapper />
-            </div>
-            <div>
-                <LeaderBoard />
-            </div>
+            <MapWrapper />
+            <LeaderBoard />
         </main>
     );
 }
