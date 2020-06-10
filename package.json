@@ -5,9 +5,11 @@
   "author": "leny <leny@becode.org>",
   "license": "MIT",
   "private": true,
+  "engines": {
+    "node": "10.19.0"
+  },
   "scripts": {
     "lint": "npx eslint --fix --cache --ignore-pattern 'docs/*' src",
-    "popo": "npm install --save-dev @babel/core @babel/cli",
     "build:server": "npx babel src/server -s --out-dir bin/server",
     "work:server": "npx babel src/server -s --watch --verbose --out-dir bin/server",
     "build:client": "npx webpack --progress --profile --colors",
