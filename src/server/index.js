@@ -28,6 +28,7 @@ const ConnectionMongoDb = require("./config/db.config");
 // routes
 require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
+require("./routes/tree.routes")(app);
 
 app.listen(APP_PORT, () =>
     console.log(`🚀 Server is listening on port ${APP_PORT}.`),
@@ -38,11 +39,11 @@ ConnectionMongoDb();
 
 // Routage
 
-app.get("/", (req, res) => {
+/*app.get("/", (req, res) => {
     res.json("API Working");
 });
 
-/*app.get("/allTrees", (req, res) => {
+app.get("/allTrees", (req, res) => {
     Trees.find({})
         .limit(10)
         .exec((err, allTrees) => {
