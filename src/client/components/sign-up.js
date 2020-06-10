@@ -67,12 +67,13 @@ export default class SignUp extends Component {
 
         axios
             .post(
-                "user/signup",
+                "api/auth/signup",
                 {
                     user: {
                         username: this.state.username,
                         email: this.state.email,
                         password: this.state.password,
+                        roles: ["user"],
                     },
                 },
                 {
