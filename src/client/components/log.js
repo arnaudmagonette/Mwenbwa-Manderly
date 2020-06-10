@@ -23,8 +23,8 @@ export default class Login extends Component {
                         <SignUp />
 
                         <SignIn />
-                    </div>{" "}
-                </div>{" "}
+                    </div>
+                </div>
             </div>
         );
     }
