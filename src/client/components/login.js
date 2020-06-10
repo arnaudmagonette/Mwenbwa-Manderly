@@ -1,6 +1,9 @@
+/* eslint-disable react/jsx-max-depth */
+/* eslint-disable no-console */
 /* eslint-disable react/button-has-type */
 import React, {Component} from "react";
 import axios from "axios";
+import Cookies from "universal-cookie";
 
 export default class Login extends Component {
     constructor(props) {
@@ -28,14 +31,12 @@ export default class Login extends Component {
                 password: this.state.password,
             })
             .then(response => {
-                console.log(response.data);
-                axios.get(
-                    "/user/me",
-                    {
-                        headers: response.data,
-                    },
-                    //window.location.replace("/user/me"),
-                );
+                const token = response.data.token;
+                //   response.headers.token = `${token}`;
+                const cookies = new Cookies();
+                cookies.set("token", token, {path: "/"});
+                console.log(cookies.get("token"));
+                // window.location.replace("/hello");
             })
             .catch(error => {
                 console.log(error);

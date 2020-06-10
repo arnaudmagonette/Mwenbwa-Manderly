@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 import path from "path";
+import Cookies from "universal-cookie";
 
 const cookieParser = require("cookie-parser");
 const express = require("express");
@@ -8,6 +9,7 @@ const bodyParser = require("body-parser");
 const user = require("./routes/user");
 const auth = require("./middleware/auth");
 const InitiateMongoServer = require("./config/db");
+const cookies = new Cookies();
 
 // Initiate Mongo Server
 InitiateMongoServer();
@@ -34,6 +36,10 @@ app.get("/api", (req, res) => {
 app.use("/user", user);
 
 app.get("/api/secret", auth, (req, res) => {
+    res.send("The password is potato");
+});
+app.get("/hello", auth, (req, res) => {
+    cookies.get("token");
     res.send("The password is potato");
 });
 

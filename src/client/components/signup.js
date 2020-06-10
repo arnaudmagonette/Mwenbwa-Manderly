@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-max-depth */
+/* eslint-disable no-console */
 /* eslint-disable react/button-has-type */
 import React, {Component} from "react";
 import axios from "axios";
