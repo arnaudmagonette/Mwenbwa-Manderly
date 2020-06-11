@@ -1,6 +1,7 @@
 /* eslint-disable react/button-has-type */
 import React, {Component} from "react";
-import axios from "axios";
+
+import AuthService from "../services/auth.service";
 
 export default class SignIn extends Component {
     constructor(props) {
@@ -25,30 +26,17 @@ export default class SignIn extends Component {
     }
 
     handleSubmit(event) {
-        const {email, password} = this.state;
         console.log("Ok");
 
-        axios
-            .post(
-                "api/auth/signin",
-                {
-                    user: {
-                        email,
-                        password,
-                    },
-                },
-                {
-                    withCredentials: true,
-                },
-            )
-            .then(response => {
-                if (response.data.logged_in) {
-                    this.props.handleSuccessfulAuth(response.data);
-                }
-            })
-            .catch(error => {
+        AuthService.login(this.state.email, this.state.password).then(
+            () => {
+                //window.location.reload();
+            },
+            error => {
                 console.log("login error", error);
-            });
+            },
+        );
+
         event.preventDefault();
     }
     render() {
