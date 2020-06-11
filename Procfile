@@ -1,1 +1,0 @@
-web: npx babel src/server -s --out-dir bin/server
