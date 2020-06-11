@@ -1,4 +1,5 @@
-/* eslint-disable no-console */
+"use strict";
+
 const mongoose = require("mongoose");
 
 const mongoURI = process.env.MONGODB_URI;
@@ -17,3 +18,4 @@ const ConnectionMongoDb = async () => {
 };
 
 module.exports = ConnectionMongoDb;
+//# sourceMappingURL=db.js.map
