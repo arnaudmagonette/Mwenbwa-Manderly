@@ -1,8 +1,7 @@
 /* eslint-disable no-console */
 const mongoose = require("mongoose");
 
-const mongoURI =
-    "mongodb://becode:2tcbx7hs@ds249967.mlab.com:49967/heroku_2tcbx7hs";
+const mongoURI = process.env.MONGODB_URI;
 
 const ConnectionMongoDb = async () => {
     try {
