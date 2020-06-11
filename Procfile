@@ -1,1 +1,1 @@
-web: npm start -p ${APP_PORT}
+web: node bin/server/index.js -p ${APP_PORT}
