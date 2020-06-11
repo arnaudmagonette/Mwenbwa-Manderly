@@ -3,7 +3,7 @@ const Tree = db.tree;
 
 exports.allTrees = (req, res) => {
     Tree.find({})
-        .limit(10)
+        .limit(100)
         .exec((err, allTrees) => {
             if (err) {
                 res.status(500).send({message: err});
