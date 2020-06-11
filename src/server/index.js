@@ -7,7 +7,7 @@ import path from "path";
 const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
-const {APP_PORT} = process.env.PORT || "127.0.0.1";
+const PORT = process.env.PORT || process.env;
 
 const corsOptions = {
     origin: "http://localhost:8080",
@@ -30,9 +30,7 @@ require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
 require("./routes/tree.routes")(app);
 
-app.listen(APP_PORT, () =>
-    console.log(`🚀 Server is listening on port ${APP_PORT}.`),
-);
+app.listen(PORT, () => console.log(`🚀 Server is listening on port ${PORT}.`));
 
 // Connection Mongo Db
 ConnectionMongoDb();
