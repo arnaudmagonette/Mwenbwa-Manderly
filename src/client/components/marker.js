@@ -25,11 +25,12 @@ const Marker = props => (
                 <p>{"Name : Arboretrium"}</p>
             </div>
             <div>
+                <img src={"./false-user.png"} />
                 <p>{"Owner : Pierre"}</p>
             </div>
             <div>
                 <p>{"Value : 131 L"}</p>
-                {/* <button type="button">Buy</button> */}
+                {/* <button type={"submit"}>{"Buy"}</button> */}
             </div>
             <div>
                 <table>
@@ -79,7 +80,7 @@ const Marker = props => (
             </div>
             <form>
                 <textarea placeholder={"Write your comment..."} />
-                {/* <button type={"submit"} /> */}
+                {/* <button type={"submit"}>{"Send"}</button> */}
             </form>
             <div>
                 <a href={"#"}>{"Wiki link"}</a>
