@@ -16,7 +16,9 @@ const LeaderBoard = () => (
                         <td>{"Score"}</td>
                     </tr>
                     <tr>
-                        <td>{""}</td>
+                        <td>
+                            <img src={"./false-user.png"} />
+                        </td>
                         <td>{"Pierre"}</td>
                         <td>{"1347 leaf"}</td>
                     </tr>
