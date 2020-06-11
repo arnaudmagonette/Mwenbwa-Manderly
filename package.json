@@ -7,7 +7,8 @@
     "private": true,
     "main": "bin/server/index.js",
     "engines": {
-        "node": "10.19.0"
+        "node": "14.4.0",
+        "npm": "6.14.5"
     },
     "scripts": {
         "lint": "npx eslint --fix --cache --ignore-pattern 'docs/*' src",
