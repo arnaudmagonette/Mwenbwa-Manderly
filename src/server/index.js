@@ -7,7 +7,7 @@ import path from "path";
 const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
-const {APP_PORT} = process.env.PORT || process.env;
+// const {APP_PORT} = process.env.PORT || process.env;
 
 const corsOptions = {
     origin: "http://localhost:8080",
@@ -30,10 +30,15 @@ require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
 require("./routes/tree.routes")(app);
 
-app.listen(APP_PORT, () =>
-    console.log(`🚀 Server is listening on port ${APP_PORT}.`),
-);
+// app.listen(APP_PORT, () =>
+//     console.log(`🚀 Server is listening on port ${APP_PORT}.`),
+// );
 
+const server_port = process.env.YOUR_PORT || process.env.PORT || 8080;
+const server_host = process.env.YOUR_HOST || "0.0.0.0";
+app.listen(server_port, server_host, () => {
+    console.log("Listening on port %d", server_port);
+});
 // Connection Mongo Db
 ConnectionMongoDb();
 
