@@ -1,0 +1,1 @@
+web: npm start -p ${APP_PORT}
