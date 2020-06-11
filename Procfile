@@ -1,0 +1,1 @@
+web: nppm start -p $PORT
