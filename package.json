@@ -5,7 +5,7 @@
     "author": "leny <leny@becode.org>",
     "license": "MIT",
     "private": true,
-    "main": "bin/server/index.js"
+    "main": "bin/server/index.js",
     "engines": {
         "node": "10.19.0"
     },
