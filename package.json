@@ -5,7 +5,6 @@
     "author": "leny <leny@becode.org>",
     "license": "MIT",
     "private": true,
-    "main": "bin/server/index.js",
     "engines": {
         "node": "14.4.0",
         "npm": "6.14.5"
@@ -17,7 +16,7 @@
         "build:client": "npx webpack --progress --profile --colors",
         "work:client": "npx webpack --env=dev --progress",
         "build": "npm run build:server && npm run build:client",
-        "start": "npm start"
+        "start": "node bin/server/index.js"
     },
     "lint-staged": {
         "*.js": [
