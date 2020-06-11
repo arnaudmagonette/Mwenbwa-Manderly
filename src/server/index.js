@@ -7,7 +7,7 @@ import path from "path";
 const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
-const {APP_PORT} = process.env.PORT || 8080;
+const {APP_PORT} = process.env.PORT || "127.0.0.1";
 
 const corsOptions = {
     origin: "http://localhost:8080",
