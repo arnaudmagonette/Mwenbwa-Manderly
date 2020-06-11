@@ -1,1 +1,1 @@
-worker: npm start -p ${APP_PORT}
+web: npm start -p ${APP_PORT}
