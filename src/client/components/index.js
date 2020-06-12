@@ -1,6 +1,6 @@
 import * as React from "react";
 import MapWrapper from "./map";
-import EditP from "./edit-Profile";
+import EditP from "./edit-profile";
 
 function Index() {
     return (
