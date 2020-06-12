@@ -1,3 +1,5 @@
+const controller = require("../controllers/user.controller");
+
 module.exports = function (app) {
     app.use((req, res, next) => {
         res.header(
@@ -6,4 +8,8 @@ module.exports = function (app) {
         );
         next();
     });
+};
+
+module.exports = function (app) {
+    app.get("/allUsers", controller.allUsers);
 };
