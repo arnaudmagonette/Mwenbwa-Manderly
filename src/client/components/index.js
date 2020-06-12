@@ -1,12 +1,14 @@
 import * as React from "react";
-import Login from "./log";
+import MapWrapper from "./map";
+import LeaderBoard from "./leaderboard";
+import Gamelog from "./gamelog";
 
 function Index() {
     return (
         <main>
-            <div>
-                <Login />
-            </div>
+            <MapWrapper />
+            <LeaderBoard />
+            <Gamelog />
         </main>
     );
 }

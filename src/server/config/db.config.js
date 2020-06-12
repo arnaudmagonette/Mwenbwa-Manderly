@@ -1,12 +1,13 @@
-/* eslint-disable no-console */
+"use strict";
+
 const mongoose = require("mongoose");
 
-const mongoURI = "mongodb://dev:dev@mongo/mwenbwaDb";
+const mongoURI = process.env.MONGODB_URI;
 
 const ConnectionMongoDb = async () => {
     try {
         await mongoose.connect(mongoURI, {
-            auth: {authSource: "admin"},
+            useUnifiedTopology: true,
             useNewUrlParser: true,
         });
         console.log("Connected to DB !!");
@@ -17,3 +18,4 @@ const ConnectionMongoDb = async () => {
 };
 
 module.exports = ConnectionMongoDb;
+//# sourceMappingURL=db.js.map

@@ -1,9 +1,18 @@
+/* becodeorg/mwenbwa
+ *
+ * /src/client/components/map.js - Map Component
+ *
+ * coded by Guillaume Boeur
+ * started at 28/05/2020
+ */
+
 import React from "react";
 import {Marker as LeafletMarker, Popup} from "react-leaflet";
 import * as Leaflet from "leaflet";
+import {iconUrl} from "./icon";
 
 const myIcon = Leaflet.icon({
-    iconUrl: "http://www.svgrepo.com/show/127575/location-sign.svg",
+    iconUrl: iconUrl("#214001"),
     iconSize: [30, 30],
     iconAnchor: [25, 15],
     popupAnchor: [0, -20],
@@ -16,11 +25,12 @@ const Marker = props => (
                 <p>{"Name : Arboretrium"}</p>
             </div>
             <div>
+                <img src={"./false-user.png"} />
                 <p>{"Owner : Pierre"}</p>
             </div>
             <div>
                 <p>{"Value : 131 L"}</p>
-                {/* <button type="button">Buy</button> */}
+                {/* <button type={"submit"}>{"Buy"}</button> */}
             </div>
             <div>
                 <table>
@@ -70,7 +80,7 @@ const Marker = props => (
             </div>
             <form>
                 <textarea placeholder={"Write your comment..."} />
-                {/* <button type={"submit"} /> */}
+                {/* <button type={"submit"}>{"Send"}</button> */}
             </form>
             <div>
                 <a href={"#"}>{"Wiki link"}</a>

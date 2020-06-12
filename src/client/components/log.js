@@ -2,7 +2,6 @@
 import React, {Component} from "react";
 import SignUp from "./sign-up";
 import SignIn from "./sign-in";
-
 export default class Login extends Component {
     render() {
         return (

@@ -8,9 +8,9 @@ const bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
     const user = new User({
-        username: req.body.user.username,
-        email: req.body.user.email,
-        password: bcrypt.hashSync(req.body.user.password, 8),
+        username: req.body.username,
+        email: req.body.email,
+        password: bcrypt.hashSync(req.body.password, 8),
     });
 
     user.save((err, resp) => {
@@ -39,7 +39,7 @@ exports.signup = (req, res) => {
 
 exports.signin = (req, res) => {
     User.findOne({
-        email: req.body.user.email,
+        email: req.body.email,
     })
         .populate("roles", "-__v")
         .exec((err, user) => {
@@ -54,7 +54,7 @@ exports.signin = (req, res) => {
             }
 
             const passwordIsValid = bcrypt.compareSync(
-                req.body.user.password,
+                req.body.password,
                 user.password,
             );
 
