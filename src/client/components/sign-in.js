@@ -30,7 +30,7 @@ export default class SignIn extends Component {
 
         AuthService.login(this.state.email, this.state.password).then(
             () => {
-                //window.location.reload();
+                window.location.reload();
             },
             error => {
                 console.log("login error", error);
