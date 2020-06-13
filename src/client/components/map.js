@@ -1,6 +1,7 @@
 import React from "react";
 import {Map, TileLayer} from "react-leaflet";
 import Marker from "./marker";
+import MarkerClusterGroup from "react-leaflet-markercluster";
 
 import "./map.less";
 
@@ -25,12 +26,14 @@ const MapWrapper = () => {
                 <TileLayer
                     url={"http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
                 />
-                {trees.map(tree => (
-                    <Marker
-                        key={tree._id}
-                        position={[tree.geoloc.lat, tree.geoloc.lon]}
-                    />
-                ))}
+                <MarkerClusterGroup>
+                    {trees.map(tree => (
+                        <Marker
+                            key={tree._id}
+                            position={[tree.geoloc.lat, tree.geoloc.lon]}
+                        />
+                    ))}
+                </MarkerClusterGroup>
             </Map>
         </div>
     );
