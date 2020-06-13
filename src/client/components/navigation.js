@@ -1,12 +1,13 @@
 /* eslint-disable react/button-has-type */
 import React from "react";
+import {Link} from "react-router-dom";
+import {paths} from "./index";
 
 const Navigation = props => (
     <div>
         <nav>
-            <a href={"#"}>{"Leaderboard"}</a>
-            <a href={"#"}>{"Game Log"}</a>
-            <a href={"#"}>{"Profil"}</a>
+            <Link to={paths.LeaderBoard}>{"Leaderboard"}</Link>
+            <Link to={paths.Gamelog}>{"Game Log"}</Link>
             <button onClick={props.handleLogout}>{"Disconnect"}</button>
         </nav>
     </div>

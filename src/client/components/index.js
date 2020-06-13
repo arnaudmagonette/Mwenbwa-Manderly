@@ -6,10 +6,21 @@ import Login from "./login";
 const {useState} = React;
 import AuthService from "../services/auth.service";
 import Navigation from "./navigation";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Redirect,
+} from "react-router-dom";
 
 const handleLogout = setUser => () => {
     setUser(null);
     AuthService.logout();
+};
+
+export const paths = {
+    LeaderBoard: "/leader-board",
+    Gamelog: "/game-log",
 };
 
 function Index() {
@@ -18,10 +29,19 @@ function Index() {
     if (user) {
         return (
             <main>
-                <MapWrapper />
-                <LeaderBoard />
-                <Gamelog />
-                <Navigation handleLogout={handleLogout(setUser)} />
+                <Router>
+                    <MapWrapper />
+                    <Redirect from={"/"} exact to={paths.LeaderBoard} />
+                    <Switch>
+                        <Route path={paths.LeaderBoard}>
+                            <LeaderBoard />
+                        </Route>
+                        <Route path={paths.Gamelog}>
+                            <Gamelog />
+                        </Route>
+                    </Switch>
+                    <Navigation handleLogout={handleLogout(setUser)} />
+                </Router>
             </main>
         );
     }
