@@ -4,11 +4,16 @@ import LeaderBoard from "./leaderboard";
 import Gamelog from "./gamelog";
 import Login from "./login";
 const {useState} = React;
-
 import AuthService from "../services/auth.service";
+import Navigation from "./navigation";
+
+const handleLogout = setUser => () => {
+    setUser(null);
+    AuthService.logout();
+};
 
 function Index() {
-    const [user] = useState(AuthService.getCurrentUser);
+    const [user, setUser] = useState(AuthService.getCurrentUser());
 
     if (user) {
         return (
@@ -16,6 +21,7 @@ function Index() {
                 <MapWrapper />
                 <LeaderBoard />
                 <Gamelog />
+                <Navigation handleLogout={handleLogout(setUser)} />
             </main>
         );
     }

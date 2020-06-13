@@ -81,13 +81,6 @@ const LeaderBoard = () => (
                 </tbody>
             </table>
         </div>
-        <div>
-            <nav>
-                <a href={"#"}>{"Leaderboard"}</a>
-                <a href={"#"}>{"Game Log"}</a>
-                <a href={"#"}>{"Profil"}</a>
-            </nav>
-        </div>
     </div>
 );
 
