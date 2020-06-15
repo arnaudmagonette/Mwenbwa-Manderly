@@ -11,6 +11,7 @@ import {Marker as LeafletMarker, Popup} from "react-leaflet";
 import * as Leaflet from "leaflet";
 import {iconUrl} from "./icon";
 import LeafIcon from "./leaf-icon";
+import AvatarIcon from "./avatar-icon";
 
 const myIcon = Leaflet.icon({
     iconUrl: iconUrl("#037318"),
@@ -26,7 +27,7 @@ const Marker = props => (
                 <p>{`Name : ${props.name}`}</p>
             </div>
             <div>
-                <img src={"./false-user.png"} />
+                <AvatarIcon />
                 <p>{`Owner : ${props.owner}`}</p>
             </div>
             <div>
@@ -45,14 +46,17 @@ const Marker = props => (
                     </thead>
                     <tbody>
                         <tr>
+                            <td>{"Avatar"}</td>
                             <td>{"User"}</td>
                             <td>{"Date"}</td>
                         </tr>
                         <tr>
+                            <AvatarIcon />
                             <td>{"Pierre"}</td>
                             <td>{"03/06/2020"}</td>
                         </tr>
                         <tr>
+                            <AvatarIcon />
                             <td>{"Marc"}</td>
                             <td>{"02/06/2020"}</td>
                         </tr>
@@ -68,14 +72,17 @@ const Marker = props => (
                     </thead>
                     <tbody>
                         <tr>
+                            <td>{"Avatar"}</td>
                             <td>{"User"}</td>
                             <td>{"Comment"}</td>
                         </tr>
                         <tr>
+                            <AvatarIcon />
                             <td>{"Pierre"}</td>
                             <td>{`${props.comments}`}</td>
                         </tr>
                         <tr>
+                            <AvatarIcon />
                             <td>{"Marc"}</td>
                             <td>{`${props.comments}`}</td>
                         </tr>

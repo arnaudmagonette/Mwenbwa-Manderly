@@ -1,6 +1,7 @@
 import React from "react";
 import AuthService from "../services/auth.service";
 import LeafIcon from "./leaf-icon";
+import AvatarIcon from "./avatar-icon";
 
 const connectedUser = AuthService.getCurrentUser();
 
@@ -10,7 +11,7 @@ const LeaderBoard = () => (
             <p>{`Welcome, ${connectedUser.username}`}</p>
         </div>
         <div>
-            <img src={"./false-user.png"} />
+            <AvatarIcon />
             <p>
                 {`${connectedUser.leaves} `} <LeafIcon />
             </p>
@@ -31,24 +32,33 @@ const LeaderBoard = () => (
                     </tr>
                     <tr>
                         <td>
-                            <img src={"./false-user.png"} />
+                            <AvatarIcon />
                         </td>
                         <td>{"Pierre"}</td>
-                        <td>{"1347 leaf"}</td>
+                        <td>
+                            {"1347 "}
+                            <LeafIcon />
+                        </td>
                     </tr>
                     <tr>
                         <td>
-                            <img src={"./false-user.png"} />
+                            <AvatarIcon />
                         </td>
                         <td>{"Henry"}</td>
-                        <td>{"1340 leaf"}</td>
+                        <td>
+                            {"1340 "}
+                            <LeafIcon />
+                        </td>
                     </tr>
                     <tr>
                         <td>
-                            <img src={"./false-user.png"} />
+                            <AvatarIcon />
                         </td>
                         <td>{"David"}</td>
-                        <td>{"1299 leaf"}</td>
+                        <td>
+                            {"1299 "}
+                            <LeafIcon />
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -68,21 +78,21 @@ const LeaderBoard = () => (
                     </tr>
                     <tr>
                         <td>
-                            <img src={"./false-user.png"} />
+                            <AvatarIcon />
                         </td>
                         <td>{"Pierre"}</td>
                         <td>{"5435"}</td>
                     </tr>
                     <tr>
                         <td>
-                            <img src={"./false-user.png"} />
+                            <AvatarIcon />
                         </td>
                         <td>{"Henry"}</td>
                         <td>{"5121"}</td>
                     </tr>
                     <tr>
                         <td>
-                            <img src={"./false-user.png"} />
+                            <AvatarIcon />
                         </td>
                         <td>{"David"}</td>
                         <td>{"4937"}</td>

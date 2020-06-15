@@ -1,6 +1,7 @@
 import React from "react";
 import AuthService from "../services/auth.service";
 import LeafIcon from "./leaf-icon";
+import AvatarIcon from "./avatar-icon";
 
 const connectedUser = AuthService.getCurrentUser();
 
@@ -10,7 +11,7 @@ const Gamelog = () => (
             <p>{`Welcome, ${connectedUser.username}`}</p>
         </div>
         <div>
-            <img src={"./false-user.png"} />
+            <AvatarIcon />
             <p>
                 {`${connectedUser.leaves} `} <LeafIcon />
             </p>
@@ -31,21 +32,21 @@ const Gamelog = () => (
                     </tr>
                     <tr>
                         <td>
-                            <img src={"./false-user.png"} />
+                            <AvatarIcon />
                         </td>
                         <td>{"Jean-Eud"}</td>
                         <td>{"bought Arboretrum"}</td>
                     </tr>
                     <tr>
                         <td>
-                            <img src={"./false-user.png"} />
+                            <AvatarIcon />
                         </td>
                         <td>{"Britney"}</td>
                         <td>{"bought Ficus"}</td>
                     </tr>
                     <tr>
                         <td>
-                            <img src={"./false-user.png"} />
+                            <AvatarIcon />
                         </td>
                         <td>{"Anémone"}</td>
                         <td>{"bought Tulipe"}</td>
