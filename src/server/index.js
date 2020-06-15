@@ -37,58 +37,6 @@ app.listen(APP_PORT, () =>
 // Connection Mongo Db
 ConnectionMongoDb();
 
-// Routage
-
-/*app.get("/", (req, res) => {
-    res.json("API Working");
-});
-
-app.get("/api/secret", auth, function (req, res) {
-    res.send("The password is potato");
-});
-
-app.get("/allTrees", (req, res) => {
-    Trees.find({})
-        .limit(1000)
-        .exec((err, allTrees) => {
-            if (err) {
-                console.error(err);
-            }
-
-            res.json(allTrees);
-        });
-});
-
-app.get("/allUsers", (req, res) => {
-    Users.find({})
-        .limit(10)
-        .exec((err, allUsers) => {
-            if (err) {
-                console.error(err);
-            }
-
-            res.json(allUsers);
-        });
-});*/
-
-//-------------------------------
-
-function initial() {
-    Role.estimatedDocumentCount((err, count) => {
-        if (!err && count === 0) {
-            new Role({
-                name: "user",
-            }).save(error => {
-                if (error) {
-                    console.log("error", error);
-                }
-
-                console.log("added 'user' to roles collection");
-            });
-        }
-    });
-}
-
 //------------------------------
 
 /*const totalLeaves = 100;

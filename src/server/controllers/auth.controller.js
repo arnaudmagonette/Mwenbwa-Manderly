@@ -6,8 +6,8 @@ const Role = db.role;
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
-import addFirstLeaves from "../middlewares/leaves";
-import addFirstTrees from "../middlewares/trees";
+import {addFirstLeaves} from "./user.controller";
+import {addFirstTrees} from "./tree.controller";
 
 exports.signup = (req, res) => {
     const user = new User({
