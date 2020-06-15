@@ -34,6 +34,7 @@ const MapWrapper = () => {
                             owner={tree.owner}
                             name={tree.name}
                             leaves={tree.leaves}
+                            comments={tree.comments}
                         />
                     ))}
                 </MarkerClusterGroup>
