@@ -1,10 +1,16 @@
 import React from "react";
+import AuthService from "../services/auth.service";
+
+const connectedUser = AuthService.getCurrentUser();
 
 const Gamelog = () => (
     <div>
         <div>
+            <p>{`Welcome, ${connectedUser.username}`}</p>
+        </div>
+        <div>
             <img src={"./false-user.png"} />
-            <p>{"123 leaf"}</p>
+            <p>{`${connectedUser.leaves} leaves`}</p>
             <p>{"53 trees"}</p>
         </div>
         <div>
