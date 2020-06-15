@@ -6,7 +6,12 @@ import Login from "./login";
 const {useState} = React;
 import AuthService from "../services/auth.service";
 import Navigation from "./navigation";
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    // Redirect,
+} from "react-router-dom";
 
 const handleLogout = setUser => () => {
     setUser(null);
@@ -26,6 +31,7 @@ function Index() {
             <main>
                 <Router>
                     <MapWrapper />
+                    {/* <Redirect from={"/"} exact to={paths.LeaderBoard} /> */}
                     <Switch>
                         <Route path={paths.LeaderBoard}>
                             <LeaderBoard />
