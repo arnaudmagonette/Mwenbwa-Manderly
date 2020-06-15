@@ -6,13 +6,16 @@ const Role = db.role;
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
+import addFirstLeaves from "../middlewares/leaves";
+import addFirstTrees from "../middlewares/trees";
+
 exports.signup = (req, res) => {
     const user = new User({
         username: req.body.username,
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 8),
         color: req.body.color,
-        leaves: "100",
+        leaves: 0,
     });
 
     user.save((err, resp) => {
@@ -20,6 +23,12 @@ exports.signup = (req, res) => {
             res.status(500).send({message: err});
             return;
         }
+
+        addFirstLeaves(resp);
+        addFirstTrees(resp);
+        addFirstTrees(resp);
+        addFirstTrees(resp);
+
         Role.findOne({name: "user"}, (error, role) => {
             if (error) {
                 res.status(500).send({message: error});
