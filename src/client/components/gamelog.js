@@ -2,6 +2,7 @@ import React from "react";
 import AuthService from "../services/auth.service";
 import LeafIcon from "./leaf-icon";
 import AvatarIcon from "./avatar-icon";
+import TreeIcon from "./tree-icon";
 
 const connectedUser = AuthService.getCurrentUser();
 
@@ -15,7 +16,9 @@ const Gamelog = () => (
             <p>
                 {`${connectedUser.leaves} `} <LeafIcon />
             </p>
-            <p>{"53 trees"}</p>
+            <p>
+                {"53 "} <TreeIcon />
+            </p>
         </div>
         <div>
             <table>
