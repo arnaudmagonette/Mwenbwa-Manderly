@@ -22,14 +22,14 @@ const Marker = props => (
     <LeafletMarker position={props.position} icon={myIcon}>
         <Popup>
             <div>
-                <p>{"Name : Arboretrium"}</p>
+                <p>{`Name : ${props.name}`}</p>
             </div>
             <div>
                 <img src={"./false-user.png"} />
-                <p>{"Owner : Pierre"}</p>
+                <p>{`Owner : ${props.owner}`}</p>
             </div>
             <div>
-                <p>{"Value : 131 L"}</p>
+                <p>{`Value : ${props.leaves} L`}</p>
                 {/* <button type={"submit"}>{"Buy"}</button> */}
             </div>
             <div>
@@ -69,11 +69,11 @@ const Marker = props => (
                         </tr>
                         <tr>
                             <td>{"Pierre"}</td>
-                            <td>{"Lorem ipsum"}</td>
+                            <td>{`${props.comments}`}</td>
                         </tr>
                         <tr>
                             <td>{"Marc"}</td>
-                            <td>{"Lorem ipsum"}</td>
+                            <td>{`${props.comments}`}</td>
                         </tr>
                     </tbody>
                 </table>
