@@ -10,9 +10,10 @@ import React from "react";
 import {Marker as LeafletMarker, Popup} from "react-leaflet";
 import * as Leaflet from "leaflet";
 import {iconUrl} from "./icon";
+import LeafIcon from "./leaf-icon";
 
 const myIcon = Leaflet.icon({
-    iconUrl: iconUrl("#214001"),
+    iconUrl: iconUrl("#037318"),
     iconSize: [30, 30],
     iconAnchor: [25, 15],
     popupAnchor: [0, -20],
@@ -29,7 +30,10 @@ const Marker = props => (
                 <p>{`Owner : ${props.owner}`}</p>
             </div>
             <div>
-                <p>{`Value : ${props.leaves} L`}</p>
+                <p>
+                    {`Value : ${props.leaves}`}
+                    <LeafIcon />
+                </p>
                 {/* <button type={"submit"}>{"Buy"}</button> */}
             </div>
             <div>

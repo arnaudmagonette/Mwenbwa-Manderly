@@ -1,5 +1,6 @@
 import React from "react";
 import AuthService from "../services/auth.service";
+import LeafIcon from "./leaf-icon";
 
 const connectedUser = AuthService.getCurrentUser();
 
@@ -10,7 +11,9 @@ const LeaderBoard = () => (
         </div>
         <div>
             <img src={"./false-user.png"} />
-            <p>{`${connectedUser.leaves} leaves`}</p>
+            <p>
+                {`${connectedUser.leaves} `} <LeafIcon />
+            </p>
             <p>{"53 trees"}</p>
         </div>
         <div>
