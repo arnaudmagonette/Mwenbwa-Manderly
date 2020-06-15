@@ -3,6 +3,7 @@
 
 import express from "express";
 import path from "path";
+import {addIdleLeaves, removeIdleLeaves} from "./controllers/user.controller";
 
 const cors = require("cors");
 const app = express();
@@ -39,40 +40,12 @@ ConnectionMongoDb();
 
 //------------------------------
 
-/*const totalLeaves = 100;
-const totalPlayers = 4;
+//addIdleLeaves();
+//removeIdleLeaves();
 
-let leavesUser = Math.floor(totalLeaves / totalPlayers);
+//-------------------------------
 
-function addLeaves() {
-    Trees.find({owner: "Arnaud"}).exec((err, allTrees) => {
-        if (err) {
-            console.error(err);
-        }
-
-        let totalLeavesTrees = 0;
-
-        allTrees.forEach((tree) => {
-            totalLeavesTrees += tree.leaves;
-        });
-
-        leavesUser = Math.floor(leavesUser + totalLeavesTrees);
-
-        console.log("Add Leaves");
-        console.log(leavesUser);
-    });
-
-    setTimeout(addLeaves, 900000);
-}
-
-function removeLeaves() {
-    leavesUser = Math.floor(leavesUser / 2);
-
-    console.log("Remove Leaves");
-    console.log(leavesUser);
-
-    setTimeout(removeLeaves, 3600000);
-}
+/*
 
 function buyTree() {
     Trees.findByIdAndUpdate("5ed10f1a45ab8e02c4ee0532", {
