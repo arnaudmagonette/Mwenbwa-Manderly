@@ -2,6 +2,7 @@ import * as React from "react";
 import MapWrapper from "./map";
 import LeaderBoard from "./leaderboard";
 import Gamelog from "./gamelog";
+import EditP from "./edit-profile";
 import Login from "./login";
 const {useState} = React;
 import AuthService from "../services/auth.service";
@@ -21,6 +22,7 @@ const handleLogout = setUser => () => {
 export const paths = {
     LeaderBoard: "/leader-board",
     Gamelog: "/game-log",
+    EditP: "/edit-profile",
 };
 
 function Index() {
@@ -38,6 +40,9 @@ function Index() {
                         </Route>
                         <Route path={paths.Gamelog}>
                             <Gamelog />
+                        </Route>
+                        <Route path={paths.EditP}>
+                            <EditP />
                         </Route>
                     </Switch>
                     <Navigation handleLogout={handleLogout(setUser)} />

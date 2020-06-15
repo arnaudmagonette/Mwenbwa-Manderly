@@ -8,6 +8,7 @@ const Navigation = props => (
         <nav>
             <Link to={paths.LeaderBoard}>{"Leaderboard"}</Link>
             <Link to={paths.Gamelog}>{"Game Log"}</Link>
+            <Link to={paths.EditP}>{"Edit profile"}</Link>
             <button onClick={props.handleLogout}>{"Disconnect"}</button>
         </nav>
     </div>

@@ -1,22 +1,19 @@
 /* eslint-disable react/button-has-type */
 import React from "react";
+import Gravatar from "react-gravatar";
 
 export default class EditP extends React.Component {
     render() {
         return (
             <div className={"notification column is-one-third"}>
                 <div>
-                    <p>{"Avatar"}</p>
+                    <Gravatar email={"{user.email}  size={110}"} />
                     <p>{"Nombre de feuilles"}</p>
                     <p>{"Nombre d'arbres"}</p>
                 </div>
                 <div className={"has-padding-top-30"}>
                     <p>{"Edit Profile"}</p>
                     <div className={"has-margin-top-40"}>
-                        {"Avatar"}
-                        <button className={"button is-primary"} type={"submit"}>
-                            {"Change avatar"}
-                        </button>
                         <form>
                             <div className={"field"}>
                                 <div className={"control"}>
