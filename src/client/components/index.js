@@ -2,6 +2,7 @@ import * as React from "react";
 import MapWrapper from "./map";
 import LeaderBoard from "./leaderboard";
 import Gamelog from "./gamelog";
+import EditProfile from "./edit-profile";
 import Login from "./login";
 const {useState} = React;
 import AuthService from "../services/auth.service";
@@ -13,6 +14,8 @@ import {
     // Redirect,
 } from "react-router-dom";
 
+import "./index.less";
+
 const handleLogout = setUser => () => {
     setUser(null);
     AuthService.logout();
@@ -21,6 +24,7 @@ const handleLogout = setUser => () => {
 export const paths = {
     LeaderBoard: "/leader-board",
     Gamelog: "/game-log",
+    EditProfile: "/edit-profile",
 };
 
 function Index() {
@@ -30,17 +34,24 @@ function Index() {
         return (
             <main>
                 <Router>
-                    <MapWrapper />
+                    <div className={"map"}>
+                        <MapWrapper />
+                    </div>
                     {/* <Redirect from={"/"} exact to={paths.LeaderBoard} /> */}
-                    <Switch>
-                        <Route path={paths.LeaderBoard}>
-                            <LeaderBoard />
-                        </Route>
-                        <Route path={paths.Gamelog}>
-                            <Gamelog />
-                        </Route>
-                    </Switch>
-                    <Navigation handleLogout={handleLogout(setUser)} />
+                    <div className={"test"}>
+                        <Switch>
+                            <Route path={paths.LeaderBoard}>
+                                <LeaderBoard />
+                            </Route>
+                            <Route path={paths.Gamelog}>
+                                <Gamelog />
+                            </Route>
+                            <Route path={paths.EditProfile}>
+                                <EditProfile />
+                            </Route>
+                        </Switch>
+                        <Navigation handleLogout={handleLogout(setUser)} />
+                    </div>
                 </Router>
             </main>
         );
