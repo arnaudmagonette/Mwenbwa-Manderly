@@ -97,3 +97,15 @@ exports.signin = (req, res) => {
             });
         });
 };
+
+// USER PROFILE
+
+exports.resetPassword = (req, res) => {
+    User.findById(req.body.id).then(resu => {
+        console.log(resu);
+        User.updateOne({
+            password: bcrypt.hashSync(req.body.password, 8),
+        });
+    });
+    res.send("Succesfully updated password");
+};

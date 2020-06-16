@@ -5,6 +5,7 @@ import express from "express";
 import path from "path";
 import {addIdleLeaves, removeIdleLeaves} from "./controllers/user.controller";
 
+const bcrypt = require("bcryptjs");
 const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
