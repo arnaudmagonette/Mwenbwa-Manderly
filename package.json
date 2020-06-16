@@ -79,9 +79,12 @@
         "react-bulma-components": "^3.3.0",
         "react-color": "^2.18.1",
         "react-dom": "^16.13.1",
+        "react-gravatar": "^2.6.3",
         "react-hook-form": "^5.7.2",
         "react-leaflet": "^2.7.0",
+        "react-leaflet-markercluster": "^2.0.0",
         "react-native-indicative": "^0.2.1",
+        "react-router-dom": "^5.2.0",
         "save": "^2.4.0"
     },
     "husky": {

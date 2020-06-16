@@ -2,8 +2,7 @@
 
 const mongoose = require("mongoose");
 
-// const mongoURI = process.env.MONGODB_URI;
-const mongoURI = "mongodb://dev:dev@mongo/mwenbwaD";
+const mongoURI = "mongodb://dev:dev@mongo/mwenbwaDb";
 
 const ConnectionMongoDb = async () => {
     try {

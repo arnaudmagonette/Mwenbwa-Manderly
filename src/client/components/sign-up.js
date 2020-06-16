@@ -43,6 +43,7 @@ export default class SignUp extends Component {
             username: "required|string|min:4",
             email: "required|string",
             password: "required|string|min:6|confirmed",
+            color: "required|string",
         };
 
         const messages = {
@@ -53,22 +54,30 @@ export default class SignUp extends Component {
 
         validateAll(data, rules, messages)
             .then(() => {
-                console.log("success");
+                console.log("Validation Ok");
 
                 AuthService.register(
                     this.state.username,
                     this.state.email,
                     this.state.password,
-                ).then(
-                    response => {
-                        if (response.data.logged_in) {
-                            this.props.handleSuccessfulAuth(response.data);
-                        }
-                    },
-                    error => {
-                        console.log("login error", error);
-                    },
-                );
+                    this.state.color,
+                )
+                    .then(() => {
+                        console.log("Register Ok");
+                    })
+                    .then(() => {
+                        AuthService.login(
+                            this.state.email,
+                            this.state.password,
+                        ).then(
+                            () => {
+                                window.location.reload();
+                            },
+                            error => {
+                                console.log("login error", error);
+                            },
+                        );
+                    });
             })
             .catch(errors => {
                 console.log(errors);

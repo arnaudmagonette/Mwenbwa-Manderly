@@ -46,6 +46,10 @@ ConnectionMongoDb();
     res.json("API Working");
 });
 
+app.get("/api/secret", auth, function (req, res) {
+    res.send("The password is potato");
+});
+
 app.get("/allTrees", (req, res) => {
     Trees.find({})
         .limit(1000)
