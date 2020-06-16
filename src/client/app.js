@@ -12,5 +12,6 @@ import ReactDOM from "react-dom";
 // import HelloWorld from "./components/hello";
 
 import Index from "./components/index";
+import EditP from "./components/edit-profile";
 
-ReactDOM.render(<Index />, document.querySelector("#app"));
+ReactDOM.render(<EditP />, document.querySelector("#app"));

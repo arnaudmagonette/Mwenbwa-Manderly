@@ -4,6 +4,7 @@
 import express from "express";
 import path from "path";
 
+const bcrypt = require("bcryptjs");
 const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
@@ -38,6 +39,8 @@ app.listen(APP_PORT, () =>
 ConnectionMongoDb();
 
 // Routage
+
+// USER PROFILE
 
 /*app.get("/", (req, res) => {
     res.json("API Working");

@@ -2,11 +2,13 @@
 
 const mongoose = require("mongoose");
 
-const mongoURI = process.env.MONGODB_URI;
+// const mongoURI = process.env.MONGODB_URI;
+const mongoURI = "mongodb://dev:dev@mongo/mwenbwaD";
 
 const ConnectionMongoDb = async () => {
     try {
         await mongoose.connect(mongoURI, {
+            auth: {authSource: "admin"},
             useUnifiedTopology: true,
             useNewUrlParser: true,
         });

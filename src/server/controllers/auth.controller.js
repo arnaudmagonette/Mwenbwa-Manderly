@@ -84,3 +84,7 @@ exports.signin = (req, res) => {
             });
         });
 };
+
+// // USER PROFILE
+
+// exports.resetPassword = (req, res) => {};

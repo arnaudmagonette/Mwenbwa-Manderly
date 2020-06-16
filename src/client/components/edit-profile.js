@@ -24,16 +24,19 @@ export default class EditP extends React.Component {
                                         className={"input has-margin-top-40"}
                                         type={"password"}
                                         placeholder={"Old password"}
+                                        name={"oldPassword"}
                                     />
                                     <input
                                         className={"input  has-margin-top-10"}
                                         type={"password"}
                                         placeholder={"New Password"}
+                                        name={"newPassword"}
                                     />
                                     <input
                                         className={"input  has-margin-top-10"}
                                         type={"password"}
                                         placeholder={"Confirm new password"}
+                                        name={"confPassword"}
                                     />
                                     <input
                                         className={"input  has-margin-top-10"}
