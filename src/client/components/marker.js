@@ -13,22 +13,23 @@ import {iconUrl} from "./icon";
 import LeafIcon from "./leaf-icon";
 import AvatarIcon from "./avatar-icon";
 
-const myIcon = Leaflet.icon({
-    iconUrl: iconUrl("#037318"),
-    iconSize: [30, 30],
-    iconAnchor: [25, 15],
-    popupAnchor: [0, -20],
-});
+const myIcon = (color = "#037318") =>
+    Leaflet.icon({
+        iconUrl: iconUrl(color),
+        iconSize: [30, 30],
+        iconAnchor: [25, 15],
+        popupAnchor: [0, -20],
+    });
 
 const Marker = props => (
-    <LeafletMarker position={props.position} icon={myIcon}>
+    <LeafletMarker position={props.position} icon={myIcon(props.owner.color)}>
         <Popup>
             <div>
                 <p>{`Name : ${props.name}`}</p>
             </div>
             <div>
                 <AvatarIcon />
-                <p>{`Owner : ${props.owner}`}</p>
+                <p>{`Owner : ${props.owner.username}`}</p>
             </div>
             <div>
                 <p>
