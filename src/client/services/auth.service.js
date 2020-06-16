@@ -22,10 +22,12 @@ class AuthService {
         localStorage.removeItem("user");
     }
 
-    resetPassword(id, password) {
+    resetPassword(password, id) {
+        console.log(id, password);
+
         return axios.post(`${API_URL}resetPassword`, {
-            id,
             password,
+            id,
         });
     }
 
