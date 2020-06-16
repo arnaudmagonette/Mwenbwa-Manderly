@@ -14,4 +14,4 @@ import ReactDOM from "react-dom";
 import Index from "./components/index";
 import EditP from "./components/edit-profile";
 
-ReactDOM.render(<EditP />, document.querySelector("#app"));
+ReactDOM.render(<Index />, document.querySelector("#app"));
