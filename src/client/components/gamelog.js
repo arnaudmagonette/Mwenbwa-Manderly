@@ -3,6 +3,7 @@ import AuthService from "../services/auth.service";
 import LeafIcon from "./leaf-icon";
 import AvatarIcon from "./avatar-icon";
 import TreeIcon from "./tree-icon";
+import Gravatar from "react-gravatar";
 
 const connectedUser = AuthService.getCurrentUser();
 
@@ -12,7 +13,7 @@ const Gamelog = () => (
             <p>{`Welcome, ${connectedUser.username}`}</p>
         </div>
         <div>
-            <AvatarIcon />
+            <Gravatar email={connectedUser.email} />
             <p>
                 {`${connectedUser.leaves} `} <LeafIcon />
             </p>
