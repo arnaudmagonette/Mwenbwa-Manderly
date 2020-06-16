@@ -13,6 +13,8 @@ import {
     // Redirect,
 } from "react-router-dom";
 
+import "./index.less";
+
 const handleLogout = setUser => () => {
     setUser(null);
     AuthService.logout();
@@ -30,17 +32,21 @@ function Index() {
         return (
             <main>
                 <Router>
-                    <MapWrapper />
+                    <div className={"map"}>
+                        <MapWrapper />
+                    </div>
                     {/* <Redirect from={"/"} exact to={paths.LeaderBoard} /> */}
-                    <Switch>
-                        <Route path={paths.LeaderBoard}>
-                            <LeaderBoard />
-                        </Route>
-                        <Route path={paths.Gamelog}>
-                            <Gamelog />
-                        </Route>
-                    </Switch>
-                    <Navigation handleLogout={handleLogout(setUser)} />
+                    <div className={"container-component"}>
+                        <Switch>
+                            <Route path={paths.LeaderBoard}>
+                                <LeaderBoard />
+                            </Route>
+                            <Route path={paths.Gamelog}>
+                                <Gamelog />
+                            </Route>
+                        </Switch>
+                        <Navigation handleLogout={handleLogout(setUser)} />
+                    </div>
                 </Router>
             </main>
         );
