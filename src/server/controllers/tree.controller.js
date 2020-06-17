@@ -58,7 +58,8 @@ exports.addFirstTrees = (req, res) => {
 };
 
 exports.buyTree = (req, res) => {
-    User.findById(req.idUser).exec((err, user) => {
+    console.log(req);
+    User.findById(req.body.idUser).exec((err, user) => {
         if (err) {
             res.status(500).send({message: err});
             return;
@@ -71,7 +72,7 @@ exports.buyTree = (req, res) => {
             return;
         }
 
-        Tree.findById(req.idTree).exec((error, tree) => {
+        Tree.findById(req.body.idTree).exec((error, tree) => {
             if (error) {
                 res.status(500).send({message: error});
                 return;

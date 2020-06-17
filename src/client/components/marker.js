@@ -5,6 +5,7 @@ import * as Leaflet from "leaflet";
 import {iconUrl} from "./icon";
 import LeafIcon from "./leaf-icon";
 import TreeService from "../services/tree.service";
+import AuthService from "../services/auth.service";
 
 import AvatarIcon from "./avatar-icon";
 
@@ -16,8 +17,8 @@ const myIcon = (color = "#037318") =>
         popupAnchor: [0, -20],
     });
 
-const handelBuyTree = () => {
-    TreeService.buyTree();
+const handelBuyTree = (a, b) => {
+    TreeService.buyTree(a, b);
 };
 
 const Marker = props => (
@@ -35,7 +36,15 @@ const Marker = props => (
                     {`Value : ${props.leaves}`}
                     <LeafIcon />
                 </p>
-                <button onClick={handelBuyTree}>{"Buy"}</button>
+                <button
+                    onClick={() => {
+                        handelBuyTree(
+                            props.id,
+                            AuthService.getCurrentUser().id,
+                        );
+                    }}>
+                    {"Buy"}
+                </button>
             </div>
             <div>
                 <table>
