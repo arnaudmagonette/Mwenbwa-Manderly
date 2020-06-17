@@ -7,18 +7,35 @@ const {useState, useEffect} = React;
 
 import "./map.less";
 
+const position = [50.632119, 5.579524];
+
 const getAllTrees = setTrees => {
     TreeService.getAllTrees().then(res => {
         setTrees(res.data);
     });
 };
 
+const getAllUsers = setUsers => {
+    fetch("/allUsers").then(response => {
+        response.json().then(body => setUsers(body));
+    });
+};
+
+const getOwner = (owner, users) => {
+    if (!owner.length) {
+        return {};
+    }
+
+    return users.find(user => user.username === owner[0]);
+};
+
 const MapWrapper = () => {
     const [trees, setTrees] = useState([]);
-    const [position] = useState([50.632119, 5.579524]);
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
         getAllTrees(setTrees);
+        getAllUsers(setUsers);
     }, []);
 
     return (
@@ -32,7 +49,7 @@ const MapWrapper = () => {
                         <Marker
                             key={tree._id}
                             position={[tree.geoloc.lat, tree.geoloc.lon]}
-                            owner={tree.owner}
+                            owner={getOwner(tree.owner, users)}
                             name={tree.name}
                             leaves={tree.leaves}
                             comments={tree.comments}
