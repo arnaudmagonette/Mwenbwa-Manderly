@@ -8,8 +8,6 @@ module.exports = function (app) {
         );
         next();
     });
-};
 
-module.exports = function (app) {
     app.get("/api/allUsers", controller.allUsers);
 };
