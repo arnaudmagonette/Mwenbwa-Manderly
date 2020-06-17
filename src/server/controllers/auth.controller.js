@@ -100,12 +100,13 @@ exports.signin = (req, res) => {
 
 // USER PROFILE
 
-exports.resetPassword = (req, res) => {
-    User.findById(req.body.id).then(resu => {
-        console.log(resu);
-        User.updateOne({
-            password: bcrypt.hashSync(req.body.password, 8),
-        });
+exports.resetPassword = req => {
+    // eslint-disable-next-line consistent-return
+    User.findById(req.body.id, (err, doc) => {
+        if (err) {
+            return false;
+        }
+        doc.password = bcrypt.hashSync(req.body.password, 8);
+        doc.save();
     });
-    res.send("Succesfully updated password");
 };

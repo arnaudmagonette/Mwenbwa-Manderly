@@ -138,7 +138,7 @@ export default class SignUp extends Component {
                         </label>
                         <input
                             className={"input is-success"}
-                            type={"text"}
+                            type={"password"}
                             name={"password_confirmation"}
                             onChange={this.handleChange}
                             placeholder={"Confirm password"}

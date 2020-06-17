@@ -89,7 +89,7 @@ export default class EditP extends React.Component {
                                     />
                                     <input
                                         className={"input is-success"}
-                                        type={"text"}
+                                        type={"password"}
                                         name={"password_confirmation"}
                                         onChange={this.handleChange}
                                         placeholder={"Confirm password"}
