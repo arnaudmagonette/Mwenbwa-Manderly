@@ -2,19 +2,13 @@ import * as React from "react";
 import MapWrapper from "./map";
 import LeaderBoard from "./leaderboard";
 import Gamelog from "./gamelog";
-import EditProfile from "./edit-profile";
+import EditP from "./edit-profile";
 import Login from "./login";
 const {useState} = React;
 import AuthService from "../services/auth.service";
 import Navigation from "./navigation";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    // Redirect,
-} from "react-router-dom";
-
 import "./index.less";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 const handleLogout = setUser => () => {
     setUser(null);
@@ -46,10 +40,11 @@ function Index() {
                             <Route path={paths.Gamelog}>
                                 <Gamelog />
                             </Route>
-                            <Route path={paths.EditProfile}>
-                                <EditProfile />
+                            <Route path={paths.EditP}>
+                                <EditP />
                             </Route>
                         </Switch>
+
                         <Navigation handleLogout={handleLogout(setUser)} />
                     </div>
                 </Router>

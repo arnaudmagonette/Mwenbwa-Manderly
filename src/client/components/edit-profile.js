@@ -1,8 +1,11 @@
 /* eslint-disable react/button-has-type */
 import React from "react";
-import Gravatar from "react-gravatar";
+import Gravatar from "react-circle-gravatar";
+
 import AuthService from "../services/auth.service";
 import {validateAll} from "indicative/validator";
+import LeafIcon from "./leaf-icon";
+import TreeIcon from "./tree-icon";
 
 export default class EditP extends React.Component {
     constructor(props) {
@@ -12,6 +15,7 @@ export default class EditP extends React.Component {
         this.state = {
             email: user.email,
             id: user.id,
+            leaves: user.leaves,
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -67,14 +71,35 @@ export default class EditP extends React.Component {
 
     render() {
         return (
-            <div className={"notification column is-one-third"}>
-                <div>
-                    <Gravatar email={this.state.email} />
-                    <p>{"Nombre de feuilles"}</p>
-                    <p>{"Nombre d'arbres"}</p>
+            <div
+                className={
+                    "notification has-margin-30 column is-three-quarters-mobile"
+                }>
+                <div
+                    className={
+                        "has-text-centered has-text-black subtitle is-5 "
+                    }>
+                    <Gravatar
+                        email={this.state.email}
+                        mask={"circle"}
+                        size={100}
+                    />
+                    <div className={"has-padding-bottom-10 has-padding-top-10"}>
+                        <p>
+                            {"134 "}
+                            {<LeafIcon />}
+                        </p>
+                    </div>
+                    <p>
+                        {"122 "}
+                        {<TreeIcon />}
+                    </p>
                 </div>
-                <div className={"has-padding-top-30"}>
-                    <p>{"Edit Profile"}</p>
+                <div
+                    className={
+                        "has-padding-top-5 has-text-black subtitle is-5 has-text-centered has-text-weight-bold"
+                    }>
+                    <p>{"Change your password"}</p>
                     <div className={"has-margin-top-40"}>
                         <form onSubmit={this.handleSubmit}>
                             <div className={"field"}>
@@ -88,8 +113,10 @@ export default class EditP extends React.Component {
                                         required
                                     />
                                     <input
-                                        className={"input is-success"}
-                                        type={"password"}
+                                        className={
+                                            "input is-success has-margin-top-10"
+                                        }
+                                        type={"text"}
                                         name={"password_confirmation"}
                                         onChange={this.handleChange}
                                         placeholder={"Confirm password"}
@@ -104,11 +131,13 @@ export default class EditP extends React.Component {
                                 </div>
                             </div>
                             <div className={"columns  has-margin-top-10"}>
-                                <div className={"column"}>
+                                <div className={"column has-text-centered"}>
                                     <button
-                                        className={"button is-primary normal"}
+                                        className={
+                                            "button is-primary  is-outlined has-margin-bottom-5 "
+                                        }
                                         type={"submit"}>
-                                        {"Edit"}
+                                        {"Edit password"}
                                     </button>
                                 </div>
                             </div>
