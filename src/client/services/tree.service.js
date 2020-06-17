@@ -6,6 +6,15 @@ class TreeService {
     getAllTrees() {
         return axios.get(`${API_URL}allTrees`);
     }
+
+    buyTree(idTree, idUser) {
+        return axios
+            .post(`${API_URL}buyTree`, {
+                idTree,
+                idUser,
+            })
+            .then(response => response.data);
+    }
 }
 
 export default new TreeService();
