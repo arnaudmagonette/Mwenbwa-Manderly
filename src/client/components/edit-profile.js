@@ -82,9 +82,9 @@ export default class EditP extends React.Component {
                     <Gravatar
                         email={this.state.email}
                         mask={"circle"}
-                        size={150}
+                        size={100}
                     />
-                    <div className={"has-padding-bottom-10 has-padding-top-20"}>
+                    <div className={"has-padding-bottom-10 has-padding-top-10"}>
                         <p>
                             {"134 "}
                             {<LeafIcon />}
@@ -97,7 +97,7 @@ export default class EditP extends React.Component {
                 </div>
                 <div
                     className={
-                        "has-padding-top-10 has-text-black subtitle is-5 has-text-centered"
+                        "has-padding-top-5 has-text-black subtitle is-5 has-text-centered has-text-weight-bold"
                     }>
                     <p>{"Change your password"}</p>
                     <div className={"has-margin-top-40"}>
@@ -134,7 +134,7 @@ export default class EditP extends React.Component {
                                 <div className={"column has-text-centered"}>
                                     <button
                                         className={
-                                            "button is-primary is-medium is-outlined has-margin-bottom-5 "
+                                            "button is-primary  is-outlined has-margin-bottom-5 "
                                         }
                                         type={"submit"}>
                                         {"Edit password"}

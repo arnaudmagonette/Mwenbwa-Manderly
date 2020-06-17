@@ -10,9 +10,11 @@ import React from "react";
 import {Marker as LeafletMarker, Popup} from "react-leaflet";
 import * as Leaflet from "leaflet";
 import {iconUrl} from "./icon";
+import LeafIcon from "./leaf-icon";
+import AvatarIcon from "./avatar-icon";
 
 const myIcon = Leaflet.icon({
-    iconUrl: iconUrl("#214001"),
+    iconUrl: iconUrl("#037318"),
     iconSize: [30, 30],
     iconAnchor: [25, 15],
     popupAnchor: [0, -20],
@@ -22,14 +24,17 @@ const Marker = props => (
     <LeafletMarker position={props.position} icon={myIcon}>
         <Popup>
             <div>
-                <p>{"Name : Arboretrium"}</p>
+                <p>{`Name : ${props.name}`}</p>
             </div>
             <div>
-                <img src={"./false-user.png"} />
-                <p>{"Owner : Pierre"}</p>
+                <AvatarIcon />
+                <p>{`Owner : ${props.owner}`}</p>
             </div>
             <div>
-                <p>{"Value : 131 L"}</p>
+                <p>
+                    {`Value : ${props.leaves}`}
+                    <LeafIcon />
+                </p>
                 {/* <button type={"submit"}>{"Buy"}</button> */}
             </div>
             <div>
@@ -41,14 +46,17 @@ const Marker = props => (
                     </thead>
                     <tbody>
                         <tr>
+                            <td>{"Avatar"}</td>
                             <td>{"User"}</td>
                             <td>{"Date"}</td>
                         </tr>
                         <tr>
+                            <AvatarIcon />
                             <td>{"Pierre"}</td>
                             <td>{"03/06/2020"}</td>
                         </tr>
                         <tr>
+                            <AvatarIcon />
                             <td>{"Marc"}</td>
                             <td>{"02/06/2020"}</td>
                         </tr>
@@ -64,16 +72,19 @@ const Marker = props => (
                     </thead>
                     <tbody>
                         <tr>
+                            <td>{"Avatar"}</td>
                             <td>{"User"}</td>
                             <td>{"Comment"}</td>
                         </tr>
                         <tr>
+                            <AvatarIcon />
                             <td>{"Pierre"}</td>
-                            <td>{"Lorem ipsum"}</td>
+                            <td>{`${props.comments}`}</td>
                         </tr>
                         <tr>
+                            <AvatarIcon />
                             <td>{"Marc"}</td>
-                            <td>{"Lorem ipsum"}</td>
+                            <td>{`${props.comments}`}</td>
                         </tr>
                     </tbody>
                 </table>

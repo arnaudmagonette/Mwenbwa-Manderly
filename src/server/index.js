@@ -3,7 +3,9 @@
 
 import express from "express";
 import path from "path";
+import {addIdleLeaves, removeIdleLeaves} from "./controllers/user.controller";
 
+const bcrypt = require("bcryptjs");
 const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
@@ -25,10 +27,19 @@ const Role = db.role;
 
 const ConnectionMongoDb = require("./config/db.config");
 
-// routes
+// Routes
 require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
 require("./routes/tree.routes")(app);
+
+// Routage React
+app.get("/*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/index.html"), err => {
+        if (err) {
+            res.status(500).send(err);
+        }
+    });
+});
 
 app.listen(APP_PORT, () =>
     console.log(`🚀 Server is listening on port ${APP_PORT}.`),
@@ -37,94 +48,14 @@ app.listen(APP_PORT, () =>
 // Connection Mongo Db
 ConnectionMongoDb();
 
-// Routage
+//------------------------------
 
-/*app.get("/", (req, res) => {
-    res.json("API Working");
-});
-
-app.get("/api/secret", auth, function (req, res) {
-    res.send("The password is potato");
-});
-
-app.get("/allTrees", (req, res) => {
-    Trees.find({})
-        .limit(1000)
-        .exec((err, allTrees) => {
-            if (err) {
-                console.error(err);
-            }
-
-            res.json(allTrees);
-        });
-});
-
-app.get("/allUsers", (req, res) => {
-    Users.find({})
-        .limit(10)
-        .exec((err, allUsers) => {
-            if (err) {
-                console.error(err);
-            }
-
-            res.json(allUsers);
-        });
-});*/
+//addIdleLeaves();
+//removeIdleLeaves();
 
 //-------------------------------
 
-function initial() {
-    Role.estimatedDocumentCount((err, count) => {
-        if (!err && count === 0) {
-            new Role({
-                name: "user",
-            }).save(error => {
-                if (error) {
-                    console.log("error", error);
-                }
-
-                console.log("added 'user' to roles collection");
-            });
-        }
-    });
-}
-
-//------------------------------
-
-/*const totalLeaves = 100;
-const totalPlayers = 4;
-
-let leavesUser = Math.floor(totalLeaves / totalPlayers);
-
-function addLeaves() {
-    Trees.find({owner: "Arnaud"}).exec((err, allTrees) => {
-        if (err) {
-            console.error(err);
-        }
-
-        let totalLeavesTrees = 0;
-
-        allTrees.forEach((tree) => {
-            totalLeavesTrees += tree.leaves;
-        });
-
-        leavesUser = Math.floor(leavesUser + totalLeavesTrees);
-
-        console.log("Add Leaves");
-        console.log(leavesUser);
-    });
-
-    setTimeout(addLeaves, 900000);
-}
-
-function removeLeaves() {
-    leavesUser = Math.floor(leavesUser / 2);
-
-    console.log("Remove Leaves");
-    console.log(leavesUser);
-
-    setTimeout(removeLeaves, 3600000);
-}
+/*
 
 function buyTree() {
     Trees.findByIdAndUpdate("5ed10f1a45ab8e02c4ee0532", {

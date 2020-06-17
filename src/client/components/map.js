@@ -31,6 +31,10 @@ const MapWrapper = () => {
                         <Marker
                             key={tree._id}
                             position={[tree.geoloc.lat, tree.geoloc.lon]}
+                            owner={tree.owner}
+                            name={tree.name}
+                            leaves={tree.leaves}
+                            comments={tree.comments}
                         />
                     ))}
                 </MarkerClusterGroup>

@@ -18,7 +18,7 @@ const handleLogout = setUser => () => {
 export const paths = {
     LeaderBoard: "/leader-board",
     Gamelog: "/game-log",
-    EditP: "/edit-profile",
+    EditProfile: "/edit-profile",
 };
 
 function Index() {

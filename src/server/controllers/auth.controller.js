@@ -6,8 +6,8 @@ const Role = db.role;
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
-import addFirstLeaves from "../middlewares/leaves";
-import addFirstTrees from "../middlewares/trees";
+import {addFirstLeaves} from "./user.controller";
+import {addFirstTrees} from "./tree.controller";
 
 exports.signup = (req, res) => {
     const user = new User({
@@ -96,4 +96,16 @@ exports.signin = (req, res) => {
                 accessToken: token,
             });
         });
+};
+
+// USER PROFILE
+
+exports.resetPassword = (req, res) => {
+    User.findById(req.body.id).then(resu => {
+        console.log(resu);
+        User.updateOne({
+            password: bcrypt.hashSync(req.body.password, 8),
+        });
+    });
+    res.send("Succesfully updated password");
 };
