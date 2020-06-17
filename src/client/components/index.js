@@ -7,12 +7,8 @@ import Login from "./login";
 const {useState} = React;
 import AuthService from "../services/auth.service";
 import Navigation from "./navigation";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Redirect,
-} from "react-router-dom";
+import "./index.less";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 const handleLogout = setUser => () => {
     setUser(null);
@@ -32,20 +28,25 @@ function Index() {
         return (
             <main>
                 <Router>
-                    <MapWrapper />
-                    <Redirect from={"/"} exact to={paths.LeaderBoard} />
-                    <Switch>
-                        <Route path={paths.LeaderBoard}>
-                            <LeaderBoard />
-                        </Route>
-                        <Route path={paths.Gamelog}>
-                            <Gamelog />
-                        </Route>
-                        <Route path={paths.EditP}>
-                            <EditP />
-                        </Route>
-                    </Switch>
-                    <Navigation handleLogout={handleLogout(setUser)} />
+                    <div className={"map"}>
+                        <MapWrapper />
+                    </div>
+                    {/* <Redirect from={"/"} exact to={paths.LeaderBoard} /> */}
+                    <div className={"container-component"}>
+                        <Switch>
+                            <Route path={paths.LeaderBoard}>
+                                <LeaderBoard />
+                            </Route>
+                            <Route path={paths.Gamelog}>
+                                <Gamelog />
+                            </Route>
+                            <Route path={paths.EditP}>
+                                <EditP />
+                            </Route>
+                        </Switch>
+
+                        <Navigation handleLogout={handleLogout(setUser)} />
+                    </div>
                 </Router>
             </main>
         );
