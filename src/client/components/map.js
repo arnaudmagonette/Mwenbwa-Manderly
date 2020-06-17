@@ -2,22 +2,43 @@ import React from "react";
 import {Map, TileLayer} from "react-leaflet";
 import Marker from "./marker";
 import MarkerClusterGroup from "react-leaflet-markercluster";
+import TreeService from "../services/tree.service";
+import UserService from "../services/user.service";
+const {useState, useEffect} = React;
 
 import "./map.less";
 
 const position = [50.632119, 5.579524];
 
 const getAllTrees = setTrees => {
-    fetch("/allTrees").then(response => {
-        response.json().then(body => setTrees(body));
+    TreeService.getAllTrees().then(res => {
+        setTrees(res.data);
     });
 };
 
-const MapWrapper = () => {
-    const [trees, setTrees] = React.useState([]);
+const getAllUsers = setUsers => {
+    UserService.getAllUsers().then(res => {
+        setUsers(res.data);
+    });
+};
 
-    React.useEffect(() => {
+const getOwner = (owner, users) => {
+    if (!owner.length) {
+        return {};
+    }
+
+    return users.find(user => user.username === owner[0]);
+};
+
+const MapWrapper = () => {
+    const [trees, setTrees] = useState([]);
+    const [users, setUsers] = useState([]);
+
+    console.log(trees[2]);
+
+    useEffect(() => {
         getAllTrees(setTrees);
+        getAllUsers(setUsers);
     }, []);
 
     return (
@@ -30,8 +51,9 @@ const MapWrapper = () => {
                     {trees.map(tree => (
                         <Marker
                             key={tree._id}
+                            id={tree._id}
                             position={[tree.geoloc.lat, tree.geoloc.lon]}
-                            owner={tree.owner}
+                            owner={getOwner(tree.owner, users)}
                             name={tree.name}
                             leaves={tree.leaves}
                             comments={tree.comments}

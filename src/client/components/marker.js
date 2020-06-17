@@ -1,41 +1,50 @@
-/* becodeorg/mwenbwa
- *
- * /src/client/components/map.js - Map Component
- *
- * coded by Guillaume Boeur
- * started at 28/05/2020
- */
-
+/* eslint-disable react/button-has-type */
 import React from "react";
 import {Marker as LeafletMarker, Popup} from "react-leaflet";
 import * as Leaflet from "leaflet";
 import {iconUrl} from "./icon";
 import LeafIcon from "./leaf-icon";
+import TreeService from "../services/tree.service";
+import AuthService from "../services/auth.service";
+
 import AvatarIcon from "./avatar-icon";
 
-const myIcon = Leaflet.icon({
-    iconUrl: iconUrl("#037318"),
-    iconSize: [30, 30],
-    iconAnchor: [25, 15],
-    popupAnchor: [0, -20],
-});
+const myIcon = (color = "#037318") =>
+    Leaflet.icon({
+        iconUrl: iconUrl(color),
+        iconSize: [30, 30],
+        iconAnchor: [25, 15],
+        popupAnchor: [0, -20],
+    });
+
+const handelBuyTree = (a, b) => {
+    TreeService.buyTree(a, b);
+};
 
 const Marker = props => (
-    <LeafletMarker position={props.position} icon={myIcon}>
+    <LeafletMarker position={props.position} icon={myIcon(props.owner.color)}>
         <Popup>
             <div>
                 <p>{`Name : ${props.name}`}</p>
             </div>
             <div>
                 <AvatarIcon />
-                <p>{`Owner : ${props.owner}`}</p>
+                <p>{`Owner : ${props.owner.username}`}</p>
             </div>
             <div>
                 <p>
                     {`Value : ${props.leaves}`}
                     <LeafIcon />
                 </p>
-                {/* <button type={"submit"}>{"Buy"}</button> */}
+                <button
+                    onClick={() => {
+                        handelBuyTree(
+                            props.id,
+                            AuthService.getCurrentUser().id,
+                        );
+                    }}>
+                    {"Buy"}
+                </button>
             </div>
             <div>
                 <table>

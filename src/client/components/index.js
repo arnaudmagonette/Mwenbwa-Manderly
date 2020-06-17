@@ -31,7 +31,6 @@ function Index() {
                     <div className={"map"}>
                         <MapWrapper />
                     </div>
-                    {/* <Redirect from={"/"} exact to={paths.LeaderBoard} /> */}
                     <div className={"container-component"}>
                         <Switch>
                             <Route path={paths.LeaderBoard}>
