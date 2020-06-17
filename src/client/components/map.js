@@ -3,6 +3,7 @@ import {Map, TileLayer} from "react-leaflet";
 import Marker from "./marker";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import TreeService from "../services/tree.service";
+import UserService from "../services/user.service";
 const {useState, useEffect} = React;
 
 import "./map.less";
@@ -16,8 +17,8 @@ const getAllTrees = setTrees => {
 };
 
 const getAllUsers = setUsers => {
-    fetch("/allUsers").then(response => {
-        response.json().then(body => setUsers(body));
+    UserService.getAllUsers().then(res => {
+        setUsers(res.data);
     });
 };
 
@@ -32,6 +33,8 @@ const getOwner = (owner, users) => {
 const MapWrapper = () => {
     const [trees, setTrees] = useState([]);
     const [users, setUsers] = useState([]);
+
+    console.log(trees[2]);
 
     useEffect(() => {
         getAllTrees(setTrees);

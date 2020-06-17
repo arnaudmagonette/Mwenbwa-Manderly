@@ -4,19 +4,21 @@ const Tree = db.tree;
 import {nameByRace} from "fantasy-name-generator";
 
 exports.allTrees = (req, res) => {
-    Tree.find({}).exec((err, allTrees) => {
-        if (err) {
-            res.status(500).send({message: err});
-            return;
-        }
+    Tree.find({})
+        .limit(1000)
+        .exec((err, allTrees) => {
+            if (err) {
+                res.status(500).send({message: err});
+                return;
+            }
 
-        if (!allTrees) {
-            res.status(404).send({message: "Trees Not found."});
-            return;
-        }
+            if (!allTrees) {
+                res.status(404).send({message: "Trees Not found."});
+                return;
+            }
 
-        res.json(allTrees);
-    });
+            res.json(allTrees);
+        });
 };
 
 exports.addFirstTrees = (req, res) => {
