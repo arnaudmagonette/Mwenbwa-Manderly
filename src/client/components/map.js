@@ -2,21 +2,22 @@ import React from "react";
 import {Map, TileLayer} from "react-leaflet";
 import Marker from "./marker";
 import MarkerClusterGroup from "react-leaflet-markercluster";
+import TreeService from "../services/tree.service";
+const {useState, useEffect} = React;
 
 import "./map.less";
 
-const position = [50.632119, 5.579524];
-
 const getAllTrees = setTrees => {
-    fetch("/allTrees").then(response => {
-        response.json().then(body => setTrees(body));
+    TreeService.getAllTrees().then(res => {
+        setTrees(res.data);
     });
 };
 
 const MapWrapper = () => {
-    const [trees, setTrees] = React.useState([]);
+    const [trees, setTrees] = useState([]);
+    const [position] = useState([50.632119, 5.579524]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         getAllTrees(setTrees);
     }, []);
 

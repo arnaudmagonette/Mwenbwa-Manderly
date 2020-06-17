@@ -11,5 +11,5 @@ module.exports = function (app) {
 };
 
 module.exports = function (app) {
-    app.get("/allUsers", controller.allUsers);
+    app.get("/api/allUsers", controller.allUsers);
 };
