@@ -6,11 +6,16 @@ const Role = db.role;
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
+import {addFirstLeaves} from "./user.controller";
+import {addFirstTrees} from "./tree.controller";
+
 exports.signup = (req, res) => {
     const user = new User({
-        username: req.body.user.username,
-        email: req.body.user.email,
-        password: bcrypt.hashSync(req.body.user.password, 8),
+        username: req.body.username,
+        email: req.body.email,
+        password: bcrypt.hashSync(req.body.password, 8),
+        color: req.body.color,
+        leaves: 0,
     });
 
     user.save((err, resp) => {
@@ -18,6 +23,12 @@ exports.signup = (req, res) => {
             res.status(500).send({message: err});
             return;
         }
+
+        addFirstLeaves(resp);
+        addFirstTrees(resp);
+        addFirstTrees(resp);
+        addFirstTrees(resp);
+
         Role.findOne({name: "user"}, (error, role) => {
             if (error) {
                 res.status(500).send({message: error});
@@ -39,7 +50,7 @@ exports.signup = (req, res) => {
 
 exports.signin = (req, res) => {
     User.findOne({
-        email: req.body.user.email,
+        email: req.body.email,
     })
         .populate("roles", "-__v")
         .exec((err, user) => {
@@ -54,7 +65,7 @@ exports.signin = (req, res) => {
             }
 
             const passwordIsValid = bcrypt.compareSync(
-                req.body.user.password,
+                req.body.password,
                 user.password,
             );
 
@@ -79,8 +90,23 @@ exports.signin = (req, res) => {
                 id: user._id,
                 username: user.username,
                 email: user.email,
+                color: user.color,
+                leaves: user.leaves,
                 roles: authorities,
                 accessToken: token,
             });
         });
+};
+
+// USER PROFILE
+
+exports.resetPassword = req => {
+    // eslint-disable-next-line consistent-return
+    User.findById(req.body.id, (err, doc) => {
+        if (err) {
+            return false;
+        }
+        doc.password = bcrypt.hashSync(req.body.password, 8);
+        doc.save();
+    });
 };

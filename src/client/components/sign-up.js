@@ -1,9 +1,10 @@
 /* eslint-disable react/button-has-type */
 
 import React, {Component} from "react";
-import axios from "axios";
 import {validateAll} from "indicative/validator";
 import {CirclePicker} from "react-color";
+
+import AuthService from "../services/auth.service";
 
 export default class SignUp extends Component {
     constructor(props) {
@@ -23,7 +24,7 @@ export default class SignUp extends Component {
     }
 
     handleChangeComplete = color => {
-        this.setState({color: color.hex});{/* eslint-disable-line */}
+        this.setState({color: color.hex}); /* eslint-disable-line */
     };
 
     handleChange(event) {
@@ -39,9 +40,10 @@ export default class SignUp extends Component {
         // take the input data from state
         const data = this.state;
         const rules = {
-            username: "required|string|min:8",
+            username: "required|string|min:4",
             email: "required|string",
             password: "required|string|min:6|confirmed",
+            color: "required|string",
         };
 
         const messages = {
@@ -52,7 +54,30 @@ export default class SignUp extends Component {
 
         validateAll(data, rules, messages)
             .then(() => {
-                console.log("success");
+                console.log("Validation Ok");
+
+                AuthService.register(
+                    this.state.username,
+                    this.state.email,
+                    this.state.password,
+                    this.state.color,
+                )
+                    .then(() => {
+                        console.log("Register Ok");
+                    })
+                    .then(() => {
+                        AuthService.login(
+                            this.state.email,
+                            this.state.password,
+                        ).then(
+                            () => {
+                                window.location.reload();
+                            },
+                            error => {
+                                console.log("login error", error);
+                            },
+                        );
+                    });
             })
             .catch(errors => {
                 console.log(errors);
@@ -65,29 +90,6 @@ export default class SignUp extends Component {
                 });
             });
 
-        axios
-            .post(
-                "api/auth/signup",
-                {
-                    user: {
-                        username: this.state.username,
-                        email: this.state.email,
-                        password: this.state.password,
-                        roles: ["user"],
-                    },
-                },
-                {
-                    withCredentials: true,
-                },
-            )
-            .then(response => {
-                if (response.data.logged_in) {
-                    this.props.handleSuccessfulAuth(response.data);
-                }
-            })
-            .catch(error => {
-                console.log("login error", error);
-            });
         event.preventDefault();
     }
 
@@ -136,7 +138,7 @@ export default class SignUp extends Component {
                         </label>
                         <input
                             className={"input is-success"}
-                            type={"text"}
+                            type={"password"}
                             name={"password_confirmation"}
                             onChange={this.handleChange}
                             placeholder={"Confirm password"}
