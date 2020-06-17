@@ -51,6 +51,7 @@ const MapWrapper = () => {
                     {trees.map(tree => (
                         <Marker
                             key={tree._id}
+                            id={tree._id}
                             position={[tree.geoloc.lat, tree.geoloc.lon]}
                             owner={getOwner(tree.owner, users)}
                             name={tree.name}

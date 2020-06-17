@@ -1,8 +1,10 @@
+/* eslint-disable react/button-has-type */
 import React from "react";
 import {Marker as LeafletMarker, Popup} from "react-leaflet";
 import * as Leaflet from "leaflet";
 import {iconUrl} from "./icon";
 import LeafIcon from "./leaf-icon";
+import TreeService from "../services/tree.service";
 
 import AvatarIcon from "./avatar-icon";
 
@@ -13,6 +15,10 @@ const myIcon = (color = "#037318") =>
         iconAnchor: [25, 15],
         popupAnchor: [0, -20],
     });
+
+const handelBuyTree = () => {
+    TreeService.buyTree();
+};
 
 const Marker = props => (
     <LeafletMarker position={props.position} icon={myIcon(props.owner.color)}>
@@ -29,7 +35,7 @@ const Marker = props => (
                     {`Value : ${props.leaves}`}
                     <LeafIcon />
                 </p>
-                {/* <button type={"submit"}>{"Buy"}</button> */}
+                <button onClick={handelBuyTree}>{"Buy"}</button>
             </div>
             <div>
                 <table>
