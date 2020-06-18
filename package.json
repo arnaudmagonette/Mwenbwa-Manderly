@@ -6,8 +6,8 @@
     "license": "MIT",
     "private": true,
     "engines": {
-        "node": "10.19.0",
-        "npm": "6.14.4"
+        "node": "14.4.0",
+        "npm": "6.14.5"
     },
     "scripts": {
         "lint": "npx eslint --fix --cache --ignore-pattern 'docs/*' src",
@@ -15,7 +15,9 @@
         "work:server": "npx babel src/server -s --watch --verbose --out-dir bin/server",
         "build:client": "npx webpack --progress --profile --colors",
         "work:client": "npx webpack --env=dev --progress",
-        "build": "npm run build:server && npm run build:client"
+        "build": "npm run build:server && npm run build:client",
+        "start": "node bin/server/index.js",
+        "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
     },
     "lint-staged": {
         "*.js": [
