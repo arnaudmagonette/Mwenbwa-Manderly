@@ -1,1 +1,1 @@
-web: npm run build:server && npm run build:client -p $PORT
+web: node index.js -p $PORT
