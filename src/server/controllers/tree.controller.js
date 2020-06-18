@@ -95,6 +95,14 @@ exports.buyTree = (req, res) => {
                     res.status(500).send({message: erro});
                 }
             });
+
+            user.leaves = user.leaves - tree.leaves;
+            user.save(erro => {
+                if (erro) {
+                    res.status(500).send({message: erro});
+                }
+                console.log(user.leaves, tree.leaves);
+            });
         });
     });
 };
