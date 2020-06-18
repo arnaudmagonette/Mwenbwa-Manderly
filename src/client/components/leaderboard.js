@@ -15,18 +15,18 @@ const LeaderBoard = () => (
         <Scrollbars style={{height: 480}}>
             <div className={"has-text-centered has-text-black subtitle is-5 "}>
                 <Gravatar
-                    email={`${connectedUser.email} `}
+                    email={connectedUser.email}
                     mask={"circle"}
                     size={100}
                 />
                 <div className={"has-padding-bottom-10 has-padding-top-10"}>
                     <p>
-                        {`${connectedUser.leaves} `} <LeafIcon />
+                        {connectedUser.leaves} <LeafIcon />
                     </p>
                 </div>
                 <p>
                     {"124 "}
-                    {<TreeIcon />}
+                    <TreeIcon />
                 </p>
             </div>
             <div className={"has-padding-top-5 has-text-centered"}>
@@ -49,7 +49,7 @@ const LeaderBoard = () => (
                         <tr>
                             <td>
                                 <Gravatar
-                                    email={`${connectedUser.email} `}
+                                    email={connectedUser.email}
                                     size={30}
                                 />
                             </td>
@@ -62,7 +62,7 @@ const LeaderBoard = () => (
                         <tr>
                             <td>
                                 <Gravatar
-                                    email={`${connectedUser.email} `}
+                                    email={connectedUser.email}
                                     size={30}
                                 />
                             </td>
@@ -125,7 +125,7 @@ const LeaderBoard = () => (
                             <td>
                                 {" "}
                                 <Gravatar
-                                    email={`${connectedUser.email} `}
+                                    email={connectedUser.email}
                                     size={30}
                                 />
                             </td>
@@ -139,7 +139,7 @@ const LeaderBoard = () => (
                             <td>
                                 {" "}
                                 <Gravatar
-                                    email={`${connectedUser.email} `}
+                                    email={connectedUser.email}
                                     size={30}
                                 />
                             </td>

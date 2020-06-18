@@ -5,21 +5,17 @@ import TreeIcon from "./tree-icon";
 import AuthService from "../services/auth.service";
 
 const connectedUser = AuthService.getCurrentUser();
-
+console.log(connectedUser);
 const Gamelog = () => (
     <div
         className={
             "notification has-margin-30 column is-three-quarters-mobile "
         }>
         <div className={"has-text-centered has-text-black subtitle is-5 "}>
-            <Gravatar
-                email={`${connectedUser.email} `}
-                mask={"circle"}
-                size={100}
-            />
+            <Gravatar email={connectedUser.email} mask={"circle"} size={100} />
             <div className={"has-padding-bottom-10 has-padding-top-10"}>
                 <p>
-                    {`${connectedUser.leaves} `} <LeafIcon />
+                    {connectedUser.leaves} <LeafIcon />
                 </p>
             </div>
             <p>
@@ -46,20 +42,14 @@ const Gamelog = () => (
                     className={"table  is-striped  is-hoverable is-fullwidth"}>
                     <tr>
                         <td>
-                            <Gravatar
-                                email={`${connectedUser.email} `}
-                                size={30}
-                            />
+                            <Gravatar email={connectedUser.email} size={30} />
                         </td>
                         <td>{"Jean-Eud"}</td>
                         <td>{"bought Arboretrum"}</td>
                     </tr>
                     <tr>
                         <td>
-                            <Gravatar
-                                email={`${connectedUser.email} `}
-                                size={30}
-                            />
+                            <Gravatar email={connectedUser.email} size={30} />
                         </td>
                         <td>{"Britney"}</td>
                         <td>{"bought Ficus"}</td>
