@@ -11,7 +11,8 @@
   },
   "scripts": {
     "lint": "npx eslint --fix --cache --ignore-pattern 'docs/*' src",
-    "build": "npm run build:server && npm run build:client"
+    "build": "npm run build:server && npm run build:client",
+    "heroku-postbuild": "echo Skip build on Heroku"
   },
   "lint-staged": {
     "*.js": [
