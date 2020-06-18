@@ -11,8 +11,7 @@
   },
   "scripts": {
     "lint": "npx eslint --fix --cache --ignore-pattern 'docs/*' src",
-    "build": "npm run build:server && npm run build:client",
-    "start": "node server/index.js"
+    "build": "npm run build:server && npm run build:client"
   },
   "lint-staged": {
     "*.js": [
