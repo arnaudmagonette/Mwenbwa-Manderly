@@ -44,7 +44,7 @@ app.get("/*", (req, res) => {
 // app.listen(APP_PORT, () =>
 //     console.log(`🚀 Server is listening on port ${APP_PORT}.`),
 // );
-// Connection Mongo Db
+// Connection Mongo Db.
 ConnectionMongoDb();
 
 const server_port = process.env.YOUR_PORT || process.env.PORT || 8080;
