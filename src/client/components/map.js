@@ -2,19 +2,13 @@ import React from "react";
 import {Map, TileLayer} from "react-leaflet";
 import Marker from "./marker";
 import MarkerClusterGroup from "react-leaflet-markercluster";
-import TreeService from "../services/tree.service";
 import UserService from "../services/user.service";
+import axios from "axios";
 const {useState, useEffect} = React;
 
 import "./map.less";
 
 const position = [50.632119, 5.579524];
-
-const getAllTrees = setTrees => {
-    TreeService.getAllTrees().then(res => {
-        setTrees(res.data);
-    });
-};
 
 const getAllUsers = setUsers => {
     UserService.getAllUsers().then(res => {
@@ -37,8 +31,14 @@ const MapWrapper = () => {
     console.log(trees[2]);
 
     useEffect(() => {
-        getAllTrees(setTrees);
-        getAllUsers(setUsers);
+        axios
+            .get("http://localhost/api/allTrees")
+            .then(res => {
+                setTrees(res.data);
+            })
+            .then(() => {
+                getAllUsers(setUsers);
+            });
     }, []);
 
     return (
