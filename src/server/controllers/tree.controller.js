@@ -58,6 +58,7 @@ exports.addFirstTrees = (req, res) => {
 };
 
 exports.buyTree = (req, res) => {
+    // eslint-disable-next-line no-console
     console.log(req);
     User.findById(req.body.idUser).exec((err, user) => {
         if (err) {
@@ -101,6 +102,7 @@ exports.buyTree = (req, res) => {
                 if (erro) {
                     res.status(500).send({message: erro});
                 }
+                // eslint-disable-next-line no-console
                 console.log(user.leaves, tree.leaves);
             });
         });

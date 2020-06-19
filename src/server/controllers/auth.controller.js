@@ -1,7 +1,6 @@
 const config = require("../config/auth.config");
 const db = require("../models");
 const User = db.user;
-const Role = db.role;
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -28,23 +27,6 @@ exports.signup = (req, res) => {
         addFirstTrees(resp);
         addFirstTrees(resp);
         addFirstTrees(resp);
-
-        Role.findOne({name: "user"}, (error, role) => {
-            if (error) {
-                res.status(500).send({message: error});
-                return;
-            }
-
-            resp.roles = [role._id];
-            resp.save(erro => {
-                if (error) {
-                    res.status(500).send({message: erro});
-                    return;
-                }
-
-                res.send({message: "User was registered successfully!"});
-            });
-        });
     });
 };
 
