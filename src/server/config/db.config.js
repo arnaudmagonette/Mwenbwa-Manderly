@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
-const mongoURI = process.env.MONGOLAB_ONYX_URI;
+const mongoURI = process.env.MONGOLAB_URI;
 
 const ConnectionMongoDb = async () => {
     try {
