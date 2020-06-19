@@ -1,1 +1,1 @@
-web: npm install node ./bin/server/index.js -p $PORT
+web: node ./bin/server/index.js -p $PORT npm install 
