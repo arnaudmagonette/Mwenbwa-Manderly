@@ -4,4 +4,6 @@ module.exports = function (app) {
     app.get("/api/allTrees", controller.allTrees);
 
     app.post("/api/buyTree", controller.buyTree);
+
+    app.post("/api/howManyTrees", controller.howManyTrees);
 };

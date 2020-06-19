@@ -68,11 +68,3 @@ function buyTree() {
         console.log(tree);
     });
 }*/
-
-app.get("/*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/index.html"), err => {
-        if (err) {
-            res.status(500).send(err);
-        }
-    });
-});
