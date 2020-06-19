@@ -1,7 +1,5 @@
 /* eslint-disable no-console */
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-dotenv.config();
 const mongoURI = process.env.MONGOLAB_URI;
 
 const ConnectionMongoDb = async () => {
