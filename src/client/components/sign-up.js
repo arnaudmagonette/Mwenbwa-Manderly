@@ -144,6 +144,9 @@ export default class SignUp extends Component {
                             placeholder={"Confirm password"}
                             required
                         />
+                        <label className={"label has-padding-top-20"}>
+                            {" Choose the color of your tree "}
+                        </label>
                         <CirclePicker
                             color={this.state.color}
                             onChangeComplete={this.handleChangeComplete}
