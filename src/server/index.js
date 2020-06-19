@@ -6,16 +6,16 @@ import path from "path";
 import {addIdleLeaves, removeIdleLeaves} from "./controllers/user.controller";
 
 // const bcrypt = require("bcryptjs");
-const cors = require("cors");
+// const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
 // const {APP_PORT} = process.env.PORT || process.env;
 
-const corsOptions = {
-    origin: "http://localhost:8080",
-};
+// const corsOptions = {
+//     origin: "http://localhost:8080",
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 app.use(express.static(path.resolve(__dirname, "../../bin/client")));
 // parse requests of content-type - application/json.
 app.use(bodyParser.json());
