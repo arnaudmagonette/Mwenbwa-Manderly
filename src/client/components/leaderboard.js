@@ -20,13 +20,13 @@ function LeaderBoard(props) {
                         "has-text-centered has-text-black subtitle is-5"
                     }>
                     <Gravatar
-                        email={`${connectedUser.email} `}
+                        email={connectedUser.email}
                         mask={"circle"}
                         size={100}
                     />
                     <div className={"has-padding-bottom-10 has-padding-top-10"}>
                         <p>
-                            {`${connectedUser.leaves} `} <LeafIcon />
+                            {connectedUser.leaves} <LeafIcon />
                         </p>
                     </div>
                     <p>
@@ -57,7 +57,7 @@ function LeaderBoard(props) {
                                 <tr key={user._id}>
                                     <td>
                                         <Gravatar
-                                            email={`${user.email} `}
+                                            email={user.email}
                                             size={30}
                                         />
                                     </td>
@@ -101,7 +101,7 @@ function LeaderBoard(props) {
                                     <tr key={user._id}>
                                         <td>
                                             <Gravatar
-                                                email={`${user.email} `}
+                                                email={user.email}
                                                 size={30}
                                             />
                                         </td>

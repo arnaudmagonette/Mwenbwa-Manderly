@@ -86,7 +86,7 @@ export default class EditP extends React.Component {
                     />
                     <div className={"has-padding-bottom-10 has-padding-top-10"}>
                         <p>
-                            {"134 "}
+                            {this.state.leaves}
                             {<LeafIcon />}
                         </p>
                     </div>
