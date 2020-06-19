@@ -71,6 +71,7 @@
     "create-react-app": "^3.4.1",
     "express": "^4.17.1",
     "express-validator": "^6.5.0",
+    "fantasy-name-generator": "^2.0.0",
     "gravatar": "^1.8.0",
     "indicative": "^7.4.4",
     "jsonwebtoken": "^8.5.1",
