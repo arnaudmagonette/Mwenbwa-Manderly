@@ -56,16 +56,17 @@ export default class SignUp extends Component {
             "password.confirmed": "The password does not match",
         };
 
-        validateAll(data, rules, messages)
-            .then(() => {
-                console.log("Validation Ok");
+        validateAll(data, rules, messages);
 
-                AuthService.register(
-                    this.state.username,
-                    this.state.email,
-                    this.state.password,
-                    this.state.color,
-                );
+        console.log("Validation Ok");
+
+        AuthService.register(
+            this.state.username,
+            this.state.email,
+            this.state.password,
+            this.state.color,
+        )
+            .then(() => {
                 AuthService.login(this.state.email, this.state.password);
                 window.location.reload();
             })
