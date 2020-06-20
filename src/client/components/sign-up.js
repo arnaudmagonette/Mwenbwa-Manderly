@@ -58,29 +58,28 @@ export default class SignUp extends Component {
 
         validateAll(data, rules, messages)
             .then(() => {
-                console
-                    .log("Validation Ok")
+                console.log("Validation Ok");
 
-                    // AuthService.register(
-                    //     this.state.username,
-                    //     this.state.email,
-                    //     this.state.password,
-                    //     this.state.color,
-                    // )
-                    .then(() => {
-                        console.log("register ok");
-                        AuthService.login(
-                            this.state.email,
-                            this.state.password,
-                        ).then(
-                            () => {
-                                window.location.reload();
-                            },
-                            error => {
-                                console.log("login error", error);
-                            },
-                        );
-                    });
+                AuthService.register(
+                    this.state.username,
+                    this.state.email,
+                    this.state.password,
+                    this.state.color,
+                );
+                // .then(() => {
+                //     console.log("register ok");
+                //     AuthService.login(
+                //         this.state.email,
+                //         this.state.password,
+                //     ).then(
+                //         () => {
+                //             window.location.reload();
+                //         },
+                //         error => {
+                //             console.log("login error", error);
+                //         },
+                //     );
+                // });
             })
             .catch(errors => {
                 console.log(errors);
