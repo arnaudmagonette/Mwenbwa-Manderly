@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable unicorn/no-abusive-eslint-disable */
 /* eslint-disable react/button-has-type */
 
 import React, {Component} from "react";
@@ -24,6 +26,8 @@ export default class SignUp extends Component {
     }
 
     handleChangeComplete = color => {
+        // eslint-disable-next-line unicorn/no-abusive-eslint-disable
+        // eslint-disable-next-line unicorn/no-abusive-eslint-disable
         this.setState({color: color.hex}); /* eslint-disable-line */
     };
 
@@ -62,11 +66,14 @@ export default class SignUp extends Component {
                     this.state.password,
                     this.state.color,
                 ).then(() => {
+                    console.log(this.state.email);
+                    console.log(this.state.password);
                     AuthService.login(
                         this.state.email,
                         this.state.password,
                     ).then(
                         () => {
+                            console.log("reload");
                             window.location.reload();
                         },
                         error => {
