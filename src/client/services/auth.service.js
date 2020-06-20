@@ -37,7 +37,6 @@ class AuthService {
             email,
             password,
             color,
-            roles: ["user"],
         });
     }
 

@@ -24,6 +24,11 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: true}));
 
+//heroku
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+}
+
 const db = require("./models");
 const Role = db.role;
 
