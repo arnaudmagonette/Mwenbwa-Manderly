@@ -66,20 +66,8 @@ export default class SignUp extends Component {
                     this.state.password,
                     this.state.color,
                 ).then(() => {
-                    console.log(this.state.email);
-                    console.log(this.state.password);
-                    AuthService.login(
-                        this.state.email,
-                        this.state.password,
-                    ).then(
-                        () => {
-                            console.log("reload");
-                            window.location.reload();
-                        },
-                        error => {
-                            console.log("login error", error);
-                        },
-                    );
+                    AuthService.login(this.state.email, this.state.password);
+                    window.location.reload();
                 });
             })
             .catch(errors => {
