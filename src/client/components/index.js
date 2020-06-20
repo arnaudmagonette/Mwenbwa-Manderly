@@ -4,8 +4,9 @@ import LeaderBoard from "./leaderboard";
 import Gamelog from "./gamelog";
 import EditP from "./edit-profile";
 import Login from "./login";
-const {useState} = React;
+const {useState, useEffect} = React;
 import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 import Navigation from "./navigation";
 import "./index.less";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
@@ -21,20 +22,34 @@ export const paths = {
     EditProfile: "/edit-profile",
 };
 
-function Index() {
-    const [user, setUser] = useState(AuthService.getCurrentUser());
+const getAllUsers = setUsers => {
+    UserService.getAllUsers().then(res => {
+        setUsers(res.data);
+    });
+};
 
-    if (user) {
+function Index() {
+    const [users, setUsers] = useState([]);
+    const [userCo, setUserCo] = useState(AuthService.getCurrentUser());
+
+    useEffect(() => {
+        getAllUsers(setUsers);
+    }, []);
+
+    if (userCo) {
         return (
             <main>
                 <Router>
                     <div className={"map"}>
                         <MapWrapper />
                     </div>
-                    <div className={"container-component"}>
+                    <div
+                        className={
+                            "container-component hero is-fullheight has-padding-bottom-10"
+                        }>
                         <Switch>
                             <Route path={paths.LeaderBoard}>
-                                <LeaderBoard />
+                                <LeaderBoard users={users} />
                             </Route>
                             <Route path={paths.Gamelog}>
                                 <Gamelog />
@@ -44,7 +59,7 @@ function Index() {
                             </Route>
                         </Switch>
 
-                        <Navigation handleLogout={handleLogout(setUser)} />
+                        <Navigation handleLogout={handleLogout(setUserCo)} />
                     </div>
                 </Router>
             </main>

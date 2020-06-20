@@ -62,3 +62,17 @@ app.listen(server_port, server_host, () => {
 //removeIdleLeaves();
 
 //-------------------------------
+
+/*
+
+function buyTree() {
+    Trees.findByIdAndUpdate("5ed10f1a45ab8e02c4ee0532", {
+        $push: {owner: ["Arnaud"]},
+    }).exec((err, tree) => {
+        if (err) {
+            console.error(err);
+        }
+
+        console.log(tree);
+    });
+}*/

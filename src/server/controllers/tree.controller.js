@@ -9,21 +9,19 @@ function randomName() {
 }
 
 exports.allTrees = (req, res) => {
-    Tree.find({})
-        .limit(1000)
-        .exec((err, allTrees) => {
-            if (err) {
-                res.status(500).send({message: err});
-                return;
-            }
+    Tree.find({}).exec((err, allTrees) => {
+        if (err) {
+            res.status(500).send({message: err});
+            return;
+        }
 
-            if (!allTrees) {
-                res.status(404).send({message: "Trees Not found."});
-                return;
-            }
+        if (!allTrees) {
+            res.status(404).send({message: "Trees Not found."});
+            return;
+        }
 
-            res.json(allTrees);
-        });
+        res.json(allTrees);
+    });
 };
 
 exports.addFirstTrees = (req, res) => {
@@ -58,8 +56,6 @@ exports.addFirstTrees = (req, res) => {
 };
 
 exports.buyTree = (req, res) => {
-    // eslint-disable-next-line no-console
-    console.log(req);
     User.findById(req.body.idUser).exec((err, user) => {
         if (err) {
             res.status(500).send({message: err});
@@ -102,9 +98,23 @@ exports.buyTree = (req, res) => {
                 if (erro) {
                     res.status(500).send({message: erro});
                 }
-                // eslint-disable-next-line no-console
-                console.log(user.leaves, tree.leaves);
             });
         });
+    });
+};
+
+exports.howManyTrees = (req, res) => {
+    Tree.find({owner: req.body.owner}).count((err, numbersTrees) => {
+        if (err) {
+            res.status(500).send({message: err});
+            return;
+        }
+
+        if (!numbersTrees) {
+            // eslint-disable-next-line
+                return res.json("0");
+        }
+
+        res.json(numbersTrees);
     });
 };
