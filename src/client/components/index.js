@@ -48,7 +48,7 @@ function Index() {
                         className={
                             "container-component has-padding-30 hero is-fullheight"
                         }>
-                        <div className={"notification hero is-fullheight"}>
+                        <div className={"notification"}>
                             <Profile />
                             <Switch>
                                 <Route path={paths.LeaderBoard}>
@@ -61,11 +61,8 @@ function Index() {
                                     <EditP />
                                 </Route>
                             </Switch>
-
-                            <Navigation
-                                handleLogout={handleLogout(setUserCo)}
-                            />
                         </div>
+                        <Navigation handleLogout={handleLogout(setUserCo)} />
                     </div>
                 </Router>
             </main>

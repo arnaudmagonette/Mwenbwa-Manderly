@@ -73,7 +73,7 @@ function LeaderBoard(props) {
                                 <tr key={user._id}>
                                     <td>
                                         <Gravatar
-                                            email={`${user.email} `}
+                                            email={user.email}
                                             size={30}
                                         />
                                     </td>
