@@ -39,8 +39,6 @@ const MapWrapper = () => {
     const [users, setUsers] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
-    //console.log(trees, users);
-
     useEffect(() => {
         getAllTrees(setTrees, setIsLoaded);
         getAllUsers(setUsers);

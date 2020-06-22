@@ -49,6 +49,7 @@ const Marker = props => (
                         handelBuyTree(
                             props.id,
                             AuthService.getCurrentUser().id,
+                            location.reload(),
                         );
                     }}>
                     {"Buy"}
