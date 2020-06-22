@@ -31,6 +31,7 @@ const ConnectionMongoDb = require("./config/db.config");
 require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
 require("./routes/tree.routes")(app);
+require("./routes/log.routes")(app);
 
 // Routage React
 app.get("/*", (req, res) => {
@@ -54,17 +55,3 @@ ConnectionMongoDb();
 //removeIdleLeaves();
 
 //-------------------------------
-
-/*
-
-function buyTree() {
-    Trees.findByIdAndUpdate("5ed10f1a45ab8e02c4ee0532", {
-        $push: {owner: ["Arnaud"]},
-    }).exec((err, tree) => {
-        if (err) {
-            console.error(err);
-        }
-
-        console.log(tree);
-    });
-}*/
