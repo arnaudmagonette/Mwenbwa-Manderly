@@ -19,6 +19,7 @@ const myIcon = (color = "#037318") =>
 
 const handelBuyTree = (a, b) => {
     TreeService.buyTree(a, b);
+    window.location.reload();
 };
 
 const Marker = props => (
