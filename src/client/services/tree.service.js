@@ -15,6 +15,14 @@ class TreeService {
             })
             .then(response => response.data);
     }
+
+    howManyTrees(owner) {
+        return axios
+            .post(`${API_URL}howManyTrees`, {
+                owner,
+            })
+            .then(res => res.data);
+    }
 }
 
 export default new TreeService();

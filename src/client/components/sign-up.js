@@ -5,6 +5,7 @@ import {validateAll} from "indicative/validator";
 import {CirclePicker} from "react-color";
 
 import AuthService from "../services/auth.service";
+import LogService from "../services/log.service";
 
 export default class SignUp extends Component {
     constructor(props) {
@@ -99,7 +100,14 @@ export default class SignUp extends Component {
                             this.state.password,
                         ).then(
                             () => {
-                                window.location.reload();
+                                window.location.reload().then(() => {
+                                    LogService.postLog(
+                                        AuthService.getCurrentUser().id,
+                                        AuthService.getCurrentUser().username,
+                                        AuthService.getCurrentUser().email,
+                                        "Sign Up",
+                                    );
+                                });
                             },
                             error => {
                                 console.log("login error", error);

@@ -3,19 +3,21 @@ const User = db.user;
 const Tree = db.tree;
 
 exports.allUsers = (req, res) => {
-    User.find({}).exec((err, allUsers) => {
-        if (err) {
-            res.status(500).send({message: err});
-            return;
-        }
+    User.find({})
+        .sort([["leaves", -1]])
+        .exec((err, allUsers) => {
+            if (err) {
+                res.status(500).send({message: err});
+                return;
+            }
 
-        if (!allUsers) {
-            res.status(404).send({message: "Users Not found."});
-            return;
-        }
+            if (!allUsers) {
+                res.status(404).send({message: "Users Not found."});
+                return;
+            }
 
-        res.json(allUsers);
-    });
+            res.json(allUsers);
+        });
 };
 
 exports.addFirstLeaves = (req, res) => {

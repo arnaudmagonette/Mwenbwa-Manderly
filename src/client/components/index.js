@@ -4,11 +4,13 @@ import LeaderBoard from "./leaderboard";
 import Gamelog from "./gamelog";
 import EditP from "./edit-profile";
 import Login from "./login";
-const {useState} = React;
+const {useState, useEffect} = React;
 import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 import Navigation from "./navigation";
 import "./index.less";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import Profile from "./profile";
 
 const handleLogout = setUser => () => {
     setUser(null);
@@ -21,30 +23,49 @@ export const paths = {
     EditProfile: "/edit-profile",
 };
 
-function Index() {
-    const [user, setUser] = useState(AuthService.getCurrentUser());
+const getAllUsers = setUsers => {
+    UserService.getAllUsers().then(res => {
+        setUsers(res.data);
+    });
+};
 
-    if (user) {
+function Index() {
+    const [users, setUsers] = useState([]);
+    const [userCo, setUserCo] = useState(AuthService.getCurrentUser());
+
+    useEffect(() => {
+        getAllUsers(setUsers);
+    }, []);
+
+    if (userCo) {
         return (
             <main>
                 <Router>
                     <div className={"map"}>
                         <MapWrapper />
                     </div>
-                    <div className={"container-component"}>
-                        <Switch>
-                            <Route path={paths.LeaderBoard}>
-                                <LeaderBoard />
-                            </Route>
-                            <Route path={paths.Gamelog}>
-                                <Gamelog />
-                            </Route>
-                            <Route path={paths.EditP}>
-                                <EditP />
-                            </Route>
-                        </Switch>
+                    <div
+                        className={
+                            "container-component has-padding-30 hero is-fullheight"
+                        }>
+                        <div className={"notification hero is-fullheight"}>
+                            <Profile />
+                            <Switch>
+                                <Route path={paths.LeaderBoard}>
+                                    <LeaderBoard users={users} />
+                                </Route>
+                                <Route path={paths.Gamelog}>
+                                    <Gamelog />
+                                </Route>
+                                <Route path={paths.EditP}>
+                                    <EditP />
+                                </Route>
+                            </Switch>
 
-                        <Navigation handleLogout={handleLogout(setUser)} />
+                            <Navigation
+                                handleLogout={handleLogout(setUserCo)}
+                            />
+                        </div>
                     </div>
                 </Router>
             </main>
