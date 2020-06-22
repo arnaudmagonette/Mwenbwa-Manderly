@@ -21,6 +21,10 @@ const handelBuyTree = (a, b) => {
     TreeService.buyTree(a, b);
 };
 
+const handelReBuyTree = (idTree, idUser, latTree, lonTree) => {
+    TreeService.reBuyTree(idTree, idUser, latTree, lonTree);
+};
+
 const Marker = props => (
     <LeafletMarker position={props.position} icon={myIcon(props.owner.color)}>
         <Popup>
@@ -41,10 +45,22 @@ const Marker = props => (
                         handelBuyTree(
                             props.id,
                             AuthService.getCurrentUser().id,
-                            location.reload(),
+                            // location.reload(),
                         );
                     }}>
                     {"Buy"}
+                </button>
+                <button
+                    onClick={() => {
+                        handelReBuyTree(
+                            props.id,
+                            AuthService.getCurrentUser().id,
+                            props.position[0], // lat
+                            props.position[1], // lon
+                            // location.reload(),
+                        );
+                    }}>
+                    {"Rebuy"}
                 </button>
             </div>
             <div>
@@ -101,7 +117,7 @@ const Marker = props => (
             </div>
             <form>
                 <textarea placeholder={"Write your comment..."} />
-                {/* <button type={"submit"}>{"Send"}</button> */}
+                <button type={"submit"}>{"Send"}</button>
             </form>
             <div>
                 <a href={"#"}>{"Wiki link"}</a>
