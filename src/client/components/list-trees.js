@@ -11,7 +11,7 @@ function AllTrees() {
     // que useEffect ne s’exécutera qu’une fois, un peu comme
     // componentDidMount()
     useEffect(() => {
-        fetch("http://localhost/allTrees")
+        fetch("https://mwenbwa.herokuapp.com/allTrees")
             .then(res => res.json())
             .then(
                 result => {

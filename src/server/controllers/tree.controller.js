@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 const db = require("../models");
 const Tree = db.tree;
 const User = db.user;
@@ -111,8 +112,7 @@ exports.howManyTrees = (req, res) => {
         }
 
         if (!numbersTrees) {
-            // eslint-disable-next-line
-                return res.json("0");
+            return res.json("0");
         }
 
         res.json(numbersTrees);
