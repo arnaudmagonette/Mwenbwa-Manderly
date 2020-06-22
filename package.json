@@ -73,6 +73,7 @@
         "create-react-app": "^3.4.1",
         "express": "^4.17.1",
         "express-validator": "^6.5.0",
+        "geolocation-utils": "^1.2.3",
         "gravatar": "^1.8.0",
         "indicative": "^7.4.4",
         "leaflet": "^1.6.0",
