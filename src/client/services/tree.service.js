@@ -29,7 +29,7 @@ class TreeService {
 
     lockTree(idTree, idUser, latTree, lonTree) {
         return axios
-            .post(`${API_URL}reBuyTree`, {
+            .post(`${API_URL}lockTree`, {
                 idTree,
                 idUser,
                 latTree,
