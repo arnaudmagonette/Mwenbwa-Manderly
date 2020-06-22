@@ -10,6 +10,7 @@ import UserService from "../services/user.service";
 import Navigation from "./navigation";
 import "./index.less";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import Profile from "./profile";
 
 const handleLogout = setUser => () => {
     setUser(null);
@@ -45,21 +46,26 @@ function Index() {
                     </div>
                     <div
                         className={
-                            "container-component hero is-fullheight has-padding-bottom-10"
+                            "container-component has-padding-30 hero is-fullheight"
                         }>
-                        <Switch>
-                            <Route path={paths.LeaderBoard}>
-                                <LeaderBoard users={users} />
-                            </Route>
-                            <Route path={paths.Gamelog}>
-                                <Gamelog />
-                            </Route>
-                            <Route path={paths.EditP}>
-                                <EditP />
-                            </Route>
-                        </Switch>
+                        <div className={"notification hero is-fullheight"}>
+                            <Profile />
+                            <Switch>
+                                <Route path={paths.LeaderBoard}>
+                                    <LeaderBoard users={users} />
+                                </Route>
+                                <Route path={paths.Gamelog}>
+                                    <Gamelog />
+                                </Route>
+                                <Route path={paths.EditP}>
+                                    <EditP />
+                                </Route>
+                            </Switch>
 
-                        <Navigation handleLogout={handleLogout(setUserCo)} />
+                            <Navigation
+                                handleLogout={handleLogout(setUserCo)}
+                            />
+                        </div>
                     </div>
                 </Router>
             </main>
