@@ -28,6 +28,8 @@ exports.signup = (req, res) => {
         addFirstTrees(resp);
         addFirstTrees(resp);
         addFirstTrees(resp);
+
+        res.send({message: "User was registered successfully!"});
     });
 };
 

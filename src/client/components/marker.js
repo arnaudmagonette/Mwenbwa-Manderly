@@ -6,6 +6,7 @@ import {iconUrl} from "./icon";
 import LeafIcon from "./leaf-icon";
 import TreeService from "../services/tree.service";
 import AuthService from "../services/auth.service";
+import LogService from "../services/log.service";
 
 import AvatarIcon from "./avatar-icon";
 
@@ -18,9 +19,14 @@ const myIcon = (color = "#037318") =>
     });
 
 const handelBuyTree = (a, b) => {
-    TreeService.buyTree(a, b).then(() => {
-        window.location.reload();
-    });
+    TreeService.buyTree(a, b);
+
+    LogService.postLog(
+        AuthService.getCurrentUser().id,
+        AuthService.getCurrentUser().username,
+        AuthService.getCurrentUser().email,
+        "Buy a tree",
+    );
 };
 
 const Marker = props => (
