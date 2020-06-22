@@ -21,6 +21,7 @@ export default class SignUp extends Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handlePass = this.handlePass.bind(this);
     }
 
     handleChangeComplete = color => {
@@ -33,6 +34,33 @@ export default class SignUp extends Component {
         });
     }
 
+    handlePass() {
+        const {password, password_confirmation} = this.state;
+        // perform all neccassary validations
+        const passC1 = document.querySelector("#WrongPass");
+        const passC2 = document.querySelector("#CharMin");
+        const value = document.querySelector("#valueLength").value;
+
+        if (value.length < 8) {
+            const lessChar = "Your password needs at least 8 characters";
+            passC2.innerHTML = lessChar;
+            passC2.classList.add("has-text-danger", "is-size-6");
+        } else {
+            passC2.innerHTML = "";
+        }
+
+        if (password !== password_confirmation) {
+            const wrongPass = "Password doesn't match !";
+            passC1.innerHTML = wrongPass;
+            passC1.classList.add("has-text-danger", "is-size-6");
+        } else {
+            const goodPass = "Password does match !";
+            passC1.innerHTML = goodPass;
+            passC1.classList.remove("has-text-danger", "is-size-6");
+            passC1.classList.add("has-text-primary", "is-size-6");
+        }
+    }
+
     handleSubmit(event) {
         event.preventDefault();
         console.log(this.state);
@@ -42,7 +70,7 @@ export default class SignUp extends Component {
         const rules = {
             username: "required|string|min:4",
             email: "required|string",
-            password: "required|string|min:6|confirmed",
+            password: "required|string|min:8|confirmed",
             color: "required|string",
         };
 
@@ -126,9 +154,11 @@ export default class SignUp extends Component {
                             {"Password"}
                         </label>
                         <input
+                            id={"valueLength"}
                             className={"input is-success"}
                             type={"password"}
                             name={"password"}
+                            onKeyUp={this.handlePass}
                             placeholder={"Password"}
                             onChange={this.handleChange}
                             required
@@ -140,10 +170,13 @@ export default class SignUp extends Component {
                             className={"input is-success"}
                             type={"password"}
                             name={"password_confirmation"}
+                            onKeyUp={this.handlePass}
                             onChange={this.handleChange}
                             placeholder={"Confirm password"}
                             required
                         />
+                        <div id={"WrongPass"} />
+                        <div id={"CharMin"} />
                         <label className={"label has-padding-top-20"}>
                             {" Choose the color of your tree "}
                         </label>
