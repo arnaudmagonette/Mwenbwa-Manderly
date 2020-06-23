@@ -33,6 +33,10 @@ const handelReBuyTree = (idTree, idUser, latTree, lonTree) => {
     TreeService.reBuyTree(idTree, idUser, latTree, lonTree);
 };
 
+const handelLockTree = (idTree, idUser, latTree, lonTree) => {
+    TreeService.lockTree(idTree, idUser, latTree, lonTree);
+};
+
 const Marker = props => (
     <LeafletMarker position={props.position} icon={myIcon(props.owner.color)}>
         <Popup>
@@ -69,6 +73,18 @@ const Marker = props => (
                         );
                     }}>
                     {"Rebuy"}
+                </button>
+                <button
+                    onClick={() => {
+                        handelLockTree(
+                            props.id,
+                            AuthService.getCurrentUser().id,
+                            props.position[0], // lat
+                            props.position[1], // lon
+                            // location.reload(),
+                        );
+                    }}>
+                    {"Lock"}
                 </button>
             </div>
             <div>

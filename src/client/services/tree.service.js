@@ -27,6 +27,17 @@ class TreeService {
             .then(response => response.data);
     }
 
+    lockTree(idTree, idUser, latTree, lonTree) {
+        return axios
+            .post(`${API_URL}lockTree`, {
+                idTree,
+                idUser,
+                latTree,
+                lonTree,
+            })
+            .then(response => response.data);
+    }
+
     howManyTrees(owner) {
         return axios
             .post(`${API_URL}howManyTrees`, {
