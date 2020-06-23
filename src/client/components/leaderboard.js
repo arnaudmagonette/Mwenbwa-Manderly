@@ -3,11 +3,10 @@ import TreeService from "../services/tree.service";
 import LeafIcon from "./leaf-icon";
 import Gravatar from "react-circle-gravatar";
 import TreeIcon from "./tree-icon";
-import {Scrollbars} from "react-custom-scrollbars";
 
 function LeaderBoard(props) {
     return (
-        <Scrollbars autoHeight autoHeightMin={500}>
+        <div>
             <div className={"has-padding-top-5 has-text-centered"}>
                 <p
                     className={
@@ -51,9 +50,7 @@ function LeaderBoard(props) {
                     {"PLAYER'S TREES"}
                 </p>
                 <table
-                    className={
-                        "table table  is-striped  is-hoverable is-fullwidth"
-                    }>
+                    className={"table is-striped  is-hoverable is-fullwidth"}>
                     <thead>
                         <tr>
                             <th>{"Avatar"}</th>
@@ -88,7 +85,7 @@ function LeaderBoard(props) {
                     </tbody>
                 </table>
             </div>
-        </Scrollbars>
+        </div>
     );
 }
 

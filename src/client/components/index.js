@@ -46,12 +46,16 @@ function Index() {
                     </div>
                     <div
                         className={
-                            "container-component has-padding-30 hero is-fullheight"
+                            "container-component has-padding-left-30 has-padding-right-30 has-padding-top-30 hero is-fullheight"
                         }>
-                        <div className={"notification hero is-fullheight"}>
+                        <div
+                            className={"notification has-padding-20"}
+                            style={{overflow: "scroll"}}>
                             <Profile />
                             <Switch>
-                                <Route path={paths.LeaderBoard}>
+                                <Route
+                                    className={" hero is-fullheight"}
+                                    path={paths.LeaderBoard}>
                                     <LeaderBoard users={users} />
                                 </Route>
                                 <Route path={paths.Gamelog}>
@@ -61,12 +65,10 @@ function Index() {
                                     <EditP />
                                 </Route>
                             </Switch>
-
-                            <Navigation
-                                handleLogout={handleLogout(setUserCo)}
-                            />
                         </div>
-                    </div>
+
+                        <Navigation handleLogout={handleLogout(setUserCo)} />
+                    </div>{" "}
                 </Router>
             </main>
         );
