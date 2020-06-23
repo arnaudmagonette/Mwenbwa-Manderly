@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/button-has-type */
-import React from "react";
+import React, {useEffect} from "react";
 import {Marker as LeafletMarker, Popup} from "react-leaflet";
 import * as Leaflet from "leaflet";
 import {iconUrl} from "./icon";

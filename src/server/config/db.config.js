@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 const mongoose = require("mongoose");
-const mongoURI = process.env.MONGODB_URI || "mongodb://dev:dev@mongo/mwenbwaDb";
+const mongoURI = process.env.MONGODB_URI;
 
 const ConnectionMongoDb = async () => {
     try {
