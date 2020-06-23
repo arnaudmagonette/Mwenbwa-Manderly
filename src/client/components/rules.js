@@ -19,27 +19,36 @@ const Rules = () => (
             <br />
             <p>
                 {
-                    "Te voici voici à Liège, la cité ardente, et son étendue d'arbres. Tu viens de recevoir 3 arbres "
+                    "Here you are in Liège, the burning city and its expanse of trees. You have just received 3 trees "
                 }
                 <TreeIcon />
-                {" ainsi qu'une certaine somme de feuilles "}
+                {" and a certain amount of leaves "}
                 <LeafIcon />
-                {" pour commencer ton expension."}
+                {" to start your expansion."}
             </p>
             <br />
             <p>
-                {"Tu peux acheter des arbres libres "}
+                {"You can buy free trees "}
                 <TreeIcon />
-                {" avec cette monnaie virtuelle "}
+                {" with this virtual coins "}
                 <LeafIcon />
                 {
-                    " mais aussi racheter ceux des autres joueurs. En échange d'une plus grosse somme d'argent, tu peux même bloquer un arbre pour que personne ne puisse le racheter et qu'il reste ta propriété !"
+                    " but also buy those of other players. In exchange for a larger sum of money, you can even block a tree so that no one can buy it back and it remains your property!"
                 }
             </p>
             <br />
-            <p>{`Toutes les 15 minutes, tu reçevras le total de feuilles de tout tes arbres. Achetes en donc le plus possible pour recevoir encore plus de monnaie ! Par contre, toutes les 30 minutes tu perdras la moitié de tes feuilles... ( Winter is coming ! )`}</p>
+            <p>
+                {
+                    "Every 15 minutes, you will receive the total of leaves from all your trees. So buy as much as possible to receive even more money! However, every 30 minutes you will lose half of your leaves ... ( Winter is coming ! )"
+                }
+            </p>
             <br />
-            <p>{`Voilà, tu sais tout ce qu'il y a à savoir pour commencer ton expension, tu peux commencer par acheter un nouvel arbre. N'hésite pas à consulter le Leaderboard ci-dessous pour consulter le classement et pourquoi pas tenter de faire partie du top 3 !`}</p>
+            <p>
+                {
+                    "There, you know all there is to know to start your expansion, you can start by buying a new tree. Do not hesitate to consult the Leaderboard below to consult the ranking and why not try to be part of the top 3!"
+                }
+            </p>
+            <br />
         </Scrollbars>
     </div>
 );
