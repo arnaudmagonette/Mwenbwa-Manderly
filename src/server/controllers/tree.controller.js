@@ -11,7 +11,7 @@ function randomName() {
 
 exports.allTrees = (req, res) => {
     Tree.find({})
-        .limit(20)
+        .limit()
         .exec((err, allTrees) => {
             if (err) {
                 res.status(500).send({message: err});
