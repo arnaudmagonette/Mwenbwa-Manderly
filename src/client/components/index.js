@@ -52,11 +52,11 @@ function Index() {
                         <MapWrapper />
                     </div>
                     <Redirect from={"/"} exact to={paths.Rules} />
-                    <div
-                        className={
-                            "container-component has-padding-30 hero is-fullheight"
-                        }>
-                        <div className={"notification hero is-fullheight"}>
+                    <div className={"container-component hero is-fullheight"}>
+                        <div
+                            className={
+                                "second-container-component has-margin-30 notification hero is-fullheight"
+                            }>
                             <Profile />
                             <Switch>
                                 <Route path={paths.LeaderBoard}>
