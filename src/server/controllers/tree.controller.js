@@ -215,6 +215,109 @@ exports.reBuyTree = (req, res) => {
     });
 };
 
+exports.lockTree = (req, res) => {
+    User.findById(req.body.idUser).exec((err, user) => {
+        if (err) {
+            res.status(500).send({message: err});
+            return;
+        }
+
+        if (!user) {
+            res.status(404).send({
+                message: "User not found!",
+            });
+            return;
+        }
+
+        Tree.findById(req.body.idTree).exec((error, treeSelected) => {
+            if (error) {
+                res.status(500).send({message: error});
+                return;
+            }
+
+            if (!treeSelected) {
+                res.status(404).send({message: "Tree Not found."});
+                return;
+            }
+
+            const latTreeSelected = req.body.latTree;
+            const lonTreeSelected = req.body.lonTree;
+            const center = {lat: latTreeSelected, lon: lonTreeSelected};
+            const radius = 100;
+
+            Tree.find({}).exec((err2, trees) => {
+                if (err2) {
+                    res.status(500).send({message: err2});
+                    return;
+                }
+
+                if (!trees) {
+                    res.status(404).send({message: "Trees Not found."});
+                    return;
+                }
+
+                const treesSelected = [];
+                let valueTreesSelected = 0;
+                let valuePlayersTreesSelected = 0;
+
+                trees.forEach(tree => {
+                    const lat = tree.geoloc.lat;
+                    const lon = tree.geoloc.lon;
+
+                    if (insideCircle({lat, lon}, center, radius)) {
+                        treesSelected.push(tree);
+                    }
+                });
+
+                let player = [];
+
+                treesSelected.forEach(tree => {
+                    valueTreesSelected += tree.leaves;
+                });
+
+                treesSelected.forEach(tree => {
+                    if (tree.owner[0]) {
+                        valuePlayersTreesSelected += tree.leaves;
+                    }
+                });
+
+                treesSelected.forEach(tree => {
+                    if (tree.owner[0]) {
+                        player.push(tree.owner[0]);
+                    }
+                });
+
+                player = new Set(player);
+
+                const valueLockTree =
+                    treeSelected.leaves * 10 +
+                    valueTreesSelected * player.size -
+                    valuePlayersTreesSelected / player.size;
+
+                if (user.leaves < valueLockTree) {
+                    res.send({message: "User doesn't have enough Leaves."});
+                    return;
+                }
+
+                treeSelected.lock = true;
+                treeSelected.save(erro => {
+                    if (erro) {
+                        res.status(500).send({message: erro});
+                    }
+                    res.status(200).send({message: "Tree locked"});
+                });
+
+                user.leaves = user.leaves - valueLockTree;
+                user.save(erro => {
+                    if (erro) {
+                        res.status(500).send({message: erro});
+                    }
+                });
+            });
+        });
+    });
+};
+
 exports.howManyTrees = (req, res) => {
     Tree.find({owner: req.body.owner}).count((err, numbersTrees) => {
         if (err) {

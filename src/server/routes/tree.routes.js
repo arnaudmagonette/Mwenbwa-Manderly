@@ -7,5 +7,7 @@ module.exports = function (app) {
 
     app.post("/api/reBuyTree", controller.reBuyTree);
 
+    app.post("/api/lockTree", controller.lockTree);
+
     app.post("/api/howManyTrees", controller.howManyTrees);
 };
