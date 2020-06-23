@@ -1,10 +1,10 @@
 import * as React from "react";
+const {useState, useEffect} = React;
 import MapWrapper from "./map";
 import LeaderBoard from "./leaderboard";
 import Gamelog from "./gamelog";
 import EditP from "./edit-profile";
 import Login from "./login";
-const {useState, useEffect} = React;
 import AuthService from "../services/auth.service";
 import UserService from "../services/user.service";
 import Navigation from "./navigation";
@@ -31,7 +31,7 @@ const getAllUsers = setUsers => {
 
 function Index() {
     const [users, setUsers] = useState([]);
-    const [userCo, setUserCo] = useState(AuthService.getCurrentUser());
+    const [userCo] = useState(AuthService.getCurrentUser());
 
     useEffect(() => {
         getAllUsers(setUsers);
@@ -62,7 +62,7 @@ function Index() {
                                 </Route>
                             </Switch>
                         </div>
-                        <Navigation handleLogout={handleLogout(setUserCo)} />
+                        <Navigation handleLogout={handleLogout()} />
                     </div>
                 </Router>
             </main>

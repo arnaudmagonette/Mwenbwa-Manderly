@@ -6,19 +6,24 @@ import TreeIcon from "./tree-icon";
 import AuthService from "../services/auth.service";
 import TreeService from "../services/tree.service";
 
-const connectedUser = AuthService.getCurrentUser();
-
-const howManyTrees = setNumberTrees => {
+const howManyTrees = (connectedUser, setNumberTrees) => {
     TreeService.howManyTrees(connectedUser.username).then(res => {
         setNumberTrees(res);
     });
 };
 
 const Profile = () => {
+    const [connectedUser, setConnectedUser] = useState(
+        AuthService.getCurrentUser(),
+    );
     const [numberTrees, setNumberTrees] = useState(0);
 
     useEffect(() => {
-        howManyTrees(setNumberTrees);
+        howManyTrees(connectedUser, setNumberTrees);
+        const interval = setInterval(() => {
+            setConnectedUser(AuthService.getCurrentUser());
+        }, 1000);
+        return () => clearInterval(interval);
     }, []);
 
     return (

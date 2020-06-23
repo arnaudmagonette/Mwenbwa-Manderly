@@ -1,5 +1,4 @@
 import axios from "axios";
-import authHeader from "./auth-header";
 
 const API_URL = "http://localhost/api/";
 
@@ -8,8 +7,10 @@ class UserService {
         return axios.get(`${API_URL}allUsers`);
     }
 
-    getUserBoard() {
-        return axios.get(`${API_URL}user`, {headers: authHeader()});
+    refreshUser(id) {
+        return axios.post(`${API_URL}getUser`, {
+            id,
+        });
     }
 }
 

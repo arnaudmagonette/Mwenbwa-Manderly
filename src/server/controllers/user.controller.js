@@ -20,6 +20,22 @@ exports.allUsers = (req, res) => {
         });
 };
 
+exports.getUser = (req, res) => {
+    User.findById(req.body.id).exec((err, user) => {
+        if (err) {
+            res.status(500).send({message: err});
+            return;
+        }
+
+        if (!user) {
+            res.status(404).send({message: "User Not found."});
+            return;
+        }
+
+        res.json(user);
+    });
+};
+
 exports.addFirstLeaves = (req, res) => {
     User.find({}).exec((err, users) => {
         if (err) {

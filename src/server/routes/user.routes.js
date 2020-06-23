@@ -10,4 +10,6 @@ module.exports = function (app) {
     });
 
     app.get("/api/allUsers", controller.allUsers);
+
+    app.post("/api/getUser", controller.getUser);
 };
