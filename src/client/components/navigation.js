@@ -24,6 +24,15 @@ const Navigation = props => (
                 </button>
             </Link>
 
+            <Link to={paths.Rules}>
+                <button
+                    className={
+                        "button is-rounded  is-primary has-text-weight-bold has-text-white"
+                    }>
+                    {"Rules"}
+                </button>
+            </Link>
+
             <Link to={paths.EditProfile}>
                 <button
                     className={
