@@ -10,7 +10,12 @@ import AuthService from "../services/auth.service";
 import UserService from "../services/user.service";
 import Navigation from "./navigation";
 import "./index.less";
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Redirect,
+    Route,
+} from "react-router-dom";
 import Profile from "./profile";
 
 const handleLogout = setUser => () => {
@@ -46,6 +51,7 @@ function Index() {
                     <div className={"map"}>
                         <MapWrapper />
                     </div>
+                    <Redirect from={"/"} exact to={paths.Rules} />
                     <div
                         className={
                             "container-component has-padding-30 hero is-fullheight"
