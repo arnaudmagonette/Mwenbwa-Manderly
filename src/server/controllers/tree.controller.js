@@ -10,19 +10,21 @@ function randomName() {
 }
 
 exports.allTrees = (req, res) => {
-    Tree.find({}).exec((err, allTrees) => {
-        if (err) {
-            res.status(500).send({message: err});
-            return;
-        }
+    Tree.find({})
+        .limit(20)
+        .exec((err, allTrees) => {
+            if (err) {
+                res.status(500).send({message: err});
+                return;
+            }
 
-        if (!allTrees) {
-            res.status(404).send({message: "Trees Not found."});
-            return;
-        }
+            if (!allTrees) {
+                res.status(404).send({message: "Trees Not found."});
+                return;
+            }
 
-        res.json(allTrees);
-    });
+            res.json(allTrees);
+        });
 };
 
 exports.addFirstTrees = (req, res) => {
@@ -129,14 +131,14 @@ exports.reBuyTree = (req, res) => {
                 return;
             }
 
-            const latTreeSelected = req.body.lat;
-            const lonTreeSelected = req.body.lon;
-            const center = {latTreeSelected, lonTreeSelected};
+            const latTreeSelected = req.body.latTree;
+            const lonTreeSelected = req.body.lonTree;
+            const center = {lat: latTreeSelected, lon: lonTreeSelected};
             const radius = 100;
 
-            Tree.find({}).exec((erro, trees) => {
-                if (erro) {
-                    res.status(500).send({message: erro});
+            Tree.find({}).exec((err2, trees) => {
+                if (err2) {
+                    res.status(500).send({message: err2});
                     return;
                 }
 
@@ -145,42 +147,70 @@ exports.reBuyTree = (req, res) => {
                     return;
                 }
 
-                const treesSelect = [];
+                const treesSelected = [];
+                let valueTreesSelected = 0;
 
                 trees.forEach(tree => {
                     const lat = tree.geoloc.lat;
                     const lon = tree.geoloc.lon;
 
-                    insideCircle({lat, lon}, center, radius).then(response => {
-                        if (response) {
-                            console.log(response);
-                            treesSelect.push(tree);
-                        }
-                    });
+                    if (insideCircle({lat, lon}, center, radius)) {
+                        treesSelected.push(tree);
+                    }
                 });
 
-                console.log(treesSelect);
+                let treesSelectedUser = [];
+                let valueTreesSelectedUser = 0;
+                let treesSelectedOther = [];
+                let valueTreesSelectedOther = 0;
+
+                treesSelectedUser = treesSelected.filter(
+                    tree => tree.owner[0] === user.username,
+                );
+                treesSelectedOther = treesSelected.filter(
+                    tree => tree.owner[0] !== user.username,
+                );
+
+                treesSelected.forEach(tree => {
+                    valueTreesSelected += tree.leaves;
+                });
+
+                treesSelectedUser.forEach(tree => {
+                    valueTreesSelectedUser += tree.leaves;
+                });
+
+                treesSelectedOther.forEach(tree => {
+                    valueTreesSelectedOther += tree.leaves;
+                });
+
+                const valueReBuyTree =
+                    treeSelected.leaves +
+                    valueTreesSelectedUser *
+                        (treesSelected.length / treesSelectedUser.length) +
+                    valueTreesSelectedOther -
+                    valueTreesSelected;
+
+                if (user.leaves < valueReBuyTree) {
+                    res.send({message: "User doesn't have enough Leaves."});
+                    return;
+                }
+
+                treeSelected.owner = [user.username];
+                treeSelected.save(erro => {
+                    if (erro) {
+                        res.status(500).send({message: erro});
+                    }
+                    res.status(200);
+                });
+
+                user.leaves = user.leaves - valueReBuyTree;
+                user.save(erro => {
+                    if (erro) {
+                        res.status(500).send({message: erro});
+                    }
+                    res.status(200);
+                });
             });
-
-            // if (user.leaves < tree.leaves) {
-            //     res.send({message: "User doesn't have enough Leaves."});
-            //     return;
-            // }
-
-            // tree.name = randomName();
-            // tree.owner = [user.username];
-            // tree.save((erro) => {
-            //     if (erro) {
-            //         res.status(500).send({message: erro});
-            //     }
-            // });
-
-            // user.leaves = user.leaves - tree.leaves;
-            // user.save((erro) => {
-            //     if (erro) {
-            //         res.status(500).send({message: erro});
-            //     }
-            // });
         });
     });
 };
