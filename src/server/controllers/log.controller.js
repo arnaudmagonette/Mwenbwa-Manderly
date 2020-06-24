@@ -2,14 +2,16 @@ const db = require("../models");
 const Log = db.log;
 
 exports.getLogs = (req, res) => {
-    Log.find({}).exec((err, logs) => {
-        if (err) {
-            res.status(500).send({message: err});
-            return;
-        }
+    Log.find({})
+        .limit(20)
+        .exec((err, logs) => {
+            if (err) {
+                res.status(500).send({message: err});
+                return;
+            }
 
-        res.json(logs);
-    });
+            res.json(logs);
+        });
 };
 
 exports.postLog = (req, res) => {

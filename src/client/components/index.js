@@ -18,8 +18,8 @@ import {
 } from "react-router-dom";
 import Profile from "./profile";
 
-const handleLogout = setUser => () => {
-    setUser(null);
+const handleLogout = setUserCo => () => {
+    setUserCo(null);
     AuthService.logout();
 };
 
