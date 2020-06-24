@@ -12,8 +12,8 @@ import "./index.less";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Profile from "./profile";
 
-const handleLogout = setUser => () => {
-    setUser(null);
+const handleLogout = setUserCo => () => {
+    setUserCo(null);
     AuthService.logout();
 };
 
@@ -31,7 +31,7 @@ const getAllUsers = setUsers => {
 
 function Index() {
     const [users, setUsers] = useState([]);
-    const [userCo] = useState(AuthService.getCurrentUser());
+    const [userCo, setUserCo] = useState(AuthService.getCurrentUser());
 
     useEffect(() => {
         getAllUsers(setUsers);
@@ -62,7 +62,7 @@ function Index() {
                                 </Route>
                             </Switch>
                         </div>
-                        <Navigation handleLogout={handleLogout()} />
+                        <Navigation handleLogout={handleLogout(setUserCo)} />
                     </div>
                 </Router>
             </main>
