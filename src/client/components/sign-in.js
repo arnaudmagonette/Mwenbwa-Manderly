@@ -33,7 +33,20 @@ export default class SignIn extends Component {
                 window.location.reload();
             },
             error => {
+                const inputEmail = document.querySelector("#idEmail");
+                const inputPass = document.querySelector("#idPass");
+
                 console.log("login error", error);
+                if (error.response.status === 401) {
+                    document.querySelector("#Wrong").innerHTML =
+                        "This password is incorrect";
+                    inputEmail.style.borderColor = "green";
+                    inputPass.style.borderColor = "red";
+                } else {
+                    document.querySelector("#Wrong").innerHTML =
+                        "This email doesn't exist";
+                    inputEmail.style.borderColor = "red";
+                }
             },
         );
 
@@ -50,6 +63,7 @@ export default class SignIn extends Component {
                             {"Email"}
                         </label>
                         <input
+                            id={"idEmail"}
                             className={"input"}
                             type={"email"}
                             name={"email"}
@@ -59,17 +73,22 @@ export default class SignIn extends Component {
                             required
                         />
                         {/*  Partie Mdp   */}
-                        <label className={"label label has-padding-top-20"}>
+                        <label className={"label has-padding-top-20"}>
                             {"Password"}
                         </label>
                         <input
-                            className={"input is-success"}
+                            id={"idPass"}
+                            className={"input"}
                             type={"password"}
                             name={"password"}
                             placeholder={"Password"}
                             value={this.state.password}
                             onChange={this.handleChange}
                             required
+                        />
+                        <div
+                            className={"has-text-danger is-size-6"}
+                            id={"Wrong"}
                         />
                         <div className={"control has-padding-top-40"}>
                             <button
