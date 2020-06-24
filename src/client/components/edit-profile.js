@@ -72,7 +72,7 @@ export default class EditP extends React.Component {
                 className={
                     "has-padding-top-5 has-text-black subtitle is-5 has-text-centered has-text-weight-bold"
                 }>
-                <p>{"Change your password"}</p>
+                <p>{"CHANGE YOUR PASSWORD"}</p>
                 <div className={"has-margin-top-40"}>
                     <form onSubmit={this.handleSubmit}>
                         <div className={"field"}>

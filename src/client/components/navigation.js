@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {paths} from "./index";
 
 const Navigation = props => (
-    <div>
+    <div className={"pb-4"}>
         <div className={"buttons  is-centered"}>
             <Link to={paths.LeaderBoard}>
                 <button
