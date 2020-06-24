@@ -41,21 +41,27 @@ export default class SignUp extends Component {
         const passC1 = document.querySelector("#WrongPass");
         const passC2 = document.querySelector("#CharMin");
         const value = document.querySelector("#valueLength").value;
+        const inputValue = document.querySelector("#valueLength");
+        const inputValue2 = document.querySelector("#valueLength2");
 
         if (value.length < 8) {
             const lessChar = "Your password needs at least 8 characters";
             passC2.innerHTML = lessChar;
             passC2.classList.add("has-text-danger", "is-size-6");
+            inputValue.style.borderColor = "red";
         } else {
             passC2.innerHTML = "";
+            inputValue.style.borderColor = "green";
         }
 
         if (password !== password_confirmation) {
             const wrongPass = "Password doesn't match !";
+            inputValue2.style.borderColor = "red";
             passC1.innerHTML = wrongPass;
             passC1.classList.add("has-text-danger", "is-size-6");
         } else {
             const goodPass = "Password does match !";
+            inputValue2.style.borderColor = "green";
             passC1.innerHTML = goodPass;
             passC1.classList.remove("has-text-danger", "is-size-6");
             passC1.classList.add("has-text-primary", "is-size-6");
@@ -146,7 +152,7 @@ export default class SignUp extends Component {
                             onChange={this.handleChange}
                             required
                         />
-                        <label className={"label has-padding-top-40"}>
+                        <label className={"label has-padding-top-20"}>
                             {"Email"}
                         </label>
                         <input
@@ -163,7 +169,7 @@ export default class SignUp extends Component {
                         </label>
                         <input
                             id={"valueLength"}
-                            className={"input is-success"}
+                            className={"input"}
                             type={"password"}
                             name={"password"}
                             onKeyUp={this.handlePass}
@@ -175,7 +181,8 @@ export default class SignUp extends Component {
                             {" Confirm your password "}
                         </label>
                         <input
-                            className={"input is-success"}
+                            id={"valueLength2"}
+                            className={"input"}
                             type={"password"}
                             name={"password_confirmation"}
                             onKeyUp={this.handlePass}
