@@ -123,12 +123,16 @@ const Marker = props => {
                                 <td>{"Date"}</td>
                             </tr>
                             <tr>
-                                <AvatarIcon />
+                                <td>
+                                    <AvatarIcon />
+                                </td>
                                 <td>{"Pierre"}</td>
                                 <td>{"03/06/2020"}</td>
                             </tr>
                             <tr>
-                                <AvatarIcon />
+                                <td>
+                                    <AvatarIcon />
+                                </td>
                                 <td>{"Marc"}</td>
                                 <td>{"02/06/2020"}</td>
                             </tr>
@@ -149,12 +153,16 @@ const Marker = props => {
                                 <td>{"Comment"}</td>
                             </tr>
                             <tr>
-                                <AvatarIcon />
+                                <td>
+                                    <AvatarIcon />
+                                </td>
                                 <td>{"Pierre"}</td>
                                 <td>{`${props.comments}`}</td>
                             </tr>
                             <tr>
-                                <AvatarIcon />
+                                <td>
+                                    <AvatarIcon />
+                                </td>
                                 <td>{"Marc"}</td>
                                 <td>{`${props.comments}`}</td>
                             </tr>

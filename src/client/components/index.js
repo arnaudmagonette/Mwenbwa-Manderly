@@ -76,6 +76,7 @@ function Index() {
                                     <EditP />
                                 </Route>
                             </Switch>
+                            <Navigation handleLogout={handleLogout()} />
                         </div>
                         <Navigation handleLogout={handleLogout(setUserCo)} />
                     </div>
