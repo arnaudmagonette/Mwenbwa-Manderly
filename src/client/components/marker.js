@@ -40,7 +40,7 @@ const handelLockTree = (idTree, idUser, latTree, lonTree) => {
 };
 
 const refeshUserStorage = userCo => {
-    UserService.refreshUser(userCo.id).then(res => {
+    UserService.refreshUser(userCo._id).then(res => {
         localStorage.setItem("user", JSON.stringify(res.data));
     });
 };
@@ -80,9 +80,9 @@ const Marker = props => {
                         onClick={() => {
                             handelBuyTree(
                                 props.id,
-                                userCo.id,
-                                //location.reload(),
+                                userCo._id,
                                 refeshUserStorage(userCo),
+                                location.reload(),
                             );
                         }}>
                         {"Buy"}
@@ -91,7 +91,7 @@ const Marker = props => {
                         onClick={() => {
                             handelReBuyTree(
                                 props.id,
-                                userCo.id,
+                                userCo._id,
                                 props.position[0], // lat
                                 props.position[1], // lon
                                 location.reload(),
@@ -103,7 +103,7 @@ const Marker = props => {
                         onClick={() => {
                             handelLockTree(
                                 props.id,
-                                userCo.id,
+                                userCo._id,
                                 props.position[0], // lat
                                 props.position[1], // lon
                                 location.reload(),

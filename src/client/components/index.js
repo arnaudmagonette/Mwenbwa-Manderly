@@ -37,7 +37,7 @@ const getAllUsers = setUsers => {
 };
 
 const refeshUserStorage = userCo => {
-    UserService.refreshUser(userCo.id).then(res => {
+    UserService.refreshUser(userCo._id).then(res => {
         localStorage.setItem("user", JSON.stringify(res.data));
     });
 };
