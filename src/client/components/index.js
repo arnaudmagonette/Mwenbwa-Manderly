@@ -52,7 +52,6 @@ function Index() {
 
         const interval = setInterval(() => {
             setUserCo(AuthService.getCurrentUser());
-            console.log("ok");
         }, 900000);
         return () => clearInterval(interval);
     }, []);

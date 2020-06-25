@@ -335,6 +335,7 @@ exports.howManyTrees = (req, res) => {
 };
 
 exports.addComment = (req, res) => {
+    console.log(req.body);
     Tree.findById(req.body.idTree).exec((error, tree) => {
         if (error) {
             res.status(500).send({message: error});
@@ -346,15 +347,14 @@ exports.addComment = (req, res) => {
             return;
         }
 
-        const user = req.body.username;
+        const name = req.body.username;
         const comment = req.body.comment;
 
-        tree.comments.push({user, comment});
-        console.log(tree.comments);
-        // tree.save(erro => {
-        //     if (erro) {
-        //         res.status(500).send({message: erro});
-        //     }
-        //});
+        tree.comments.push({name, comment});
+        tree.save(erro => {
+            if (erro) {
+                res.status(500).send({message: erro});
+            }
+        });
     });
 };

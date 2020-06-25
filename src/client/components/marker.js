@@ -47,6 +47,17 @@ const refeshUserStorage = userCo => {
 
 const Marker = props => {
     const [userCo] = useState(props.userCo);
+    const [valueComment, setValueComment] = useState("");
+
+    function handleSubmit(event) {
+        TreeService.addComment(props.id, props.userCo.username, valueComment);
+
+        event.preventDefault();
+    }
+
+    function handleChange(event) {
+        setValueComment(event.target.value);
+    }
 
     return (
         <LeafletMarker
@@ -140,29 +151,24 @@ const Marker = props => {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{"Avatar"}</td>
                                 <td>{"User"}</td>
                                 <td>{"Comment"}</td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <AvatarIcon />
-                                </td>
-                                <td>{"Pierre"}</td>
-                                <td>{`${props.comments}`}</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <AvatarIcon />
-                                </td>
-                                <td>{"Marc"}</td>
-                                <td>{`${props.comments}`}</td>
-                            </tr>
+                            {props.comments.map(comment => (
+                                <tr key={comment._id}>
+                                    <td>{comment.name}</td>
+                                    <td>{comment.comment}</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
-                <form>
-                    <textarea placeholder={"Write your comment..."} />
+                <form onSubmit={handleSubmit}>
+                    <textarea
+                        value={valueComment}
+                        onChange={handleChange}
+                        placeholder={"Write your comment..."}
+                    />
                     <button type={"submit"}>{"Send"}</button>
                 </form>
                 <div>
