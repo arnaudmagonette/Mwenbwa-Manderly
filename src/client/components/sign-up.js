@@ -67,6 +67,9 @@ export default class SignUp extends Component {
                         console.log("Register Ok");
                     })
                     .then(() => {
+                        console.log("login");
+                        console.log(this.state.email);
+                        console.log(this.state.password);
                         AuthService.login(
                             this.state.email,
                             this.state.password,
