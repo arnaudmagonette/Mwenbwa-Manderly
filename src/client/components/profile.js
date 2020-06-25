@@ -12,10 +12,8 @@ const howManyTrees = (connectedUser, setNumberTrees) => {
     });
 };
 
-const Profile = () => {
-    const [connectedUser, setConnectedUser] = useState(
-        AuthService.getCurrentUser(),
-    );
+const Profile = props => {
+    const [connectedUser, setConnectedUser] = useState(props.userCo);
     const [numberTrees, setNumberTrees] = useState(0);
 
     useEffect(() => {

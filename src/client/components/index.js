@@ -36,12 +36,25 @@ const getAllUsers = setUsers => {
     });
 };
 
+const refeshUserStorage = userCo => {
+    UserService.refreshUser(userCo.id).then(res => {
+        localStorage.setItem("user", JSON.stringify(res.data));
+    });
+};
+
 function Index() {
     const [users, setUsers] = useState([]);
     const [userCo, setUserCo] = useState(AuthService.getCurrentUser());
 
     useEffect(() => {
         getAllUsers(setUsers);
+        refeshUserStorage(userCo);
+
+        const interval = setInterval(() => {
+            setUserCo(AuthService.getCurrentUser());
+            console.log("ok");
+        }, 900000);
+        return () => clearInterval(interval);
     }, []);
 
     if (userCo) {
@@ -49,7 +62,7 @@ function Index() {
             <main>
                 <Router>
                     <div className={"map"}>
-                        <MapWrapper />
+                        <MapWrapper userCo={userCo} />
                     </div>
                     <Redirect from={"/"} exact to={paths.Rules} />
                     <div
@@ -59,7 +72,7 @@ function Index() {
                         <div
                             className={"notification has-padding-20"}
                             style={{overflow: "scroll"}}>
-                            <Profile />
+                            <Profile userCo={userCo} />
                             <Switch>
                                 <Route
                                     className={" hero is-fullheight"}

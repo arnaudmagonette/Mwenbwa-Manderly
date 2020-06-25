@@ -10,19 +10,21 @@ function randomName() {
 }
 
 exports.allTrees = (req, res) => {
-    Tree.find({}).exec((err, allTrees) => {
-        if (err) {
-            res.status(500).send({message: err});
-            return;
-        }
+    Tree.find({})
+        .limit(20)
+        .exec((err, allTrees) => {
+            if (err) {
+                res.status(500).send({message: err});
+                return;
+            }
 
-        if (!allTrees) {
-            res.status(404).send({message: "Trees Not found."});
-            return;
-        }
+            if (!allTrees) {
+                res.status(404).send({message: "Trees Not found."});
+                return;
+            }
 
-        res.json(allTrees);
-    });
+            res.json(allTrees);
+        });
 };
 
 exports.addFirstTrees = (req, res) => {
@@ -329,5 +331,30 @@ exports.howManyTrees = (req, res) => {
         }
 
         res.json(numbersTrees);
+    });
+};
+
+exports.addComment = (req, res) => {
+    Tree.findById(req.body.idTree).exec((error, tree) => {
+        if (error) {
+            res.status(500).send({message: error});
+            return;
+        }
+
+        if (!tree) {
+            res.status(404).send({message: "Tree Not found."});
+            return;
+        }
+
+        const user = req.body.username;
+        const comment = req.body.comment;
+
+        tree.comments.push({user, comment});
+        console.log(tree.comments);
+        // tree.save(erro => {
+        //     if (erro) {
+        //         res.status(500).send({message: erro});
+        //     }
+        //});
     });
 };

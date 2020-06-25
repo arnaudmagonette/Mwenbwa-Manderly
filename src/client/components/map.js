@@ -1,10 +1,10 @@
 import React from "react";
+const {useState, useEffect} = React;
 import {Map, TileLayer} from "react-leaflet";
 import Marker from "./marker";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import TreeService from "../services/tree.service";
 import UserService from "../services/user.service";
-const {useState, useEffect} = React;
 
 import "./map.less";
 
@@ -34,10 +34,11 @@ const getOwner = (owner, users) => {
     return users.find(user => user.username === owner[0]);
 };
 
-const MapWrapper = () => {
+const MapWrapper = props => {
     const [trees, setTrees] = useState([]);
     const [users, setUsers] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [userCo] = useState(props.userCo);
 
     useEffect(() => {
         getAllTrees(setTrees, setIsLoaded);
@@ -70,6 +71,7 @@ const MapWrapper = () => {
                                         name={tree.name}
                                         leaves={tree.leaves}
                                         comments={tree.comments}
+                                        userCo={userCo}
                                     />
                                 );
                             }
