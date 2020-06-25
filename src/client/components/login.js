@@ -15,14 +15,16 @@ export default class Login extends Component {
                         {" Welcome to Mwembwa"}
                     </h1>
                 </div>
-                <div
-                    className={
-                        "container notification is-four-fifths has-margin-top-50"
-                    }>
-                    <div className={"columns is-size-3"}>
-                        <SignUp />
+                <div className={"columns is-centered"}>
+                    <div
+                        className={
+                            "column notification is-four-fifths has-margin-top-50 has-margin-bottom-50"
+                        }>
+                        <div className={"columns is-size-3"}>
+                            <SignUp />
 
-                        <SignIn />
+                            <SignIn />
+                        </div>
                     </div>
                 </div>
             </div>

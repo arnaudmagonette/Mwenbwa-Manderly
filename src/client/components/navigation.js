@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {paths} from "./index";
 
 const Navigation = props => (
-    <div>
+    <div className={"pb-4"}>
         <div className={"buttons  is-centered"}>
             <Link to={paths.LeaderBoard}>
                 <button
@@ -21,6 +21,15 @@ const Navigation = props => (
                         "button is-rounded is-primary has-text-weight-bold has-text-white"
                     }>
                     {"Game Log"}
+                </button>
+            </Link>
+
+            <Link to={paths.Rules}>
+                <button
+                    className={
+                        "button is-rounded  is-primary has-text-weight-bold has-text-white"
+                    }>
+                    {"Rules"}
                 </button>
             </Link>
 
