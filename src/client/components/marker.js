@@ -137,11 +137,14 @@ const Marker = props => {
                             <tr>
                                 <td>{"User"}</td>
                             </tr>
-                            {props.allOwners.map(owner => (
-                                <tr key={props.id}>
-                                    <td>{owner}</td>
-                                </tr>
-                            ))}
+                            {props.allOwners.map((owner, index) => {
+                                const keyOwner = index + 1;
+                                return (
+                                    <tr key={keyOwner}>
+                                        <td>{owner}</td>
+                                    </tr>
+                                );
+                            })}
                         </tbody>
                     </table>
                 </div>
