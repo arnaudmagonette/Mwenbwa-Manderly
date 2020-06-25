@@ -37,6 +37,13 @@ const handelReBuyTree = (idTree, idUser, latTree, lonTree) => {
 const handelLockTree = (idTree, idUser, latTree, lonTree) => {
     TreeService.lockTree(idTree, idUser, latTree, lonTree);
 };
+// const handleSubmit = (idTree, username, comment, event) => {
+//     TreeService.addComment();
+// };
+// const handleChange = (event, setValueComment) => {
+//     setValueComment(event.target.value);
+//     console.log(event.target.value);
+// };
 
 const refeshUserStorage = () => {
     UserService.refreshUser(AuthService.getCurrentUser()._id).then(res => {
@@ -46,6 +53,10 @@ const refeshUserStorage = () => {
 };
 
 const Marker = props => (
+    // // const [valueComment, setValueComment] = useState("");
+    // useEffect(() => {
+    //     handleChange(event, setValueComment);
+    // });
     <LeafletMarker position={props.position} icon={myIcon(props.owner.color)}>
         <Popup>
             <div>
@@ -156,15 +167,23 @@ const Marker = props => (
                     </tbody>
                 </table>
             </div>
-            <form>
-                <textarea placeholder={"Write your comment..."} />
-                <button type={"submit"}>{"Send"}</button>
-            </form>
+            {/* <form
+                    onSubmit={handleSubmit(
+                        props.idTree,
+                        AuthService.getCurrentUser().username,
+                        valueComment,
+                    )}>
+                    <textarea
+                        value={valueComment}
+                        onChange={handleChange(setValueComment)}
+                        placeholder={"Write your comment..."}
+                    />
+                    <button type={"submit"}>{"Send"}</button>
+                </form> */}
             <div>
                 <a href={"#"}>{"Wiki link"}</a>
             </div>
         </Popup>
     </LeafletMarker>
 );
-
 export default Marker;
