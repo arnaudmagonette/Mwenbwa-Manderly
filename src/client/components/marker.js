@@ -161,7 +161,12 @@ const Marker = props => (
                 <button type={"submit"}>{"Send"}</button>
             </form>
             <div>
-                <a href={"#"}>{"Wiki link"}</a>
+                <a
+                    href={`https://en.wikipedia.org/wiki/${props.treeName}`}
+                    target={"_blank"}
+                    rel={"noreferrer"}>
+                    {"Wiki link"}
+                </a>
             </div>
         </Popup>
     </LeafletMarker>

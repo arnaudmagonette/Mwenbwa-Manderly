@@ -70,6 +70,7 @@ const MapWrapper = () => {
                                         name={tree.name}
                                         leaves={tree.leaves}
                                         comments={tree.comments}
+                                        treeName={tree.sci_name}
                                     />
                                 );
                             }

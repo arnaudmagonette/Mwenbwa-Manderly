@@ -33,6 +33,8 @@ exports.signup = (req, res) => {
 };
 
 exports.signin = (req, res) => {
+    console.log(req.body.email);
+    console.log(req.body.password);
     User.findOne({
         email: req.body.email,
     }).exec((err, user) => {
