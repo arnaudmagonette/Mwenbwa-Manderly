@@ -89,7 +89,7 @@ exports.buyTree = (req, res) => {
             }
 
             tree.name = randomName();
-            tree.owner = [user.username];
+            tree.owner.unshift(user.username);
             tree.save(erro => {
                 if (erro) {
                     res.status(500).send({message: erro});

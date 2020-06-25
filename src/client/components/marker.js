@@ -33,10 +33,24 @@ const handelBuyTree = (a, b) => {
 
 const handelReBuyTree = (idTree, idUser, latTree, lonTree) => {
     TreeService.reBuyTree(idTree, idUser, latTree, lonTree);
+
+    LogService.postLog(
+        AuthService.getCurrentUser()._id,
+        AuthService.getCurrentUser().username,
+        AuthService.getCurrentUser().email,
+        "Rebuy the tree",
+    );
 };
 
 const handelLockTree = (idTree, idUser, latTree, lonTree) => {
     TreeService.lockTree(idTree, idUser, latTree, lonTree);
+
+    LogService.postLog(
+        AuthService.getCurrentUser()._id,
+        AuthService.getCurrentUser().username,
+        AuthService.getCurrentUser().email,
+        "Lock the tree",
+    );
 };
 
 const refeshUserStorage = userCo => {
@@ -121,24 +135,13 @@ const Marker = props => {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{"Avatar"}</td>
                                 <td>{"User"}</td>
-                                <td>{"Date"}</td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <AvatarIcon />
-                                </td>
-                                <td>{"Pierre"}</td>
-                                <td>{"03/06/2020"}</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <AvatarIcon />
-                                </td>
-                                <td>{"Marc"}</td>
-                                <td>{"02/06/2020"}</td>
-                            </tr>
+                            {props.allOwners.map(owner => (
+                                <tr key={props.id}>
+                                    <td>{owner}</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>

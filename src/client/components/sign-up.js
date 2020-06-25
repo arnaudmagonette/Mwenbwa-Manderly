@@ -108,7 +108,7 @@ export default class SignUp extends Component {
                             () => {
                                 window.location.reload().then(() => {
                                     LogService.postLog(
-                                        AuthService.getCurrentUser().id,
+                                        AuthService.getCurrentUser()._id,
                                         AuthService.getCurrentUser().username,
                                         AuthService.getCurrentUser().email,
                                         "Sign Up",
