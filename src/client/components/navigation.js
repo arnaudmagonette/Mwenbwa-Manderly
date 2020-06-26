@@ -23,7 +23,14 @@ const Navigation = props => (
                     {"Game Log"}
                 </button>
             </Link>
-
+            <Link to={paths.DeleteProfile}>
+                <button
+                    className={
+                        "button is-rounded  is-primary has-text-weight-bold has-text-white"
+                    }>
+                    {"Delete Profile"}
+                </button>
+            </Link>
             <Link to={paths.Rules}>
                 <button
                     className={
