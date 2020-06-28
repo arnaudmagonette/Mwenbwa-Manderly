@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 const db = require("../models");
 const Tree = db.tree;
 const User = db.user;
@@ -22,6 +23,14 @@ exports.allTrees = (req, res) => {
         }
 
         res.json(allTrees);
+    });
+};
+
+exports.deleteUserTrees = trees => {
+    Tree.save(trees, err => {
+        if (err) {
+            return false;
+        }
     });
 };
 

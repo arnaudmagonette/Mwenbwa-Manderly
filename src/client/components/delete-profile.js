@@ -12,21 +12,23 @@ export default class DeleteProfile extends React.Component {
     }
     handleClick() {
         treeService.getAllTrees().then(res => {
-            console.log(res.data.length);
-            const trees = [];
-            for (let i = 0; i <= res.data.length; i++) {
-                trees.push(res.data[i]);
-            }
             const userConnected = authService.getCurrentUser();
-            trees.map(tree => {
-                if (tree.owner === userConnected.username) {
-                    console.log("test");
-                } else {
-                    console.log("error");
-                    console.log(userConnected.username);
-                    console.log(tree.owner);
+            const userArray = [userConnected.username];
+            // const trees = res.data.filter(el => el.owner === userArray);
+            // console.log(trees.values);
+            const iterator = res.data.values();
+            const trees = [];
+            for (const elements of iterator) {
+                trees.push(elements.owner);
+            }
+            for (let i = 0; i <= trees.length; i++) {
+                if (JSON.stringify(trees[i]) === JSON.stringify(userArray)) {
+                    trees[i] = [];
+                    treeService.deleteUserTrees();
+                    console.log(trees[i]);
+                    console.log(trees);
                 }
-            });
+            }
         });
     }
     render() {
