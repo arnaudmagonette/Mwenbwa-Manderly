@@ -42,9 +42,9 @@ const Navigation = props => (
                 </button>
             </Link>
         </div>
-        <div className={"buttons are-medium is-centered  "}>
+        <div className={"buttons are-medium is-centered has-margin-bottom-1"}>
             <button
-                className={"button is-rounded is-danger "}
+                className={"button is-rounded is-danger"}
                 onClick={props.handleLogout}>
                 {"Disconnect"}
                 <i className={"fas fa-times"} />

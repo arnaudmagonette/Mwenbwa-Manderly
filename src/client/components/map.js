@@ -5,6 +5,7 @@ import Marker from "./marker";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import TreeService from "../services/tree.service";
 import UserService from "../services/user.service";
+import {MagicSpinner} from "react-spinners-kit";
 
 import "./map.less";
 
@@ -86,12 +87,8 @@ const MapWrapper = props => {
     }
 
     return (
-        <div>
-            <Map center={position} zoom={14}>
-                <TileLayer
-                    url={"http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
-                />
-            </Map>
+        <div className={"loading"}>
+            <MagicSpinner size={100} color={"#00d1b2"} />
         </div>
     );
 };
