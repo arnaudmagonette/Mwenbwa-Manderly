@@ -10,6 +10,4 @@ module.exports = function (app) {
     app.post("/api/lockTree", controller.lockTree);
 
     app.post("/api/howManyTrees", controller.howManyTrees);
-
-    app.post("/api/addComment", controller.addComment);
 };

@@ -45,16 +45,6 @@ class TreeService {
             })
             .then(res => res.data);
     }
-
-    addComment(idTree, username, comment) {
-        return axios
-            .post(`${API_URL}addComment`, {
-                idTree,
-                username,
-                comment,
-            })
-            .then(response => response.data);
-    }
 }
 
 export default new TreeService();

@@ -10,21 +10,19 @@ function randomName() {
 }
 
 exports.allTrees = (req, res) => {
-    Tree.find({})
-        .limit(20)
-        .exec((err, allTrees) => {
-            if (err) {
-                res.status(500).send({message: err});
-                return;
-            }
+    Tree.find({}).exec((err, allTrees) => {
+        if (err) {
+            res.status(500).send({message: err});
+            return;
+        }
 
-            if (!allTrees) {
-                res.status(404).send({message: "Trees Not found."});
-                return;
-            }
+        if (!allTrees) {
+            res.status(404).send({message: "Trees Not found."});
+            return;
+        }
 
-            res.json(allTrees);
-        });
+        res.json(allTrees);
+    });
 };
 
 exports.addFirstTrees = (req, res) => {
@@ -89,7 +87,7 @@ exports.buyTree = (req, res) => {
             }
 
             tree.name = randomName();
-            tree.owner.unshift(user.username);
+            tree.owner = [user.username];
             tree.save(erro => {
                 if (erro) {
                     res.status(500).send({message: erro});
@@ -331,30 +329,5 @@ exports.howManyTrees = (req, res) => {
         }
 
         res.json(numbersTrees);
-    });
-};
-
-exports.addComment = (req, res) => {
-    console.log(req.body);
-    Tree.findById(req.body.idTree).exec((error, tree) => {
-        if (error) {
-            res.status(500).send({message: error});
-            return;
-        }
-
-        if (!tree) {
-            res.status(404).send({message: "Tree Not found."});
-            return;
-        }
-
-        const name = req.body.username;
-        const comment = req.body.comment;
-
-        tree.comments.push({name, comment});
-        tree.save(erro => {
-            if (erro) {
-                res.status(500).send({message: erro});
-            }
-        });
     });
 };

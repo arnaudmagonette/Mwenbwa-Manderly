@@ -11,12 +11,7 @@ const treesSchema = new Schema(
             lon: Number,
         },
         owner: [{type: String, default: "For sale"}],
-        comments: [
-            {
-                name: String,
-                comment: String,
-            },
-        ],
+        comments: [{type: String, default: null}],
         lock: {type: Boolean, default: false},
     },
     {collection: "trees"},
