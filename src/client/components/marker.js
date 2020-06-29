@@ -9,8 +9,7 @@ import TreeService from "../services/tree.service";
 import AuthService from "../services/auth.service";
 import LogService from "../services/log.service";
 import UserService from "../services/user.service";
-
-import AvatarIcon from "./avatar-icon";
+import Gravatar from "react-circle-gravatar";
 
 const myIcon = (color = "#037318") =>
     Leaflet.icon({
@@ -82,49 +81,63 @@ const Marker = props => {
                     <p>{`Name : ${props.name}`}</p>
                 </div>
                 <div>
-                    <AvatarIcon />
-                    <p>{`Owner : ${props.owner.username}`}</p>
+                    <p>
+                        {`Owner : `}
+                        <Gravatar
+                            email={props.owner.email}
+                            mask={"circle"}
+                            size={30}
+                        />{" "}
+                        {props.owner.username}
+                    </p>
                 </div>
                 <div>
                     <p>
                         {`Value : ${props.leaves}`}
                         <LeafIcon />
                     </p>
-                    <button
-                        onClick={() => {
-                            handelBuyTree(
-                                props.id,
-                                userCo._id,
-                                refeshUserStorage(userCo),
-                                location.reload(),
-                            );
-                        }}>
-                        {"Buy"}
-                    </button>
-                    <button
-                        onClick={() => {
-                            handelReBuyTree(
-                                props.id,
-                                userCo._id,
-                                props.position[0], // lat
-                                props.position[1], // lon
-                                location.reload(),
-                            );
-                        }}>
-                        {"Rebuy"}
-                    </button>
-                    <button
-                        onClick={() => {
-                            handelLockTree(
-                                props.id,
-                                userCo._id,
-                                props.position[0], // lat
-                                props.position[1], // lon
-                                location.reload(),
-                            );
-                        }}>
-                        {"Lock"}
-                    </button>
+                    {props.owner.username === "For sale" && (
+                        <button
+                            onClick={() => {
+                                handelBuyTree(
+                                    props.id,
+                                    userCo._id,
+                                    refeshUserStorage(userCo),
+                                    location.reload(),
+                                );
+                            }}>
+                            {"Buy"}
+                        </button>
+                    )}
+                    {!(props.userCo._id === props.owner._id) &&
+                        !(props.owner.username === "For sale") && (
+                            <button
+                                onClick={() => {
+                                    handelReBuyTree(
+                                        props.id,
+                                        userCo._id,
+                                        props.position[0], // lat
+                                        props.position[1], // lon
+                                        location.reload(),
+                                    );
+                                }}>
+                                {"Rebuy"}
+                            </button>
+                        )}
+                    {props.userCo._id === props.owner._id && (
+                        <button
+                            onClick={() => {
+                                handelLockTree(
+                                    props.id,
+                                    userCo._id,
+                                    props.position[0], // lat
+                                    props.position[1], // lon
+                                    location.reload(),
+                                );
+                            }}>
+                            {"Lock"}
+                        </button>
+                    )}
                 </div>
                 <div>
                     <table>
