@@ -26,14 +26,6 @@ exports.allTrees = (req, res) => {
     });
 };
 
-exports.deleteUserTrees = trees => {
-    Tree.save(trees, err => {
-        if (err) {
-            return false;
-        }
-    });
-};
-
 exports.addFirstTrees = (req, res) => {
     Tree.find({name: "For sale"})
         .count()

@@ -45,10 +45,6 @@ class TreeService {
             })
             .then(res => res.data);
     }
-
-    deleteUserTrees() {
-        return axios.post(`${API_URL}deleteUserTrees`, {});
-    }
 }
 
 export default new TreeService();

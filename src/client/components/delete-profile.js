@@ -14,19 +14,18 @@ export default class DeleteProfile extends React.Component {
         treeService.getAllTrees().then(res => {
             const userConnected = authService.getCurrentUser();
             const userArray = [userConnected.username];
-            // const trees = res.data.filter(el => el.owner === userArray);
-            // console.log(trees.values);
-            const iterator = res.data.values();
-            const trees = [];
-            for (const elements of iterator) {
-                trees.push(elements.owner);
-            }
-            for (let i = 0; i <= trees.length; i++) {
-                if (JSON.stringify(trees[i]) === JSON.stringify(userArray)) {
-                    trees[i] = [];
-                    treeService.deleteUserTrees();
-                    console.log(trees[i]);
-                    console.log(trees);
+            console.log(res.data);
+            console.log(Array.isArray(res.data));
+            for (let i = 0; i < res.data.length; i++) {
+                if (
+                    res.data[i].owner !== [] &&
+                    JSON.stringify(res.data[i].owner) ===
+                        JSON.stringify(userArray)
+                ) {
+                    //res.data[i].owner = [];
+                    console.log(res.data[i]._id);
+                    console.log(res.data[i].owner);
+                    treeService.deleteUserTrees(res.data[i].owner);
                 }
             }
         });
