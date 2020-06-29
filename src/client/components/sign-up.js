@@ -104,21 +104,41 @@ export default class SignUp extends Component {
                         AuthService.login(
                             this.state.email,
                             this.state.password,
-                        ).then(
-                            () => {
-                                window.location.reload().then(() => {
-                                    LogService.postLog(
-                                        AuthService.getCurrentUser()._id,
-                                        AuthService.getCurrentUser().username,
-                                        AuthService.getCurrentUser().email,
-                                        "Sign Up",
-                                    );
-                                });
-                            },
-                            error => {
-                                console.log("login error", error);
-                            },
+                        ).then(() => {
+                            window.location.reload().then(() => {
+                                LogService.postLog(
+                                    AuthService.getCurrentUser().id,
+                                    AuthService.getCurrentUser().username,
+                                    AuthService.getCurrentUser().email,
+                                    "Sign Up",
+                                );
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.log("login error", error);
+                        const emailUsed = document.querySelector("#emailUsed");
+                        const usernameUsed = document.querySelector(
+                            "#usernameUsed",
                         );
+
+                        if (
+                            error.response.data.message ===
+                            "Failed! Email is already in use!"
+                        ) {
+                            emailUsed.innerHTML = "Email already used !";
+                        } else {
+                            emailUsed.innerHTML = "";
+                        }
+
+                        if (
+                            error.response.data.message ===
+                            "Failed! Username is already in use!"
+                        ) {
+                            usernameUsed.innerHTML = "Username already used !";
+                        } else {
+                            usernameUsed.innerHTML = "";
+                        }
                     });
             })
             .catch(errors => {
@@ -141,7 +161,9 @@ export default class SignUp extends Component {
                 <div> {"Sign Up "} </div>
                 <div className={"field"}>
                     <form onSubmit={this.handleSubmit}>
-                        <label className={"label has-padding-top-40"}>
+                        <label
+                            id={"labelUsername"}
+                            className={"label has-padding-top-40"}>
                             {" Username "}
                         </label>
                         <input
@@ -152,7 +174,13 @@ export default class SignUp extends Component {
                             onChange={this.handleChange}
                             required
                         />
-                        <label className={"label has-padding-top-20"}>
+                        <div
+                            className={"has-text-danger is-size-6"}
+                            id={"usernameUsed"}
+                        />
+                        <label
+                            id={"labelEmail"}
+                            className={"label has-padding-top-20"}>
                             {"Email"}
                         </label>
                         <input
@@ -163,6 +191,10 @@ export default class SignUp extends Component {
                             value={this.state.email}
                             onChange={this.handleChange}
                             required
+                        />
+                        <div
+                            className={"has-text-danger is-size-6"}
+                            id={"emailUsed"}
                         />
                         <label className={"label label has-padding-top-20"}>
                             {"Password"}
