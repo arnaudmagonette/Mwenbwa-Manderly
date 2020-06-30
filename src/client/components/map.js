@@ -74,6 +74,7 @@ const MapWrapper = props => {
                                         leaves={tree.leaves}
                                         comments={tree.comments}
                                         userCo={userCo}
+                                        lock={tree.lock}
                                     />
                                 );
                             }

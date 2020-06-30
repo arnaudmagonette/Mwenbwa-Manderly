@@ -96,7 +96,7 @@ const Marker = props => {
                         {`Value : ${props.leaves}`}
                         <LeafIcon />
                     </p>
-                    {props.owner.username === "For sale" && (
+                    {!props.lock && props.owner.username === "For sale" && (
                         <button
                             onClick={() => {
                                 handelBuyTree(
@@ -109,7 +109,8 @@ const Marker = props => {
                             {"Buy"}
                         </button>
                     )}
-                    {!(props.userCo._id === props.owner._id) &&
+                    {!props.lock &&
+                        !(props.userCo._id === props.owner._id) &&
                         !(props.owner.username === "For sale") && (
                             <button
                                 onClick={() => {
@@ -124,7 +125,7 @@ const Marker = props => {
                                 {"Rebuy"}
                             </button>
                         )}
-                    {props.userCo._id === props.owner._id && (
+                    {!props.lock && props.userCo._id === props.owner._id && (
                         <button
                             onClick={() => {
                                 handelLockTree(
@@ -138,6 +139,7 @@ const Marker = props => {
                             {"Lock"}
                         </button>
                     )}
+                    {props.lock && <p>{"is locked"}</p>}
                 </div>
                 <div>
                     <table>
