@@ -23,7 +23,14 @@ const Navigation = props => (
                     {"Game Log"}
                 </button>
             </Link>
-
+            <Link to={paths.DeleteProfile}>
+                <button
+                    className={
+                        "button is-rounded  is-primary has-text-weight-bold has-text-white"
+                    }>
+                    {"Delete Profile"}
+                </button>
+            </Link>
             <Link to={paths.Rules}>
                 <button
                     className={
@@ -32,7 +39,14 @@ const Navigation = props => (
                     {"Rules"}
                 </button>
             </Link>
-
+            <Link to={paths.DeleteProfile}>
+                <button
+                    className={
+                        "button is-rounded  is-primary has-text-weight-bold has-text-white"
+                    }>
+                    {"Delete Profile"}
+                </button>
+            </Link>
             <Link to={paths.EditProfile}>
                 <button
                     className={
@@ -42,9 +56,9 @@ const Navigation = props => (
                 </button>
             </Link>
         </div>
-        <div className={"buttons are-medium is-centered  "}>
+        <div className={"buttons are-medium is-centered has-margin-bottom-1"}>
             <button
-                className={"button is-rounded is-danger "}
+                className={"button is-rounded is-danger"}
                 onClick={props.handleLogout}>
                 {"Disconnect"}
                 <i className={"fas fa-times"} />

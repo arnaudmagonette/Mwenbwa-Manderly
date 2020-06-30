@@ -17,6 +17,7 @@ import {
     Route,
 } from "react-router-dom";
 import Profile from "./profile";
+import DeleteProfile from "./delete-profile";
 
 const handleLogout = setUserCo => () => {
     setUserCo(null);
@@ -28,6 +29,7 @@ export const paths = {
     Gamelog: "/game-log",
     Rules: "/rules",
     EditProfile: "/edit-profile",
+    DeleteProfile: "/delete-profile",
 };
 
 const getAllUsers = setUsers => {
@@ -71,6 +73,9 @@ function Index() {
                                 </Route>
                                 <Route path={paths.Rules}>
                                     <Rules />
+                                </Route>
+                                <Route path={paths.DeleteProfile}>
+                                    <DeleteProfile />
                                 </Route>
                                 <Route path={paths.EditP}>
                                     <EditP />
