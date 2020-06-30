@@ -11,7 +11,7 @@ export default class EditP extends React.Component {
         const user = AuthService.getCurrentUser();
         this.state = {
             email: user.email,
-            id: user.id,
+            id: user._id,
             leaves: user.leaves,
         };
 
@@ -27,7 +27,6 @@ export default class EditP extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state);
 
         // take the input data from state
         const data = this.state;
@@ -53,7 +52,6 @@ export default class EditP extends React.Component {
                 });
             })
             .catch(errors => {
-                console.log(errors);
                 const formattedErrors = {};
                 errors.forEach(error => {
                     formattedErrors[error.field] = error.message;
