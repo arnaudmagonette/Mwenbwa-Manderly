@@ -1,7 +1,7 @@
 /* eslint-disable react/button-has-type */
 import React from "react";
 import {Link} from "react-router-dom";
-import {paths} from "./index";
+import {paths} from "./side-bar";
 
 const Navigation = props => (
     <div className={"pb-4"}>

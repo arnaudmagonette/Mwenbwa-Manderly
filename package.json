@@ -92,6 +92,7 @@
         "react-leaflet-markercluster": "^2.0.0",
         "react-native-avatar-gravatar": "0.0.4",
         "react-native-indicative": "^0.2.1",
+        "react-offcanvas": "^0.4.0",
         "react-perfect-scrollbar": "^1.5.8",
         "react-router-dom": "^5.2.0",
         "react-scrollbar": "^0.5.6",
