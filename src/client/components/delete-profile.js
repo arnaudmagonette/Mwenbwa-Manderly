@@ -24,8 +24,6 @@ export default class DeleteProfile extends React.Component {
                 ) {
                     //res.data[i].owner = [];
                     console.log(res.data[i]._id);
-                    console.log(res.data[i].owner);
-                    treeService.deleteUserTrees(res.data[i].owner);
                 }
             }
         });
