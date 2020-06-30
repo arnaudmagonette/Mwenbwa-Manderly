@@ -52,7 +52,7 @@ const MapWrapper = props => {
                 <Map center={position} zoom={14}>
                     <TileLayer
                         url={
-                            "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            "https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png"
                         }
                     />
                     <MarkerClusterGroup>
