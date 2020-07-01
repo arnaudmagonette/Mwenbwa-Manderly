@@ -16,6 +16,7 @@ export default class DeleteProfile extends React.Component {
             const userArray = [userConnected.username];
             console.log(res.data);
             console.log(Array.isArray(res.data));
+            const treesID = [];
             for (let i = 0; i < res.data.length; i++) {
                 if (
                     res.data[i].owner !== [] &&
@@ -23,7 +24,8 @@ export default class DeleteProfile extends React.Component {
                         JSON.stringify(userArray)
                 ) {
                     //res.data[i].owner = [];
-                    console.log(res.data[i]._id);
+                    treesID.push(res.data[i]._id);
+                    console.log(treesID);
                 }
             }
         });
