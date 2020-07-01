@@ -4,6 +4,7 @@ const Log = db.log;
 exports.getLogs = (req, res) => {
     Log.find({})
         .limit(20)
+        .sort([["dateTime", -1]])
         .exec((err, logs) => {
             if (err) {
                 res.status(500).send({message: err});
