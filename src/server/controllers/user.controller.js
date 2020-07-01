@@ -20,6 +20,16 @@ exports.allUsers = (req, res) => {
         });
 };
 
+exports.deleteUserAndTrees = (req, res, err) => {
+    console.log(req.body.username);
+    Tree.find({owner: [req.body.username]}).then(resu => {
+        if (err) {
+            res.status(500).send("error");
+        }
+        console.log(resu);
+    });
+};
+
 exports.getUser = (req, res) => {
     User.findById(req.body.id).exec((err, user) => {
         if (err) {

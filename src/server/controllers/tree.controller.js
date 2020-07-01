@@ -316,11 +316,6 @@ exports.lockTree = (req, res) => {
     });
 };
 
-exports.deleteUserTrees = (req, res) => {
-    Tree.find({_id: req.body.treesID});
-    console.log(res);
-};
-
 exports.howManyTrees = (req, res) => {
     Tree.find({owner: req.body.owner}).count((err, numbersTrees) => {
         if (err) {
