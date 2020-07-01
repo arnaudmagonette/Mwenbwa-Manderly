@@ -19,37 +19,52 @@ const myIcon = (color = "#037318") =>
         popupAnchor: [0, -20],
     });
 
-const handelBuyTree = (a, b) => {
-    TreeService.buyTree(a, b);
+const handleBuyTree = (a, b, onSuccess) => {
+    TreeService.buyTree(a, b).then(() => {
+        LogService.postLog(
+            AuthService.getCurrentUser()._id,
+            AuthService.getCurrentUser().username,
+            AuthService.getCurrentUser().email,
+            "Buy a tree",
+        );
 
-    LogService.postLog(
-        AuthService.getCurrentUser()._id,
-        AuthService.getCurrentUser().username,
-        AuthService.getCurrentUser().email,
-        "Buy a tree",
-    );
+        onSuccess();
+    });
+
+    // To do: Remove when backend returns 200 on success
+    location.reload();
 };
 
-const handelReBuyTree = (idTree, idUser, latTree, lonTree) => {
-    TreeService.reBuyTree(idTree, idUser, latTree, lonTree);
+const handleReBuyTree = (idTree, idUser, latTree, lonTree, onSuccess) => {
+    TreeService.reBuyTree(idTree, idUser, latTree, lonTree).then(() => {
+        LogService.postLog(
+            AuthService.getCurrentUser()._id,
+            AuthService.getCurrentUser().username,
+            AuthService.getCurrentUser().email,
+            "Rebuy the tree",
+        );
 
-    LogService.postLog(
-        AuthService.getCurrentUser()._id,
-        AuthService.getCurrentUser().username,
-        AuthService.getCurrentUser().email,
-        "Rebuy the tree",
-    );
+        onSuccess();
+    });
+
+    // To do: Remove when backend returns 200 on success
+    location.reload();
 };
 
-const handelLockTree = (idTree, idUser, latTree, lonTree) => {
-    TreeService.lockTree(idTree, idUser, latTree, lonTree);
+const handleLockTree = (idTree, idUser, latTree, lonTree, onSuccess) => {
+    TreeService.lockTree(idTree, idUser, latTree, lonTree).then(() => {
+        LogService.postLog(
+            AuthService.getCurrentUser()._id,
+            AuthService.getCurrentUser().username,
+            AuthService.getCurrentUser().email,
+            "Lock the tree",
+        );
 
-    LogService.postLog(
-        AuthService.getCurrentUser()._id,
-        AuthService.getCurrentUser().username,
-        AuthService.getCurrentUser().email,
-        "Lock the tree",
-    );
+        onSuccess();
+    });
+
+    // To do: Remove when backend returns 200 on success
+    location.reload();
 };
 
 const refeshUserStorage = userCo => {
@@ -99,12 +114,10 @@ const Marker = props => {
                     {!props.lock && props.owner.username === "For sale" && (
                         <button
                             onClick={() => {
-                                handelBuyTree(
-                                    props.id,
-                                    userCo._id,
-                                    refeshUserStorage(userCo),
-                                    location.reload(),
-                                );
+                                handleBuyTree(props.id, userCo._id, () => {
+                                    props.onBuyTree();
+                                    refeshUserStorage(userCo);
+                                });
                             }}>
                             {"Buy"}
                         </button>
@@ -114,12 +127,12 @@ const Marker = props => {
                         !(props.owner.username === "For sale") && (
                             <button
                                 onClick={() => {
-                                    handelReBuyTree(
+                                    handleReBuyTree(
                                         props.id,
                                         userCo._id,
                                         props.position[0], // lat
                                         props.position[1], // lon
-                                        location.reload(),
+                                        props.onBuyTree,
                                     );
                                 }}>
                                 {"Rebuy"}
@@ -128,12 +141,12 @@ const Marker = props => {
                     {!props.lock && props.userCo._id === props.owner._id && (
                         <button
                             onClick={() => {
-                                handelLockTree(
+                                handleLockTree(
                                     props.id,
                                     userCo._id,
                                     props.position[0], // lat
                                     props.position[1], // lon
-                                    location.reload(),
+                                    props.onBuyTree,
                                 );
                             }}>
                             {"Lock"}

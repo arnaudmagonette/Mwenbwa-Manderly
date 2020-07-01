@@ -57,6 +57,10 @@ const getInitialViewport = () => {
     };
 };
 
+const onBuyTree = setTrees => () => {
+    getAllTrees(setTrees, () => null);
+};
+
 const MapWrapper = props => {
     const [trees, setTrees] = useState([]);
     const [users, setUsers] = useState([]);
@@ -101,6 +105,7 @@ const MapWrapper = props => {
                                         comments={tree.comments}
                                         userCo={userCo}
                                         lock={tree.lock}
+                                        onBuyTree={onBuyTree(setTrees)}
                                     />
                                 );
                             }
