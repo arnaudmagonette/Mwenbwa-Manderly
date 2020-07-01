@@ -20,13 +20,18 @@ exports.allUsers = (req, res) => {
         });
 };
 
-exports.deleteUserAndTrees = (req, res, err) => {
-    console.log(req.body.username);
-    Tree.find({owner: [req.body.username]}).then(resu => {
-        if (err) {
-            res.status(500).send("error");
+exports.deleteUserAndTrees = req => {
+    const user = req.body.username;
+    Tree.find({owner: [user]}).then(resu => {
+        for (const element of resu) {
+            element.owner = [];
+            element.name = "For sale";
+            element.lock = false;
+            element.save();
         }
-        console.log(resu);
+        User.deleteOne({username: user}).then(res => {
+            console.log(res);
+        });
     });
 };
 

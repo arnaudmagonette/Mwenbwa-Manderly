@@ -15,6 +15,8 @@ export default class DeleteProfile extends React.Component {
         // treeService.deleteUserAndTrees(res.id);
         console.log(userConnected.username);
         userService.deleteUserAndTrees(userConnected.username);
+        authService.logout();
+        window.location.reload();
     }
     render() {
         return (
