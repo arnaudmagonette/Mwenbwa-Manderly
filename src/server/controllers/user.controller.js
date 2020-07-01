@@ -29,8 +29,6 @@ exports.deleteUserAndTrees = req => {
             element.lock = false;
             element.save();
         }
-        // console.log(User.deleteOne({username: user}));
-        // User.deleteOne({username: user});
         User.deleteOne({username: user}).then(res => {
             console.log(res);
         });
