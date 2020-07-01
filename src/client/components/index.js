@@ -25,7 +25,9 @@ function Index() {
 
     useEffect(() => {
         getAllUsers(setUsers);
-        refeshUserStorage(userCo);
+        if (userCo) {
+            refeshUserStorage(userCo);
+        }
 
         const interval = setInterval(() => {
             setUserCo(AuthService.getCurrentUser());
