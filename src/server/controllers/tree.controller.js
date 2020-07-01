@@ -356,81 +356,152 @@ exports.addComment = (req, res) => {
     });
 };
 
-// exports.getValueTree = (req, res) => {
-//     console.log(req.body);
-//     Tree.findById(req.body.idTree).exec((error, tree) => {
-//         if (error) {
-//             res.status(500).send({message: error});
-//             return;
-//         }
+exports.getValueTree = (req, res) => {
+    User.findById(req.body.idUser).exec((err, user) => {
+        if (err) {
+            res.status(500).send({message: err});
+            return;
+        }
 
-//         if (!tree) {
-//             res.status(404).send({message: "Tree Not found."});
-//             return;
-//         }
+        if (!user) {
+            res.status(404).send({
+                message: "User not found!",
+            });
+            return;
+        }
+        Tree.findById(req.body.idTree).exec((error, treeSelected) => {
+            if (error) {
+                res.status(500).send({message: error});
+                return;
+            }
 
-//         if (1 === 1) {
-//             const latTreeSelected = req.body.latTree;
-//             const lonTreeSelected = req.body.lonTree;
-//             const center = {lat: latTreeSelected, lon: lonTreeSelected};
-//             const radius = 100;
+            if (!treeSelected) {
+                res.status(404).send({message: "Tree Not found."});
+                return;
+            }
 
-//             Tree.find({}).exec((err2, trees) => {
-//                 if (err2) {
-//                     res.status(500).send({message: err2});
-//                     return;
-//                 }
+            if (req.body.type === "rebuy") {
+                const latTreeSelected = treeSelected.geoloc.lat;
+                const lonTreeSelected = treeSelected.geoloc.lon;
+                const center = {lat: latTreeSelected, lon: lonTreeSelected};
+                const radius = 100;
 
-//                 if (!trees) {
-//                     res.status(404).send({message: "Trees Not found."});
-//                     return;
-//                 }
+                Tree.find({}).exec((err2, trees) => {
+                    if (err2) {
+                        res.status(500).send({message: err2});
+                        return;
+                    }
 
-//                 const treesSelected = [];
-//                 let valueTreesSelected = 0;
+                    if (!trees) {
+                        res.status(404).send({message: "Trees Not found."});
+                        return;
+                    }
 
-//                 trees.forEach((tree) => {
-//                     const lat = tree.geoloc.lat;
-//                     const lon = tree.geoloc.lon;
+                    const treesSelected = [];
+                    let valueTreesSelected = 0;
 
-//                     if (insideCircle({lat, lon}, center, radius)) {
-//                         treesSelected.push(tree);
-//                     }
-//                 });
+                    trees.forEach(treeCircle => {
+                        const lat = treeCircle.geoloc.lat;
+                        const lon = treeCircle.geoloc.lon;
 
-//                 let treesSelectedUser = [];
-//                 let valueTreesSelectedUser = 0;
-//                 let treesSelectedOther = [];
-//                 let valueTreesSelectedOther = 0;
+                        if (insideCircle({lat, lon}, center, radius)) {
+                            treesSelected.push(treeCircle);
+                        }
+                    });
 
-//                 treesSelectedUser = treesSelected.filter(
-//                     (tree) => tree.owner[0] === user.username,
-//                 );
-//                 treesSelectedOther = treesSelected.filter(
-//                     (tree) => tree.owner[0] !== user.username,
-//                 );
+                    let treesSelectedUser = [];
+                    let valueTreesSelectedUser = 0;
+                    let treesSelectedOther = [];
+                    let valueTreesSelectedOther = 0;
 
-//                 treesSelected.forEach((tree) => {
-//                     valueTreesSelected += tree.leaves;
-//                 });
+                    treesSelectedUser = treesSelected.filter(
+                        tree => tree.owner[0] === user.username,
+                    );
+                    treesSelectedOther = treesSelected.filter(
+                        tree => tree.owner[0] !== user.username,
+                    );
 
-//                 treesSelectedUser.forEach((tree) => {
-//                     valueTreesSelectedUser += tree.leaves;
-//                 });
+                    treesSelected.forEach(tree => {
+                        valueTreesSelected += tree.leaves;
+                    });
 
-//                 treesSelectedOther.forEach((tree) => {
-//                     valueTreesSelectedOther += tree.leaves;
-//                 });
+                    treesSelectedUser.forEach(tree => {
+                        valueTreesSelectedUser += tree.leaves;
+                    });
 
-//                 const valueReBuyTree =
-//                     treeSelected.leaves +
-//                     valueTreesSelectedUser *
-//                         (treesSelected.length / treesSelectedUser.length) +
-//                     valueTreesSelectedOther -
-//                     valueTreesSelected;
+                    treesSelectedOther.forEach(tree => {
+                        valueTreesSelectedOther += tree.leaves;
+                    });
 
-//                 return valueReBuyTree;
-//             });
-//         }
-//     });
-// };
+                    const valueReBuyTree =
+                        treeSelected.leaves +
+                        valueTreesSelectedUser *
+                            (treesSelected.length / treesSelectedUser.length) +
+                        valueTreesSelectedOther -
+                        valueTreesSelected;
+
+                    res.json(valueReBuyTree);
+                });
+            }
+
+            if (req.body.type === "lock") {
+                const latTreeSelected = treeSelected.geoloc.lat;
+                const lonTreeSelected = treeSelected.geoloc.lon;
+                const center = {lat: latTreeSelected, lon: lonTreeSelected};
+                const radius = 100;
+
+                Tree.find({}).exec((err2, trees) => {
+                    if (err2) {
+                        res.status(500).send({message: err2});
+                        return;
+                    }
+
+                    if (!trees) {
+                        res.status(404).send({message: "Trees Not found."});
+                        return;
+                    }
+
+                    const treesSelected = [];
+                    let valueTreesSelected = 0;
+                    let valuePlayersTreesSelected = 0;
+
+                    trees.forEach(treeCircle => {
+                        const lat = treeCircle.geoloc.lat;
+                        const lon = treeCircle.geoloc.lon;
+
+                        if (insideCircle({lat, lon}, center, radius)) {
+                            treesSelected.push(treeCircle);
+                        }
+                    });
+
+                    let player = [];
+
+                    treesSelected.forEach(tree => {
+                        valueTreesSelected += tree.leaves;
+                    });
+
+                    treesSelected.forEach(tree => {
+                        if (tree.owner[0]) {
+                            valuePlayersTreesSelected += tree.leaves;
+                        }
+                    });
+
+                    treesSelected.forEach(tree => {
+                        if (tree.owner[0]) {
+                            player.push(tree.owner[0]);
+                        }
+                    });
+
+                    player = new Set(player);
+
+                    const valueLockTree =
+                        treeSelected.leaves * 10 +
+                        valueTreesSelected * player.size -
+                        valuePlayersTreesSelected / player.size;
+
+                    res.json(valueLockTree);
+                });
+            }
+        });
+    });
+};
