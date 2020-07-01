@@ -12,6 +12,12 @@ class UserService {
             id,
         });
     }
+
+    deleteUserAndTrees(username) {
+        return axios.post(`${API_URL}deleteUserAndTrees`, {
+            username,
+        });
+    }
 }
 
 export default new UserService();

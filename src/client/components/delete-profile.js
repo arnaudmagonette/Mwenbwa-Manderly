@@ -1,8 +1,8 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable array-callback-return */
 import React from "react";
-import treeService from "../services/tree.service";
 import authService from "../services/auth.service";
+import userService from "../services/user.service";
 
 export default class DeleteProfile extends React.Component {
     constructor(props) {
@@ -11,24 +11,10 @@ export default class DeleteProfile extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick() {
-        treeService.getAllTrees().then(res => {
-            const userConnected = authService.getCurrentUser();
-            const userArray = [userConnected.username];
-            console.log(res.data);
-            console.log(Array.isArray(res.data));
-            for (let i = 0; i < res.data.length; i++) {
-                if (
-                    res.data[i].owner !== [] &&
-                    JSON.stringify(res.data[i].owner) ===
-                        JSON.stringify(userArray)
-                ) {
-                    //res.data[i].owner = [];
-                    console.log(res.data[i]._id);
-                    console.log(res.data[i].owner);
-                    treeService.deleteUserTrees(res.data[i].owner);
-                }
-            }
-        });
+        const userConnected = authService.getCurrentUser();
+        // treeService.deleteUserAndTrees(res.id);
+        console.log(userConnected.username);
+        userService.deleteUserAndTrees(userConnected.username);
     }
     render() {
         return (

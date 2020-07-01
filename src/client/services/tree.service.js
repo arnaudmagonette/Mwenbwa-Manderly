@@ -46,5 +46,4 @@ class TreeService {
             .then(res => res.data);
     }
 }
-
 export default new TreeService();

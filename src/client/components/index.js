@@ -27,9 +27,9 @@ const handleLogout = setUserCo => () => {
 export const paths = {
     LeaderBoard: "/leader-board",
     Gamelog: "/game-log",
-    DeleteProfile: "/delete-profile",
     Rules: "/rules",
     EditProfile: "/edit-profile",
+    DeleteProfile: "/delete-profile",
 };
 
 const getAllUsers = setUsers => {
