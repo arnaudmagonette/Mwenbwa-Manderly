@@ -32,14 +32,6 @@ class AuthService {
         });
     }
 
-    deleteUser(id) {
-        console.log(id);
-
-        return axios.post(`${API_URL}deleteUser`, {
-            id,
-        });
-    }
-
     register(username, email, password, color) {
         return axios.post(`${API_URL}signup`, {
             username,
