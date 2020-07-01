@@ -9,8 +9,6 @@ import {MagicSpinner} from "react-spinners-kit";
 
 import "./map.less";
 
-const position = [50.632119, 5.579524];
-
 const getAllTrees = (setTrees, setIsLoaded) => {
     TreeService.getAllTrees()
         .then(res => {
@@ -35,12 +33,37 @@ const getOwner = (owner, users) => {
     return users.find(user => user.username === owner[0]);
 };
 
+const onViewportChanged = viewport => {
+    localStorage.setItem(
+        "viewport",
+        // JSON.stringify = transforme objet en string
+        JSON.stringify({
+            center: viewport.center,
+            zoom: viewport.zoom,
+        }),
+    );
+};
+
+const getInitialViewport = () => {
+    //JSON.parse = retransforme en objet
+    const viewport = JSON.parse(localStorage.getItem("viewport"));
+
+    if (viewport && viewport.center && viewport.zoom) {
+        return viewport;
+    }
+    return {
+        center: [50.632119, 5.579524],
+        zoom: 14,
+    };
+};
+
 const MapWrapper = props => {
     const [trees, setTrees] = useState([]);
     const [users, setUsers] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [userCo] = useState(props.userCo);
 
+    const viewport = getInitialViewport();
     useEffect(() => {
         getAllTrees(setTrees, setIsLoaded);
         getAllUsers(setUsers);
@@ -49,7 +72,10 @@ const MapWrapper = props => {
     if (isLoaded) {
         return (
             <div>
-                <Map center={position} zoom={14}>
+                <Map
+                    center={viewport.center}
+                    zoom={viewport.zoom}
+                    onViewportChanged={onViewportChanged}>
                     <TileLayer
                         url={
                             "https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png"
