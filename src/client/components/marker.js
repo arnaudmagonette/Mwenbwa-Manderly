@@ -190,7 +190,9 @@ const Marker = props => {
                         onChange={handleChange}
                         placeholder={"Write your comment..."}
                     />
-                    <button type={"submit"}>{"Send"}</button>
+                    <button type={"submit"} onClick={location.reload()}>
+                        {"Send"}
+                    </button>
                 </form>
                 <div>
                     <a href={"#"}>{"Wiki link"}</a>
