@@ -333,7 +333,6 @@ exports.howManyTrees = (req, res) => {
 };
 
 exports.addComment = (req, res) => {
-    console.log(req.body);
     Tree.findById(req.body.idTree).exec((error, tree) => {
         if (error) {
             res.status(500).send({message: error});
@@ -356,3 +355,82 @@ exports.addComment = (req, res) => {
         });
     });
 };
+
+// exports.getValueTree = (req, res) => {
+//     console.log(req.body);
+//     Tree.findById(req.body.idTree).exec((error, tree) => {
+//         if (error) {
+//             res.status(500).send({message: error});
+//             return;
+//         }
+
+//         if (!tree) {
+//             res.status(404).send({message: "Tree Not found."});
+//             return;
+//         }
+
+//         if (1 === 1) {
+//             const latTreeSelected = req.body.latTree;
+//             const lonTreeSelected = req.body.lonTree;
+//             const center = {lat: latTreeSelected, lon: lonTreeSelected};
+//             const radius = 100;
+
+//             Tree.find({}).exec((err2, trees) => {
+//                 if (err2) {
+//                     res.status(500).send({message: err2});
+//                     return;
+//                 }
+
+//                 if (!trees) {
+//                     res.status(404).send({message: "Trees Not found."});
+//                     return;
+//                 }
+
+//                 const treesSelected = [];
+//                 let valueTreesSelected = 0;
+
+//                 trees.forEach((tree) => {
+//                     const lat = tree.geoloc.lat;
+//                     const lon = tree.geoloc.lon;
+
+//                     if (insideCircle({lat, lon}, center, radius)) {
+//                         treesSelected.push(tree);
+//                     }
+//                 });
+
+//                 let treesSelectedUser = [];
+//                 let valueTreesSelectedUser = 0;
+//                 let treesSelectedOther = [];
+//                 let valueTreesSelectedOther = 0;
+
+//                 treesSelectedUser = treesSelected.filter(
+//                     (tree) => tree.owner[0] === user.username,
+//                 );
+//                 treesSelectedOther = treesSelected.filter(
+//                     (tree) => tree.owner[0] !== user.username,
+//                 );
+
+//                 treesSelected.forEach((tree) => {
+//                     valueTreesSelected += tree.leaves;
+//                 });
+
+//                 treesSelectedUser.forEach((tree) => {
+//                     valueTreesSelectedUser += tree.leaves;
+//                 });
+
+//                 treesSelectedOther.forEach((tree) => {
+//                     valueTreesSelectedOther += tree.leaves;
+//                 });
+
+//                 const valueReBuyTree =
+//                     treeSelected.leaves +
+//                     valueTreesSelectedUser *
+//                         (treesSelected.length / treesSelectedUser.length) +
+//                     valueTreesSelectedOther -
+//                     valueTreesSelected;
+
+//                 return valueReBuyTree;
+//             });
+//         }
+//     });
+// };

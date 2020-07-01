@@ -72,8 +72,13 @@ const Marker = props => {
         setValueComment(event.target.value);
     }
 
+    function handleClick() {
+        console.log("ok");
+    }
+
     return (
         <LeafletMarker
+            onClick={handleClick}
             position={props.position}
             icon={myIcon(props.owner.color)}>
             <Popup>
