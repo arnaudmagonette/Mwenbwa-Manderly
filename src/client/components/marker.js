@@ -282,7 +282,6 @@ const Marker = props => {
                             </table>
                         </div>
                     </div>
-
                     <div className={"has-padding-top-10"}>
                         <form onSubmit={handleSubmit}>
                             <textarea
@@ -299,11 +298,23 @@ const Marker = props => {
                                     className={
                                         "button is-primary is-small has-margin-top-10"
                                     }
-                                    type={"submit"}>
+                                    type={"submit"}
+                                    onClick={() => {
+                                        location.reload();
+                                    }}>
                                     {"Send"}
                                 </button>
                             </div>
                         </form>
+                        <div>
+                            <p>
+                                <a
+                                    className={"has-text-weight-bold is-size-9"}
+                                    href={"#"}>
+                                    {"Wiki link"}
+                                </a>
+                            </p>
+                        </div>
                     </div>
                     <p>
                         <a
