@@ -103,6 +103,7 @@ const MapWrapper = props => {
                                         name={tree.name}
                                         leaves={tree.leaves}
                                         comments={tree.comments}
+                                        sciName={tree.sci_name}
                                         userCo={userCo}
                                         lock={tree.lock}
                                         onBuyTree={onBuyTree(setTrees)}

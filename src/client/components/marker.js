@@ -308,7 +308,8 @@ const Marker = props => {
                     <p>
                         <a
                             className={"has-text-weight-bold is-size-9"}
-                            href={"#"}>
+                            href={`https://en.wikipedia.org/wiki/${props.sciName}`}
+                            target={"blank"}>
                             {"Wiki link"}
                         </a>
                     </p>
@@ -410,9 +411,7 @@ const Marker = props => {
                             }>
                             <thead>
                                 <tr>
-                                    <th className={"has-text-centered"}>
-                                        {"User"}
-                                    </th>
+                                    <th>{"User"}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -499,7 +498,9 @@ const Marker = props => {
                     </form>
                 </div>
                 <p>
-                    <a className={"has-text-weight-bold is-size-9"} href={"#"}>
+                    <a
+                        className={"has-text-weight-bold is-size-9"}
+                        href={`https://en.wikipedia.org/wiki/${props.wiki}`}>
                         {"Wiki link"}
                     </a>
                 </p>
