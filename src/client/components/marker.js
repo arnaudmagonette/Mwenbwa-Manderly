@@ -143,7 +143,7 @@ const Marker = props => {
                         />{" "}
                         <div
                             className={
-                                "has-padding-bottom-2 has-padding-top-2"
+                                "has-padding-bottom-2 has-padding-top-2 title is-5"
                             }>
                             {`${props.owner.username}  `}
                         </div>
