@@ -86,3 +86,12 @@ exports.resetPassword = req => {
         doc.save();
     });
 };
+
+exports.deleteUser = req => {
+    // eslint-disable-next-line consistent-return
+    User.findByIdAndRemove(req.body.id, err => {
+        if (err) {
+            return false;
+        }
+    });
+};

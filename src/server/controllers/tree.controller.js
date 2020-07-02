@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 const db = require("../models");
 const Tree = db.tree;
 const User = db.user;

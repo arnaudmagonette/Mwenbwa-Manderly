@@ -9,6 +9,8 @@ module.exports = function (app) {
         next();
     });
 
+    app.post("/api/deleteUserAndTrees", controller.deleteUserAndTrees);
+
     app.get("/api/allUsers", controller.allUsers);
 
     app.post("/api/getUser", controller.getUser);

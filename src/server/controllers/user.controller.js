@@ -20,6 +20,21 @@ exports.allUsers = (req, res) => {
         });
 };
 
+exports.deleteUserAndTrees = req => {
+    const user = req.body.username;
+    Tree.find({owner: [user]}).then(resu => {
+        for (const element of resu) {
+            element.owner = [];
+            element.name = "For sale";
+            element.lock = false;
+            element.save();
+        }
+        User.deleteOne({username: user}).then(res => {
+            console.log(res);
+        });
+    });
+};
+
 exports.getUser = (req, res) => {
     User.findById(req.body.id).exec((err, user) => {
         if (err) {

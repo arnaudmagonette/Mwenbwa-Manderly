@@ -14,11 +14,13 @@ import Gamelog from "./gamelog";
 import Rules from "./rules";
 import EditP from "./edit-profile";
 import Navigation from "./navigation";
+import DeleteProfile from "./delete-profile";
 
 export const paths = {
     LeaderBoard: "/leader-board",
     Gamelog: "/game-log",
     Rules: "/rules",
+    DeleteProfile: "/delete-profile",
     EditProfile: "/edit-profile",
 };
 
@@ -88,6 +90,9 @@ const SideBar = props => {
                                 </Route>
                                 <Route path={paths.EditP}>
                                     <EditP />
+                                </Route>
+                                <Route path={paths.DeleteProfile}>
+                                    <DeleteProfile />
                                 </Route>
                             </Switch>
                         </div>
