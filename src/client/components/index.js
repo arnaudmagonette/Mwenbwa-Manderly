@@ -36,11 +36,11 @@ const getAllUsers = setUsers => {
     });
 };
 
-const refeshUserStorage = userCo => {
-    UserService.refreshUser(userCo._id).then(res => {
-        localStorage.setItem("user", JSON.stringify(res.data));
-    });
-};
+// const refeshUserStorage = (userCo) => {
+//     UserService.refreshUser(userCo._id).then((res) => {
+//         localStorage.setItem("user", JSON.stringify(res.data));
+//     });
+// };
 
 function Index() {
     const [users, setUsers] = useState([]);
@@ -48,7 +48,7 @@ function Index() {
 
     useEffect(() => {
         getAllUsers(setUsers);
-        refeshUserStorage(userCo);
+        // refeshUserStorage(userCo);
 
         const interval = setInterval(() => {
             setUserCo(AuthService.getCurrentUser());
