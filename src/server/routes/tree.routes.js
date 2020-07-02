@@ -12,4 +12,6 @@ module.exports = function (app) {
     app.post("/api/howManyTrees", controller.howManyTrees);
 
     app.post("/api/addComment", controller.addComment);
+
+    app.post("/api/getValueTree", controller.getValueTree);
 };

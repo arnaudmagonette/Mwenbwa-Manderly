@@ -55,6 +55,16 @@ class TreeService {
             })
             .then(response => response.data);
     }
+
+    getValueTree(idTree, idUser, type) {
+        return axios
+            .post(`${API_URL}getValueTree`, {
+                idTree,
+                idUser,
+                type,
+            })
+            .then(res => res.data);
+    }
 }
 
 export default new TreeService();

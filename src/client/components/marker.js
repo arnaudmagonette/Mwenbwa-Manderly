@@ -10,6 +10,7 @@ import AuthService from "../services/auth.service";
 import LogService from "../services/log.service";
 import UserService from "../services/user.service";
 import Gravatar from "react-circle-gravatar";
+import {RotateSpinner} from "react-spinners-kit";
 
 const myIcon = (color = "#037318") =>
     Leaflet.icon({
@@ -76,6 +77,8 @@ const refeshUserStorage = userCo => {
 const Marker = props => {
     const [userCo] = useState(props.userCo);
     const [valueComment, setValueComment] = useState("");
+    const [valueTree, setValueTree] = useState(props.leaves);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     function handleSubmit(event) {
         TreeService.addComment(props.id, props.userCo.username, valueComment);
@@ -87,8 +90,169 @@ const Marker = props => {
         setValueComment(event.target.value);
     }
 
+    function handleClick(idTree, idUser) {
+        if (
+            !props.lock &&
+            !(props.userCo._id === props.owner._id) &&
+            !(props.owner.username === "For sale")
+        ) {
+            TreeService.getValueTree(idTree, idUser, "rebuy")
+                .then(res => {
+                    setValueTree(res);
+                })
+                .then(() => {
+                    setIsLoaded(true);
+                });
+        } else if (!props.lock && props.userCo._id === props.owner._id) {
+            TreeService.getValueTree(idTree, idUser, "lock")
+                .then(res => {
+                    setValueTree(res);
+                })
+                .then(() => {
+                    setIsLoaded(true);
+                });
+        } else {
+            setIsLoaded(true);
+        }
+    }
+
+    if (isLoaded) {
+        return (
+            <LeafletMarker
+                onClick={() => {
+                    handleClick(props.id, userCo._id, props);
+                }}
+                position={props.position}
+                icon={myIcon(props.owner.color)}>
+                <Popup>
+                    <div>
+                        <p>{`Name : ${props.name}`}</p>
+                    </div>
+                    <div>
+                        <p>
+                            {`Owner : `}
+                            <Gravatar
+                                email={props.owner.email}
+                                mask={"circle"}
+                                size={30}
+                            />{" "}
+                            {props.owner.username}
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            {`Value : ${valueTree}`}
+                            <LeafIcon />
+                        </p>
+                        {!props.lock && props.owner.username === "For sale" && (
+                            <button
+                                onClick={() => {
+                                    handleBuyTree(
+                                        props.id,
+                                        userCo._id,
+                                        refeshUserStorage(userCo),
+                                        location.reload(),
+                                    );
+                                }}>
+                                {"Buy"}
+                            </button>
+                        )}
+                        {!props.lock &&
+                            !(props.userCo._id === props.owner._id) &&
+                            !(props.owner.username === "For sale") && (
+                                <button
+                                    onClick={() => {
+                                        handleReBuyTree(
+                                            props.id,
+                                            userCo._id,
+                                            props.position[0], // lat
+                                            props.position[1], // lon
+                                            location.reload(),
+                                        );
+                                    }}>
+                                    {"Rebuy"}
+                                </button>
+                            )}
+                        {!props.lock && props.userCo._id === props.owner._id && (
+                            <button
+                                onClick={() => {
+                                    handleLockTree(
+                                        props.id,
+                                        userCo._id,
+                                        props.position[0], // lat
+                                        props.position[1], // lon
+                                        location.reload(),
+                                    );
+                                }}>
+                                {"Lock"}
+                            </button>
+                        )}
+                        {props.lock && <p>{"is locked"}</p>}
+                    </div>
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>{"Purchase History"}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{"User"}</td>
+                                </tr>
+                                {props.allOwners.map((owner, index) => {
+                                    const keyOwner = index + 1;
+                                    return (
+                                        <tr key={keyOwner}>
+                                            <td>{owner}</td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>{"Comments"}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{"User"}</td>
+                                    <td>{"Comment"}</td>
+                                </tr>
+                                {props.comments.map(comment => (
+                                    <tr key={comment._id}>
+                                        <td>{comment.name}</td>
+                                        <td>{comment.comment}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    <form onSubmit={handleSubmit}>
+                        <textarea
+                            value={valueComment}
+                            onChange={handleChange}
+                            placeholder={"Write your comment..."}
+                        />
+                        <button type={"submit"}>{"Send"}</button>
+                    </form>
+                    <div>
+                        <a href={"#"}>{"Wiki link"}</a>
+                    </div>
+                </Popup>
+            </LeafletMarker>
+        );
+    }
+
     return (
         <LeafletMarker
+            onClick={() => {
+                handleClick(props.id, userCo._id, props);
+            }}
             position={props.position}
             icon={myIcon(props.owner.color)}>
             <Popup>
@@ -108,7 +272,8 @@ const Marker = props => {
                 </div>
                 <div>
                     <p>
-                        {`Value : ${props.leaves}`}
+                        {`Value : `}
+                        <RotateSpinner size={20} color={"#00d1b2"} />
                         <LeafIcon />
                     </p>
                     {!props.lock && props.owner.username === "For sale" && (
