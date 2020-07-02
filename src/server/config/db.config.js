@@ -2,7 +2,7 @@
 
 const mongoose = require("mongoose");
 
-const mongoURI = "mongodb://dev:dev@mongo/mwenbwaDb";
+const mongoURI = process.env.MONGODB_URI;
 
 const ConnectionMongoDb = async () => {
     try {
