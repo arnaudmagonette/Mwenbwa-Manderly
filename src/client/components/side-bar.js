@@ -19,8 +19,8 @@ import DeleteProfile from "./delete-profile";
 export const paths = {
     LeaderBoard: "/leader-board",
     Gamelog: "/game-log",
-    Rules: "/rules",
     DeleteProfile: "/delete-profile",
+    Rules: "/rules",
     EditProfile: "/edit-profile",
 };
 
@@ -85,14 +85,14 @@ const SideBar = props => {
                                 <Route path={paths.Gamelog}>
                                     <Gamelog />
                                 </Route>
+                                <Route path={paths.DeleteProfile}>
+                                    <DeleteProfile />
+                                </Route>
                                 <Route path={paths.Rules}>
                                     <Rules />
                                 </Route>
                                 <Route path={paths.EditP}>
                                     <EditP />
-                                </Route>
-                                <Route path={paths.DeleteProfile}>
-                                    <DeleteProfile />
                                 </Route>
                             </Switch>
                         </div>

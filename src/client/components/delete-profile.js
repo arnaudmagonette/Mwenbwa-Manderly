@@ -27,7 +27,7 @@ export default class DeleteProfile extends React.Component {
                         onClick={this.handleClick}
                         type={"submit"}
                         className={
-                            "button is-primary  is-outlined has-margin-bottom-5 "
+                            "button is-danger  is-outlined has-margin-bottom-5 "
                         }>
                         {"Delete Profile"}
                     </button>
