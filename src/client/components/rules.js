@@ -37,7 +37,7 @@ const Rules = () => (
         <br />
         <p>
             {
-                "Every 15 minutes, you will receive the total of leaves from all your trees. So buy as much as possible to receive even more money! However, every 30 minutes you will lose half of your leaves ... ( Winter is coming ! )"
+                "Every 15 minutes, you will receive the total of leaves from all your trees. So buy as much as possible to receive even more money! However, every hours you will lose half of your leaves ... ( Winter is coming ! )"
             }
         </p>
         <br />
