@@ -139,7 +139,7 @@ const Marker = props => {
                         <Gravatar
                             email={props.owner.email}
                             mask={"circle"}
-                            size={50}
+                            size={100}
                         />{" "}
                         <div
                             className={
