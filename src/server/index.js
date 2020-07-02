@@ -44,6 +44,7 @@ app.get("/*", (req, res) => {
 //     console.log(`🚀 Server is listening on port ${APP_PORT}.`),
 // );
 
+//HEROKU
 const server_port = process.env.YOUR_PORT || process.env.PORT || 80;
 const server_host = process.env.YOUR_HOST || "0.0.0.0";
 app.listen(server_port, server_host, () => {
