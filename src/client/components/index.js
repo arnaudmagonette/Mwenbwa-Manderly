@@ -70,7 +70,7 @@ function Index() {
                         }>
                         <div
                             className={"notification has-padding-20"}
-                            style={{overflow: "scroll"}}>
+                            style={{overflow: "auto"}}>
                             <Profile userCo={userCo} />
                             <Switch>
                                 <Route
