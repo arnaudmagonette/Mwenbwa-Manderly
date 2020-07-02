@@ -434,10 +434,15 @@ exports.getValueTree = (req, res) => {
                         valueTreesSelectedOther += tree.leaves;
                     });
 
+                    let tsul = 1;
+
+                    if (treesSelectedUser.length !== 0) {
+                        tsul = treesSelectedUser.length;
+                    }
+
                     const valueReBuyTree =
                         treeSelected.leaves +
-                        valueTreesSelectedUser *
-                            (treesSelected.length / treesSelectedUser.length) +
+                        valueTreesSelectedUser * (treesSelected.length / tsul) +
                         valueTreesSelectedOther -
                         valueTreesSelected;
 
