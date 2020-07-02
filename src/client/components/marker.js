@@ -217,9 +217,7 @@ const Marker = props => {
                                 }>
                                 <thead>
                                     <tr>
-                                        <th className={"has-text-centered"}>
-                                            {"User"}
-                                        </th>
+                                        <th>{"User"}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
