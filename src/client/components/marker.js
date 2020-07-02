@@ -310,20 +310,13 @@ const Marker = props => {
                             <p>
                                 <a
                                     className={"has-text-weight-bold is-size-9"}
-                                    href={"#"}>
+                                    href={`https://en.wikipedia.org/wiki/${props.sciName}`}
+                                    target={"blank"}>
                                     {"Wiki link"}
                                 </a>
                             </p>
                         </div>
                     </div>
-                    <p>
-                        <a
-                            className={"has-text-weight-bold is-size-9"}
-                            href={`https://en.wikipedia.org/wiki/${props.sciName}`}
-                            target={"blank"}>
-                            {"Wiki link"}
-                        </a>
-                    </p>
                 </Popup>
             </LeafletMarker>
         );
