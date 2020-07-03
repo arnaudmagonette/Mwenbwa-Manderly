@@ -8,7 +8,7 @@ import {addIdleLeaves, removeIdleLeaves} from "./controllers/user.controller";
 const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
-// const {APP_PORT} = process.env.PORT || process.env;
+const {APP_PORT} = process.env.PORT || process.env;
 
 const corsOptions = {
     origin: "http://localhost:8080",
@@ -20,6 +20,11 @@ app.use(express.static(path.resolve(__dirname, "../../bin/client")));
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: true}));
+
+//heroku
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+}
 
 const db = require("./models");
 
@@ -40,19 +45,20 @@ app.get("/*", (req, res) => {
     });
 });
 
-// app.listen(APP_PORT, () =>
-//     console.log(`🚀 Server is listening on port ${APP_PORT}.`),
-// );
+//local
+app.listen(APP_PORT, () =>
+    console.log(`🚀 Server is listening on port ${APP_PORT}.`),
+);
 
-// heroku
+// Connection Mongo Db
+ConnectionMongoDb();
+
+//heroku
 // const server_port = process.env.YOUR_PORT || process.env.PORT || 8080;
 // const server_host = process.env.YOUR_HOST || "0.0.0.0";
 // app.listen(server_port, server_host, () => {
 //     console.log("Listening on port %d", server_port);
 // });
-
-// Connection Mongo Db
-ConnectionMongoDb();
 
 //------------------------------
 

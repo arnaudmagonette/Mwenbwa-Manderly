@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/button-has-type */
 import React, {Component} from "react";
 
@@ -26,6 +27,7 @@ export default class SignIn extends Component {
     }
 
     handleSubmit(event) {
+        // eslint-disable-next-line no-console
         console.log("Ok");
 
         AuthService.login(this.state.email, this.state.password).then(
