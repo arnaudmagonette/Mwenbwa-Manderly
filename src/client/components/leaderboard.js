@@ -27,10 +27,7 @@ function LeaderBoard(props) {
                         {props.users.map(user => (
                             <tr key={user._id}>
                                 <td>
-                                    <Gravatar
-                                        email={`${user.email} `}
-                                        size={30}
-                                    />
+                                    <Gravatar email={user.email} size={30} />
                                 </td>
                                 <td>{user.username}</td>
                                 <td>
