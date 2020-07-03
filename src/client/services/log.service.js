@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://mwenbwa.herokuapp.com/api/";
+const API_URL = "http://localhost/api/";
 
 class LogService {
     getLogs() {
