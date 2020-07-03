@@ -23,49 +23,41 @@ const myIcon = (color = "#037318") =>
     });
 
 const handleBuyTree = (a, b, onSuccess) => {
-    TreeService.buyTree(a, b).then(() => {
-        LogService.postLog(
-            AuthService.getCurrentUser()._id,
-            AuthService.getCurrentUser().username,
-            AuthService.getCurrentUser().email,
-            "Buy a tree",
-        );
+    TreeService.buyTree(a, b);
 
-        onSuccess();
-    });
+    LogService.postLog(
+        AuthService.getCurrentUser()._id,
+        AuthService.getCurrentUser().username,
+        AuthService.getCurrentUser().email,
+        "Buy a tree",
+    );
 
     location.reload();
 };
 
 const handleReBuyTree = (idTree, idUser, latTree, lonTree, onSuccess) => {
-    TreeService.reBuyTree(idTree, idUser, latTree, lonTree).then(() => {
-        LogService.postLog(
-            AuthService.getCurrentUser()._id,
-            AuthService.getCurrentUser().username,
-            AuthService.getCurrentUser().email,
-            "Rebuy the tree",
-        );
+    TreeService.reBuyTree(idTree, idUser, latTree, lonTree);
 
-        onSuccess();
-    });
+    LogService.postLog(
+        AuthService.getCurrentUser()._id,
+        AuthService.getCurrentUser().username,
+        AuthService.getCurrentUser().email,
+        "Rebuy the tree",
+    );
 
-    // To do: Remove when backend returns 200 on success
     location.reload();
 };
 
 const handleLockTree = (idTree, idUser, latTree, lonTree, onSuccess) => {
-    TreeService.lockTree(idTree, idUser, latTree, lonTree).then(() => {
-        LogService.postLog(
-            AuthService.getCurrentUser()._id,
-            AuthService.getCurrentUser().username,
-            AuthService.getCurrentUser().email,
-            "Lock the tree",
-        );
+    TreeService.lockTree(idTree, idUser, latTree, lonTree);
 
-        onSuccess();
-    });
+    LogService.postLog(
+        AuthService.getCurrentUser()._id,
+        AuthService.getCurrentUser().username,
+        AuthService.getCurrentUser().email,
+        "Lock the tree",
+    );
 
-    // To do: Remove when backend returns 200 on success
     location.reload();
 };
 
