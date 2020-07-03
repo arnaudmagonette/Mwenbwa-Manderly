@@ -1,60 +1,65 @@
-# mwenbwa
+# Mwenbwa
 
 > A web-based game of conquests… and trees
 
-* * *
+***
+
+## Heroku Link
+
+(*wainting for it*)
+
+## Contributors
+- [Guillaume Boeur](https://github.com/Guillaume-Boeur)
+- [Arnaud Magonette](https://github.com/arnaudmagonette)
+- [Alan Louette](https://github.com/AlanLouette)
+- [Thomas Dussart](https://github.com/thomasdussart)
+
+***
 
 ## Introduction
 
-Based on [external data](https://data.gov.be/en/node/48556), you will create a WebApp consisting of a REST-like API (back-end) and a React SPA (front-end). This WebApp will consist be an online [IDLE Game](https://en.wikipedia.org/wiki/Incremental_game), based in Liège.
+Based on [external data](https://data.gov.be/en/node/48556), we created a WebApp consisting of a REST-like API (back-end) and a React SPA (front-end). This WebApp will consist be an online [IDLE Game](https://en.wikipedia.org/wiki/Incremental_game), based in Liège.
 
 ## Mwenbwa - game rules
 
-In a map of Liège, there will be trees. Each tree as a _value_ (which is the product of his _diameter_ by his _height_, *rounded to top*). 
+In a map of Liège, there is trees. Each tree as a _value_ (which is the product of his _diameter_ by his _height_, *rounded to top*). 
 
-> This value will use the "leaf" as unit. For instance, a tree of 9m of diameter and 17.3m of size will have a value of (`9 × 17.3 = 155.7 ≈ 156`) **156 leaves**.
+> This value will use the "leaf" as unit.
 
-When a player enter the game, he needs to create an account, will choose a color, and will receive three random, *free* tree (and some bonus leaves, following the formula: `[total leaves of players] / [amount of players]`).  
-Every fifteen minutes **in real life**, each player will receive an amount of leaves equals to the total of each of his trees.  
+When a player enter the game, he needs to create an account, choose a color, and receive three random, *free* tree and some bonus leaves.  
+Every fifteen minutes **in real life**, each player receive an amount of leaves equals to the total of each of his trees.  
 Every hour **in real life**, each player loose half his leaves.
-
-> 👉 It can be useful to change these values during the development. Be sure they are easy to change and adapt.
 
 Whenever he wants, a player can _buy_ a tree. 
 
-- If the tree is *free*, the _value_ of the tree is its price. When a player buy a *free tree*, a [random name](https://www.npmjs.com/package/fantasy-name-generator) is affected to that tree.
-- If the tree belongs to another player, the price is computed with the following formula: `[value of the targetted tree] + ([value of all the targetted player's trees in 100m radius] × ([amount of trees in 100m radius] / [amount of tree of targetted player in 100m radius])) + [value of all the other players trees in 100m radius] - [value of all your tree in 100m radius]`.
+- If the tree is *free*, the _value_ of the tree is its price. When a player buy a *free tree*, a **random name** is affected to that tree.
+- If the tree belongs to another player, the price is computed with a formula.
 
-Whenever he wants, a player can *lock* a tree by paying the following formula: `[value of the tree] × 10 + ([value of all the trees in 100m radius] × [amount of players in 100m radius]) - ([value of all player's trees in 100m radius] / [amount of players in 100m radius])`. A *locked tree* can't be buy by another player.
+Whenever he wants, a player can *lock* a tree by paying an expensive somme: A *locked tree* can't be buy by another player.
 
-At anytime, a player can check the *leaderboard*, to see each player score, amount of trees, etc.  
-At anytime, a player can consult the *gamelog*, which record all actions in the game.
+At anytime, a player can check the **leaderboard**, to see each player score, amount of trees, etc.  
+At anytime, a player can consult the **gamelog**, which record all actions in the game.
 
-When clicking on a tree, a player can see its value, name, owner, history of buys, and a link to the relative wikipedia article for this tree's species (if applicable). Any player can also leave a comment on a tree.
+When clicking on a tree, a player can see its value, name, owner, history of buys, and a link to the relative wikipedia article for this tree's species (if applicable).Any player can also leave a **comment** on a tree.
+
+***
 
 ## Implementation
 
-There's a lot of things to do in this project. Besides some constraints listed bellow, you're free to use anything you want for this project.
-
 ### Data
 
-You can find the data of the trees in the JSON file stored in the `data` folder. These data came from the [Belgium OpenData Initiative website](https://data.gov.be).
-
-You will need to convert and store the data into a MongoDB database. Be sure to design your schema regarding the rules of the game.
+These data came from the [Belgium OpenData Initiative website](https://data.gov.be).
+Convert and store into a **MongoDB** database.
 
 ### Interactive map
 
-Of course, you'll need to use an interactive map to show all the trees. 
-
-> 👉 **OpenStreetMap** is actually the best choice, you will have to use it with **Leaflet**.
+**OpenStreetMap** is used with **Leaflet**.
 
 ### Mockup & Design
 
-We didn't made any mockup nor design for this project, the first task of your group will be their conception.
+First mockup with [JustInMind](https://www.justinmind.com/)
 
 ### Technical Stack
-
-You actually have a **technical stack** to follow.
 
 #### Back-end
 
@@ -70,70 +75,25 @@ A `Single Page App` using:
 - **React**
 - **Leaflet**
 
-#### Toolchain / Dev Env
+### Toolchain / Dev Env
 
-The project is divided in two distinct parts: back-end and front-end. We prepared a starter with a premade dev environment that can be used again for other following projects. 
+#### Environment
 
-##### Environment
+**Back-end** part be compiled with [BabelJS](https://babeljs.io).
 
-The project is provided with a `docker-compose.yml` and its documentation in markdown: [`docker-readme.md`](./docker-readme.md).
-The whole project's code will be written in `src`. The compiling tools are configurated to push the compilated files in the `bin` folder.
+**Front-end** part be compiled/packaged with [Webpack](https://webpack.js.org/).
 
-> ⚠️ **WARNING:** Never **ever** put your modifications to the project in the bin's files ! He will be replaced by a new bin folder at your next compilation!
-
-##### Back-end
-
-Back-end part will be compiled with [BabelJS](https://babeljs.io). The back-end's code is located in  `src/server`.
-
-We prepared for you a little snippet of functionnal code that configure your server **express**, an API route : `GET /hello` and the middleware *middleware* **static** to display de client's files.
-
-You are free to use this snippet or rewrite it. 
- 
-###### Compilation
-
-There is two compilation's options :
-
-- `npm run build:server` (compile your code)
-- `npm run work:server` (compile then observe your files and recompile if you make any modifications)
-> ☝️ **NOTE:** Do not forget to run your docker-compose before building the back-end part.
-
-##### Front-end
-
-For the front-end part your code will be compiled/packaged with [Webpack](https://webpack.js.org/). The code is written in `src/client`.
-
-> ☝️ **NOTE:** Webpack is a powerfull tool that can be complex to learn. We suggest you to take some time to learn this tool during your "pâturages" and maybe provide your collegues a workshop about it.
-
-Like the back-end part, we prepared a little snippet of code displaying a React component with the text "*Hello, World*".
- 
-###### Compilation
-
-To compile the front-end code there is two options:
-
-- `npm run build:client` (compile your code)
-- `npm run work:client` (compile then observe your files to recompile them in case of any modifications)
-
-##### Prettier & ESLint
+#### Prettier & ESLint
 
 The project is configured to use  [Prettier](https://prettier.io) & [ESLint](https://eslint.org).
 
-###### Compilation
 
-To check your files with ESLint and Prettier you can also run this command:  `npm run lint`.
+#### Hooks git
 
-###### Hooks git
-
-The project is also configured with a *hook* de **precommit** for git: when you will try to commit your files, ESLint and Prettier will be executed and, in case of error, the commit will be canceled to let you correct your mistakes. This way you will have the certitude of commiting files exempt of potential problems. 
+The project is also configured with a *hook* de **precommit** for git
 
 #### Deployment
 
-We are expecting a **functionnal** and *deployed* project.
-One of the solutions is to use [**Heroku**](https://www.heroku.com). To host your Database, Heroku is working with [**mLab**](https://mlab.com) .
+The application is deployed on [**Heroku**](https://www.heroku.com) and it is working with [**mLab**](https://mlab.com) for the Database .
 
 * * *
-
-## Deadline
-
-The project **have** to be online the **26/06/2020 16H59**.  
-We are expecting an e-mail for each group with a link to the repository and a link to the application in production.
-
-Have fun and good work.
