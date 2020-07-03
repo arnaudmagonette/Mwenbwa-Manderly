@@ -3,18 +3,51 @@ const User = db.user;
 const Tree = db.tree;
 
 exports.allUsers = (req, res) => {
-    User.find({}).exec((err, allUsers) => {
+    User.find({})
+        .sort([["leaves", -1]])
+        .exec((err, allUsers) => {
+            if (err) {
+                res.status(500).send({message: err});
+                return;
+            }
+
+            if (!allUsers) {
+                res.status(404).send({message: "Users Not found."});
+                return;
+            }
+
+            res.json(allUsers);
+        });
+};
+
+exports.deleteUserAndTrees = req => {
+    const user = req.body.username;
+    Tree.find({owner: [user]}).then(resu => {
+        for (const element of resu) {
+            element.owner = [];
+            element.name = "For sale";
+            element.lock = false;
+            element.save();
+        }
+        User.deleteOne({username: user}).then(res => {
+            console.log(res);
+        });
+    });
+};
+
+exports.getUser = (req, res) => {
+    User.findById(req.body.id).exec((err, user) => {
         if (err) {
             res.status(500).send({message: err});
             return;
         }
 
-        if (!allUsers) {
-            res.status(404).send({message: "Users Not found."});
+        if (!user) {
+            res.status(404).send({message: "User Not found."});
             return;
         }
 
-        res.json(allUsers);
+        res.json(user);
     });
 };
 

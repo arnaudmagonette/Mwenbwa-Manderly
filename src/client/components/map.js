@@ -1,19 +1,22 @@
 import React from "react";
+const {useState, useEffect} = React;
 import {Map, TileLayer} from "react-leaflet";
 import Marker from "./marker";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import TreeService from "../services/tree.service";
 import UserService from "../services/user.service";
-const {useState, useEffect} = React;
+import {MagicSpinner} from "react-spinners-kit";
 
 import "./map.less";
 
-const position = [50.632119, 5.579524];
-
-const getAllTrees = setTrees => {
-    TreeService.getAllTrees().then(res => {
-        setTrees(res.data);
-    });
+const getAllTrees = (setTrees, setIsLoaded) => {
+    TreeService.getAllTrees()
+        .then(res => {
+            setTrees(res.data);
+        })
+        .then(() => {
+            setIsLoaded(true);
+        });
 };
 
 const getAllUsers = setUsers => {
@@ -24,43 +27,101 @@ const getAllUsers = setUsers => {
 
 const getOwner = (owner, users) => {
     if (!owner.length) {
-        return {};
+        return users.find(user => user.username === "For sale");
     }
 
     return users.find(user => user.username === owner[0]);
 };
 
-const MapWrapper = () => {
+const onViewportChanged = viewport => {
+    localStorage.setItem(
+        "viewport",
+        // JSON.stringify = transforme objet en string
+        JSON.stringify({
+            center: viewport.center,
+            zoom: viewport.zoom,
+        }),
+    );
+};
+
+const getInitialViewport = () => {
+    //JSON.parse = retransforme en objet
+    const viewport = JSON.parse(localStorage.getItem("viewport"));
+
+    if (viewport && viewport.center && viewport.zoom) {
+        return viewport;
+    }
+    return {
+        center: [50.632119, 5.579524],
+        zoom: 14,
+    };
+};
+
+const onBuyTree = setTrees => () => {
+    getAllTrees(setTrees, () => null);
+};
+
+const MapWrapper = props => {
     const [trees, setTrees] = useState([]);
     const [users, setUsers] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [userCo] = useState(props.userCo);
 
-    console.log(trees[2]);
-
+    const viewport = getInitialViewport();
     useEffect(() => {
-        getAllTrees(setTrees);
+        getAllTrees(setTrees, setIsLoaded);
         getAllUsers(setUsers);
     }, []);
 
+    if (isLoaded) {
+        return (
+            <div>
+                <Map
+                    center={viewport.center}
+                    zoom={viewport.zoom}
+                    onViewportChanged={onViewportChanged}>
+                    <TileLayer
+                        url={
+                            "https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png"
+                        }
+                    />
+                    <MarkerClusterGroup>
+                        {trees.map(tree => {
+                            const ownerTree = getOwner(tree.owner, users);
+                            if (ownerTree && tree) {
+                                // eslint-disable-next-line
+                                return (
+                                    <Marker
+                                        key={tree._id}
+                                        id={tree._id}
+                                        position={[
+                                            tree.geoloc.lat,
+                                            tree.geoloc.lon,
+                                        ]}
+                                        owner={ownerTree}
+                                        allOwners={tree.owner}
+                                        name={tree.name}
+                                        leaves={tree.leaves}
+                                        comments={tree.comments}
+                                        sciName={tree.sci_name}
+                                        userCo={userCo}
+                                        lock={tree.lock}
+                                        onBuyTree={onBuyTree(setTrees)}
+                                    />
+                                );
+                            }
+                            // eslint-disable-next-line
+                            return;
+                        })}
+                    </MarkerClusterGroup>
+                </Map>
+            </div>
+        );
+    }
+
     return (
-        <div>
-            <Map center={position} zoom={14}>
-                <TileLayer
-                    url={"http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
-                />
-                <MarkerClusterGroup>
-                    {trees.map(tree => (
-                        <Marker
-                            key={tree._id}
-                            id={tree._id}
-                            position={[tree.geoloc.lat, tree.geoloc.lon]}
-                            owner={getOwner(tree.owner, users)}
-                            name={tree.name}
-                            leaves={tree.leaves}
-                            comments={tree.comments}
-                        />
-                    ))}
-                </MarkerClusterGroup>
-            </Map>
+        <div className={"loading"}>
+            <MagicSpinner size={100} color={"#00d1b2"} />
         </div>
     );
 };

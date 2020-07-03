@@ -1,5 +1,4 @@
 import axios from "axios";
-import authHeader from "./auth-header";
 
 const API_URL = "https://mwenbwa.herokuapp.com/api/";
 
@@ -8,8 +7,16 @@ class UserService {
         return axios.get(`${API_URL}allUsers`);
     }
 
-    getUserBoard() {
-        return axios.get(`${API_URL}user`, {headers: authHeader()});
+    refreshUser(id) {
+        return axios.post(`${API_URL}getUser`, {
+            id,
+        });
+    }
+
+    deleteUserAndTrees(username) {
+        return axios.post(`${API_URL}deleteUserAndTrees`, {
+            username,
+        });
     }
 }
 

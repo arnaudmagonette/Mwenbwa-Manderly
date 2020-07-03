@@ -1,11 +1,8 @@
 /* eslint-disable react/button-has-type */
 import React from "react";
-import Gravatar from "react-circle-gravatar";
 
 import AuthService from "../services/auth.service";
 import {validateAll} from "indicative/validator";
-import LeafIcon from "./leaf-icon";
-import TreeIcon from "./tree-icon";
 
 export default class EditP extends React.Component {
     constructor(props) {
@@ -14,7 +11,7 @@ export default class EditP extends React.Component {
         const user = AuthService.getCurrentUser();
         this.state = {
             email: user.email,
-            id: user.id,
+            id: user._id,
             leaves: user.leaves,
         };
 
@@ -30,7 +27,6 @@ export default class EditP extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state);
 
         // take the input data from state
         const data = this.state;
@@ -56,7 +52,6 @@ export default class EditP extends React.Component {
                 });
             })
             .catch(errors => {
-                console.log(errors);
                 const formattedErrors = {};
                 errors.forEach(error => {
                     formattedErrors[error.field] = error.message;
@@ -73,76 +68,51 @@ export default class EditP extends React.Component {
         return (
             <div
                 className={
-                    "notification has-margin-30 column is-three-quarters-mobile"
+                    "has-padding-top-5 has-text-black subtitle is-5 has-text-centered has-text-weight-bold"
                 }>
-                <div
-                    className={
-                        "has-text-centered has-text-black subtitle is-5 "
-                    }>
-                    <Gravatar
-                        email={this.state.email}
-                        mask={"circle"}
-                        size={100}
-                    />
-                    <div className={"has-padding-bottom-10 has-padding-top-10"}>
-                        <p>
-                            {"134 "}
-                            {<LeafIcon />}
-                        </p>
-                    </div>
-                    <p>
-                        {"122 "}
-                        {<TreeIcon />}
-                    </p>
-                </div>
-                <div
-                    className={
-                        "has-padding-top-5 has-text-black subtitle is-5 has-text-centered has-text-weight-bold"
-                    }>
-                    <p>{"Change your password"}</p>
-                    <div className={"has-margin-top-40"}>
-                        <form onSubmit={this.handleSubmit}>
-                            <div className={"field"}>
-                                <div className={"control"}>
-                                    <input
-                                        className={"input is-success"}
-                                        type={"password"}
-                                        name={"password"}
-                                        placeholder={"Password"}
-                                        onChange={this.handleChange}
-                                        required
-                                    />
-                                    <input
-                                        className={
-                                            "input is-success has-margin-top-10"
-                                        }
-                                        type={"text"}
-                                        name={"password_confirmation"}
-                                        onChange={this.handleChange}
-                                        placeholder={"Confirm password"}
-                                        required
-                                    />
-                                    <input
-                                        type={"hidden"}
-                                        name={"id"}
-                                        value={this.state.id}
-                                        onChange={this.handleChange}
-                                    />
-                                </div>
+                <p>{"CHANGE YOUR PASSWORD"}</p>
+                <div className={"has-margin-top-40"}>
+                    <form onSubmit={this.handleSubmit}>
+                        <div className={"field"}>
+                            <div className={"control"}>
+                                <input
+                                    className={"input is-success"}
+                                    type={"password"}
+                                    name={"password"}
+                                    placeholder={"Password"}
+                                    onChange={this.handleChange}
+                                    required
+                                />
+                                <input
+                                    className={
+                                        "input is-success has-margin-top-10"
+                                    }
+                                    type={"text"}
+                                    name={"password_confirmation"}
+                                    onChange={this.handleChange}
+                                    placeholder={"Confirm password"}
+                                    required
+                                />
+                                <input
+                                    type={"hidden"}
+                                    name={"id"}
+                                    value={this.state.id}
+                                    onChange={this.handleChange}
+                                />
                             </div>
-                            <div className={"columns  has-margin-top-10"}>
-                                <div className={"column has-text-centered"}>
-                                    <button
-                                        className={
-                                            "button is-primary  is-outlined has-margin-bottom-5 "
-                                        }
-                                        type={"submit"}>
-                                        {"Edit password"}
-                                    </button>
-                                </div>
+                        </div>
+                        <div className={"columns  has-margin-top-10"}>
+                            <div className={"column has-text-centered"}>
+                                <button
+                                    className={
+                                        "button is-primary  is-outlined has-margin-bottom-5 "
+                                    }
+                                    type={"submit"}>
+                                    {"Edit password"}
+                                </button>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         );

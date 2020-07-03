@@ -1,32 +1,22 @@
 import React from "react";
+const {useState, useEffect} = React;
 import Gravatar from "react-circle-gravatar";
-import LeafIcon from "./leaf-icon";
-import TreeIcon from "./tree-icon";
-import AuthService from "../services/auth.service";
+import LogService from "../services/log.service";
 
-const connectedUser = AuthService.getCurrentUser();
+const getlogs = setLogs => {
+    LogService.getLogs().then(res => {
+        setLogs(res.data);
+    });
+};
 
-const Gamelog = () => (
-    <div
-        className={
-            "notification has-margin-30 column is-three-quarters-mobile "
-        }>
-        <div className={"has-text-centered has-text-black subtitle is-5 "}>
-            <Gravatar
-                email={`${connectedUser.email} `}
-                mask={"circle"}
-                size={100}
-            />
-            <div className={"has-padding-bottom-10 has-padding-top-10"}>
-                <p>
-                    {`${connectedUser.leaves} `} <LeafIcon />
-                </p>
-            </div>
-            <p>
-                {"124 "}
-                {<TreeIcon />}
-            </p>
-        </div>
+const Gamelog = () => {
+    const [logs, setLogs] = useState([]);
+
+    useEffect(() => {
+        getlogs(setLogs);
+    }, []);
+
+    return (
         <div className={"has-padding-top-5 has-text-centered"}>
             <p
                 className={
@@ -44,40 +34,19 @@ const Gamelog = () => (
                 </thead>
                 <tbody
                     className={"table  is-striped  is-hoverable is-fullwidth"}>
-                    <tr>
-                        <td>
-                            <Gravatar
-                                email={`${connectedUser.email} `}
-                                size={30}
-                            />
-                        </td>
-                        <td>{"Jean-Eud"}</td>
-                        <td>{"bought Arboretrum"}</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <Gravatar
-                                email={`${connectedUser.email} `}
-                                size={30}
-                            />
-                        </td>
-                        <td>{"Britney"}</td>
-                        <td>{"bought Ficus"}</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <Gravatar
-                                email={"alan.louette@gmail.com"}
-                                size={30}
-                            />
-                        </td>
-                        <td>{"Anémone"}</td>
-                        <td>{"bought Tulipe"}</td>
-                    </tr>
+                    {logs.map(log => (
+                        <tr key={log._id}>
+                            <td>
+                                <Gravatar email={log.playerEmail} size={30} />
+                            </td>
+                            <td>{log.playerUsername}</td>
+                            <td>{log.action}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>
-    </div>
-);
+    );
+};
 
 export default Gamelog;

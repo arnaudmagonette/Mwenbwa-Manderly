@@ -5,7 +5,6 @@ import express from "express";
 import path from "path";
 import {addIdleLeaves, removeIdleLeaves} from "./controllers/user.controller";
 
-const bcrypt = require("bcryptjs");
 const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
@@ -23,7 +22,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 const db = require("./models");
-const Role = db.role;
 
 const ConnectionMongoDb = require("./config/db.config");
 
@@ -31,6 +29,7 @@ const ConnectionMongoDb = require("./config/db.config");
 require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
 require("./routes/tree.routes")(app);
+require("./routes/log.routes")(app);
 
 // Routage React
 app.get("/*", (req, res) => {
@@ -45,11 +44,13 @@ app.get("/*", (req, res) => {
 //     console.log(`🚀 Server is listening on port ${APP_PORT}.`),
 // );
 
-const server_port = process.env.YOUR_PORT || process.env.PORT || 8080;
-const server_host = process.env.YOUR_HOST || "0.0.0.0";
-app.listen(server_port, server_host, () => {
-    console.log("Listening on port %d", server_port);
-});
+// heroku
+// const server_port = process.env.YOUR_PORT || process.env.PORT || 8080;
+// const server_host = process.env.YOUR_HOST || "0.0.0.0";
+// app.listen(server_port, server_host, () => {
+//     console.log("Listening on port %d", server_port);
+// });
+
 // Connection Mongo Db
 ConnectionMongoDb();
 

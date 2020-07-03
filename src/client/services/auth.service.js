@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://mwenbwa.herokuapp.com/api/auth/";
+const API_URL = "https://mwenbwa.herokuapp.com//api/auth/";
 
 class AuthService {
     login(email, password) {
@@ -11,6 +11,7 @@ class AuthService {
             })
             .then(response => {
                 if (response.data.accessToken) {
+                    console.log(response.data);
                     localStorage.setItem("user", JSON.stringify(response.data));
                 }
 
@@ -37,7 +38,6 @@ class AuthService {
             email,
             password,
             color,
-            roles: ["user"],
         });
     }
 
