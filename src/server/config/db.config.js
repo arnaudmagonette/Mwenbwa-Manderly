@@ -1,11 +1,12 @@
 /* eslint-disable no-console */
 const mongoose = require("mongoose");
 
-const mongoURI = "mongodb://heroku_2tcbx7hs:tq1onbmtutprq";
+// const mongoURI = process.env.MONGODB_URI;
 
 const ConnectionMongoDb = async () => {
     try {
-        await mongoose.connect(mongoURI, {
+        await mongoose.connect(process.env.MONGODB, {
+            auth: {authSource: "admin"},
             useUnifiedTopology: true,
             useNewUrlParser: true,
         });

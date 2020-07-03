@@ -34,7 +34,6 @@ const handleBuyTree = (a, b, onSuccess) => {
         onSuccess();
     });
 
-    // To do: Remove when backend returns 200 on success
     location.reload();
 };
 
