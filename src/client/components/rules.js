@@ -13,7 +13,9 @@ const Rules = () => (
             }>
             {"RULES"}
         </p>
-        <p>{`Welcome to Mwenbwa ${connectedUser.username} !`}</p>
+        <p className={"has-text-black subtitle is-5"}>
+            {`Welcome to Mwenbwa ${connectedUser.username} !`}
+        </p>
         <br />
         <p>
             {

@@ -27,10 +27,13 @@ const Profile = props => {
     return (
         <div className={"has-text-centered has-text-black subtitle is-5 "}>
             <Gravatar email={connectedUser.email} mask={"circle"} size={100} />
-            <div className={"has-padding-bottom-10 has-padding-top-10"}>
+            <div
+                className={
+                    "has-padding-bottom-10 has-padding-top-10 has-text-weight-bold"
+                }>
                 <p>{connectedUser.username}</p>
             </div>
-            <div className={"columns"}>
+            <div className={"columns has-text-weight-bold"}>
                 <p className={"column"}>
                     {`${connectedUser.leaves} `} <LeafIcon />
                 </p>
