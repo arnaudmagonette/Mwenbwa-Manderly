@@ -6,7 +6,7 @@
 
 ## Heroku Link
 
-(*wainting for it*)
+[https://mwenbwa.herokuapp.com/](https://mwenbwa.herokuapp.com/)
 
 ## Contributors
 - [Guillaume Boeur](https://github.com/Guillaume-Boeur)
@@ -53,7 +53,7 @@ Convert and store into a **MongoDB** database.
 
 ### Interactive map
 
-**OpenStreetMap** is used with **Leaflet**.
+[OpenStreetMap](https://www.openstreetmap.org/) is used with [Leaflet](https://leafletjs.com/).
 
 ### Mockup & Design
 
@@ -65,15 +65,15 @@ First mockup with [JustInMind](https://www.justinmind.com/)
 
 A `REST-like API` using:
 
-- **Node.JS**
-- **MongoDB**
+- **[Node.JS](https://nodejs.org/en/)**
+- **[MongoDB](https://www.mongodb.com/)**
 
 #### Front-end
 
 A `Single Page App` using:
 
-- **React**
-- **Leaflet**
+- **[React](https://reactjs.org/)**
+- **[Leaflet](https://leafletjs.com/)**
 
 ### Toolchain / Dev Env
 
